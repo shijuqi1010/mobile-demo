@@ -3,7 +3,12 @@
 import Vue from 'vue'
 import App from './App'
 import router from './router'
+import 'babel-polyfill' // 低版本浏览器兼容es6
+import 'core-js/fn/object/assign' // Object.assign引起的页面显示空白
+import Toast from 'vue-toast-component'
 
+Vue.use(Toast)
+ 
 Vue.config.productionTip = false
 
 /* eslint-disable no-new */
