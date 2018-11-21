@@ -279,6 +279,7 @@ export default {
     .introduce{
       position: absolute;
       display: flex;
+      display: -webkit-flex;
       flex-direction: column;
       z-index: 500;
       top: 24%;
@@ -482,6 +483,7 @@ export default {
     // box-sizing: border-box;
     height: 11%;
     display: flex;
+    display: -webkit-flex;
     z-index: 500;
     bottom: 0;
     width: 100%;
