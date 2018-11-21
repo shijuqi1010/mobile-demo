@@ -23,15 +23,14 @@ export default {
 html {
   margin: 0;
   padding: 0;
-  -ms-text-size-adjust: 100%;
-  -webkit-text-size-adjust: 100%;
-  font-size: 100px;
+  // -ms-text-size-adjust: 100%;
+  // -webkit-text-size-adjust: 100%;
+  -webkit-text-size-adjust: none; 
 }
 body {
   margin: 0;
   padding: 0;
-  -webkit-text-size-adjust: none; 
-  font-size: 12px; /*实际相当于14px*/
+  -webkit-text-size-adjust: none;
 }
 * {
   margin: 0;
@@ -54,5 +53,6 @@ a {
   // color: #2c3e50;
   margin: 0;
   padding: 0;
+  -webkit-text-size-adjust: none;
 }
 </style>

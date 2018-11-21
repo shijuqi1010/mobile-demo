@@ -178,13 +178,13 @@ export default {
 .des-index {
   position: fixed;
   width: 100%;
+  height: 100%;
   padding: 0;
   top: 0;
   left: 0;
   right: 0;
   bottom: 0;
   font-weight: normal;
-  -webkit-text-size-adjust: none;
   overflow: hidden;
   background-image: url("https://img1.aylives.cn/7fce378fdd1448838838ee553ff248ca.png"); //667
   background-repeat: no-repeat;
@@ -200,6 +200,7 @@ export default {
   .header{
     position: relative;
     top: 7%;
+    // top: 44px;
     // border: 1px solid red;
     // box-sizing: border-box;
     width: 100%;
@@ -319,9 +320,10 @@ export default {
     color: #ffffff;
     .animation{
       position: absolute;
-      font-size: 62.5% !important;
-      // font-size: 6px;
+      -webkit-text-size-adjust: none; 
+      font-size: 6px;
       // font-size: 12px;
+      text-align: center;
       animation: bubble 5s infinite linear alternate;
       -webkit-animation: bubble 5s infinite linear alternate;
       -moz-animation: bubble 5s infinite linear alternate;
@@ -482,24 +484,36 @@ export default {
     position: absolute;
     // border: 1px solid black;
     // box-sizing: border-box;
-    height: 11%;
+    height: 12%;
+    // height: 68px;
     display: flex;
     display: -webkit-flex;
-    display: -ms-flexbox;
+    display: -ms-flex;
     z-index: 500;
     bottom: 0;
     width: 100%;
     color: #FFFFFF;
     text-align: center;
     // font-size: 10px;
+    @media only screen and (min-width: 768px) {
+      height: 128px;
+    }
     .des-btn{
       display: block;
+      font-size: 12px;
       flex: 1;
       -webkit-box-flex: 1;
       -ms-flex: 1;
       padding: 5px 0;
+      @media only screen and (min-width: 768px) {
+        font-size: 24px;
+      }
       img{
         height: 60%;
+        width: 40px;
+        @media only screen and (min-width: 768px) {
+          width: 76px;
+        }
       }
     }
   }
