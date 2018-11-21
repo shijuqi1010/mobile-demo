@@ -196,14 +196,9 @@ export default {
     background-image: url("https://img1.aylives.cn/2e0ce14d7a1e44d6b4359389549f3b55.png");
     font-size: 24px;
   }
-  .fade-enter-active, .fade-leave-active {
-    transition: all 0.4s cubic-bezier(0.22, 1.48, 0.45, 0.98);
-  }
-  .fade-enter, .fade-leave-active {
-    opacity: 0;
-  }
   .header{
     position: relative;
+    top: 7%;
     // border: 1px solid red;
     // box-sizing: border-box;
     width: 100%;
@@ -219,11 +214,11 @@ export default {
       // box-sizing: border-box;
       width: 60%;
       text-align: left;
-      top: 24%;
+      // top: 24%;
       margin-left: 4%;
       .self-castle{
         position: absolute;
-        width: 40%;
+        // width: 40%;
         // border: 1px solid red;
         // box-sizing: border-box;
         img{
@@ -235,6 +230,7 @@ export default {
           }
         }
         .title{
+          margin: auto;
           color: #010101;
         }
       }
@@ -248,10 +244,11 @@ export default {
         flex-direction: column;
         list-style: none;
         font-size: 10px;
-        margin-left: 40%;
+        margin-left: 66px;
         text-align: left;
         @media only screen and (min-width: 768px) {
           font-size: 24px;
+          margin-left: 140px;
         }
         li{
           position: absolute;
@@ -269,7 +266,7 @@ export default {
           padding-right: 5%;
         }
         .total-point{
-          margin-top: 30%;
+          margin-top: 34px;
           @media only screen and (min-width: 768px) {
             margin-top: 24%;
           }
@@ -282,7 +279,7 @@ export default {
       display: -webkit-flex;
       flex-direction: column;
       z-index: 500;
-      top: 24%;
+      // top: 24%;
       right: -2%;
       width: 20%;
       list-style: none;
@@ -306,11 +303,11 @@ export default {
         padding-right: 4%;
       }
       li:nth-child(2){
-        margin-top: 18%;
-        margin-bottom: 18%;
+        margin-top: 16%;
+        margin-bottom: 16%;
         @media only screen and (min-width: 768px) {
-          margin-top: 10%;
-          margin-bottom: 10%;
+          margin-top: 5%;
+          margin-bottom: 5%;
         }
       }
     }
@@ -484,6 +481,7 @@ export default {
     height: 11%;
     display: flex;
     display: -webkit-flex;
+    display: -ms-flexbox;
     z-index: 500;
     bottom: 0;
     width: 100%;
@@ -493,6 +491,8 @@ export default {
     .des-btn{
       display: block;
       flex: 1;
+      -webkit-box-flex: 1;
+      -ms-flex: 1;
       padding: 5px 0;
       img{
         height: 60%;
