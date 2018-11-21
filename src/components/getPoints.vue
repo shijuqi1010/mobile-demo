@@ -27,14 +27,19 @@
         </li>
       </ul>
     </div>
-    <div class="container">
 
-    </div>
+    <ul class="vip-animation">
+      <li class="animation" v-for="(item, index) in userInfo" :key="index">
+        <img class="bubble" :id="index" src="../assets/stone.png" alt="">
+        <span class="text">{{item.text}}</span>
+      </li>
+    </ul>
+
     <div class="content">
-
     </div>
+
     <div class="footer">
-      <div class="des-btn">
+      <div class="des-btn" @click="getPoints">
         <img src="../assets/energy.png" alt="">
         <p>获取能量</p>
       </div>
@@ -75,8 +80,39 @@ export default {
       clickAble: true,
       uploaded: false,
       loading: true,
-      tip: false
-    };
+      tip: false,
+      userInfo:[{
+        text: 1111111
+      },
+      {
+        text: 2111111
+      },
+      {
+        text: 31111
+      },
+      {
+        text: 41111
+      },
+      {
+        text: 50000
+      },
+      {
+        text: 60000
+      },
+      {
+        text: 72222
+      },
+      {
+        text: 83333
+      },
+      {
+        text: 94444
+      },
+      {
+        text: 101111
+      }
+      ]
+    }
   },
   created() {
     this.init()
@@ -115,17 +151,8 @@ export default {
         }
       })
     },
-    create() {
-      api.Axios.post(api.CREATE(this.photoUrl, this.name, this.num)).then(
-        res => {
-          if (res.data.code === 200) {
-            this.id = res.data.data.id
-            this.$router.push({ path: "/poster"})
-          } else {
-            this.$toast(res.data.msg, 2000)
-          }
-        }
-      )
+    getPoints () {
+      this.$router.push({ path: "/getPoints"})
     }
   }
 };
@@ -140,73 +167,43 @@ export default {
   left: 0;
   right: 0;
   bottom: 0;
-  // height: 667px;
   font-weight: normal;
   overflow: hidden;
-  background: url("https://img1.aylives.cn/f66f947d9b754a6b8f78c3831e1b7ccc.png");
-  // background: url("奥克城背景");
+  background-image: url("https://img1.aylives.cn/7fce378fdd1448838838ee553ff248ca.png"); //667
   background-repeat: no-repeat;
   background-position: center center;
   background-size: cover;
-  // @media only screen and (max-width: 320px) {
-  //   height: 569px;
-  // }
-  // @media only screen and (min-width: 360px) {
-  //   height: 640px;
-  // }
-  // @media only screen and (min-width: 365px) {
-  //   height: 649px;
-  // }
-  // @media only screen and (min-width: 370px) {
-  //   height: 658px;
-  // }
-  // @media only screen and (min-width: 375px) {
-  //   height: 667px;
-  // }
-  // @media only screen and (min-width: 380px) {
-  //   height: 676px;
-  // }
-  // @media only screen and (min-width: 385px) {
-  //   height: 685px;
-  // }
-  // @media only screen and (min-width: 390px) {
-  //   height: 694px;
-  // }
-  // @media only screen and (min-width: 395px) {
-  //   height: 702px;
-  // }
-  // @media only screen and (min-width: 400px) {
-  //   height: 711px;
-  // }
-  // @media only screen and (min-width: 411px) {
-  //   height: 731px;
-  // }
-  // @media only screen and (device-width: 411px) and (device-height: 823px) {
-  //   height: 823px;
-  // }
-  // @media only screen and (min-width: 414px) {
-  //   height: 736px;
-  // }
-  // @media only screen and (min-width: 768px) {
-  //   height: 1366px;
-  // }
-  // @media only screen and (min-width: 1024px) {
-  //   height: 1821px;
-  // }
+  @media only screen and (device-width: 375px) and (device-height: 812px) {
+    // background-image: url("https://img1.aylives.cn/0472e8034ba54187ba399ca916623a17.png");
+  }
+  @media only screen and (min-width: 768px) {
+    background-image: url("https://img1.aylives.cn/2e0ce14d7a1e44d6b4359389549f3b55.png");
+    font-size: 24px;
+  }
   .header{
-    // position: relative;
-    border: 1px solid red;
+    position: relative;
+    // border: 1px solid red;
+    // box-sizing: border-box;
     width: 100%;
-    height: 21%;
+    height: 22%;
+    color: #F4F8FF;
+    font-size: 10px;
+    @media only screen and (min-width: 768px) {
+      font-size: 24px;
+    }
     .castle{
-      // width: 53px;
-      color: #010101;
-      // height: 38px;
-      text-align: center;
-      margin-top: 5%;
+      position: absolute;
+      // border: 1px solid red;
+      // box-sizing: border-box;
+      width: 60%;
+      text-align: left;
+      top: 24%;
       margin-left: 4%;
       .self-castle{
         position: absolute;
+        width: 40%;
+        // border: 1px solid red;
+        // box-sizing: border-box;
         img{
           width: 53px;
           height: 38px;
@@ -216,130 +213,308 @@ export default {
           }
         }
         .title{
-          font-size: 10px;
-          @media only screen and (min-width: 768px) {
-            font-size: 24px;
-          }
+          color: #010101;
         }
       }
       .point-info{
+        width: 60%;
+        // border: 1px solid black;
+        // box-sizing: border-box;
         position: absolute;
-        width: 100%;
-        text-align: center;
+        display: flex;
+        flex-direction: column;
         list-style: none;
         font-size: 10px;
-        color: #F4F8FF;
-        margin-left: 18%;
-        // left: 16%;
+        margin-left: 40%;
         text-align: left;
         @media only screen and (min-width: 768px) {
           font-size: 24px;
         }
         li{
           position: absolute;
-          display: inline-block;
           width: auto;
-          // height: 33px;
           line-height: 22px;
-          background:linear-gradient(0deg,rgba(113,146,255,1) 0%,rgba(35,224,254,1) 100%);
-          border-radius:10px;
+          background: linear-gradient(0deg,rgba(113,146,255,1) 0%,rgba(35,224,254,1) 100%);
+          border-radius: 10px;
           @media only screen and (min-width: 768px) {
             border-radius: 30px;
-            line-height: 66px;
-            height: 66px;
+            line-height: 50px;
           }
         }
         .point-data{
-          // margin-top: 2%;
-          padding-left: 3%;
-          padding-right: 3%;
+          padding-left: 5%;
+          padding-right: 5%;
         }
         .total-point{
-          margin-top: 10%;
+          margin-top: 30%;
+          @media only screen and (min-width: 768px) {
+            margin-top: 24%;
+          }
         }
       }
     }
     .introduce{
+      position: absolute;
       display: flex;
       flex-direction: column;
-      position: absolute;
       z-index: 500;
-      top: 3%;
+      top: 24%;
       right: -2%;
       width: 20%;
-      // height: 100px;
-      // border: 1px solid black;
-      text-align: left;
       list-style: none;
-      font-size: 10px;
-      color: #F4F8FF;
       text-align: center;
-      padding: 10px 0;
       @media only screen and (min-width: 768px) {
         font-size: 24px;
       }
       li{
         display: block;
         flex: 1;
-        // padding: 5px 0;
-        // font-size: 10px;
-        color: #ffffff;
-        line-height: 22px;
+        line-height: 20px;
         background:linear-gradient(0deg,rgba(255,164,101,1) 0%,rgba(255,190,127,1) 100%);
         border-radius: 8px;
         @media only screen and (min-width: 768px) {
           border-radius: 30px;
-          line-height: 66px;
-          height: 66px;
+          line-height: 42px;
         }
       }
       .introduce-data{
-        margin-top: 6%;
         padding-left: 6%;
         padding-right: 4%;
       }
-      // .total-point{
-      //   margin-top: 20%;
-      // }
+      li:nth-child(2){
+        margin-top: 18%;
+        margin-bottom: 18%;
+        @media only screen and (min-width: 768px) {
+          margin-top: 10%;
+          margin-bottom: 10%;
+        }
+      }
     }
   }
-  .container{
-    border: 1px solid red;
+  .vip-animation{
     width: 100%;
-    height: 18%;
-    // margin-top: 38%;
+    height: 19%;
+    .animation{
+      position: absolute;
+      font-size: 12px;
+      animation: bubble 5s infinite linear alternate;
+      -webkit-animation: bubble 5s infinite linear alternate;
+      -moz-animation: bubble 5s infinite linear alternate;
+      -o-animation: bubble 5s infinite linear alternate;
+      animation-fill-mode: both; /*播放后的状态*/
+      transform-origin: center bottom; /*设置动画旋转元素的基点为：居中靠下*/
+      cursor: pointer;
+      .bubble{
+        // position: absolute;
+        width: 20px;
+        height: 17px;
+      }
+      .text{
+        position: absolute;
+        left: 50%;
+        transform: translateX(-50%);
+        -webkit-transform: translateX(-50%);
+      }
+      @media only screen and (max-width: 320px) {
+        font-size: 10px;
+        .bubble{
+          width: 16px;
+          height: 14px;
+        }
+      }
+      @media only screen and (min-width: 768px) {
+        font-size: 20px;
+        .bubble{
+          width: 42px;
+          height: 36px;
+        }
+      }
+    }
+    .animation:hover{
+      animation-duration:5s; /*动画时间*/
+      // animation-fill-mode: both; /*播放后的状态*/
+      animation-name: hidder;
+      animation-direction: alternate;
+      animation-timing-function:linear;
+      animation-iteration-count: 1; /*动作循环的次数：infinite 无限循环*/
+      transform-origin: center bottom; /*设置动画旋转元素的基点为：居中靠下*/
+      cursor: pointer;
+    }
+    li{
+      list-style: none;
+      display: inline-block;
+    }
+    li:nth-child(1){
+      margin-top: 30%;
+      margin-left: 20%;
+      @media only screen and (min-width: 768px) {
+        margin-top: 26%;
+        margin-left: 14%;
+      }
+    }
+    li:nth-child(2){
+      margin-top: 34%;
+      margin-left: 8%;
+      @media only screen and (min-width: 768px) {
+        margin-top: 0%;
+        margin-left: -14%;
+      }
+    }
+    li:nth-child(3){
+      margin-top: 4%;
+      margin-left: -30%;
+    }
+    li:nth-child(4){
+      margin-top: 16%;
+      margin-left: -47%;
+    }
+    li:nth-child(5){
+      margin-top: 6%;
+      margin-left: 19%;
+    }
+    li:nth-child(6){
+      margin-top: 17%;
+      margin-left: 12%;
+    }
+    li:nth-child(7){
+      margin-top: 0;
+      margin-left: 0;
+    }
+    li:nth-child(8){
+      margin-top: 12%;
+      margin-left: -5%;
+    }
+    li:nth-child(9){
+      margin-top: 10%;
+      margin-left: -18%;
+    }
+    li:nth-child(10){
+      margin-top: 24%;
+      margin-left: -2%;
+    }
+    li:nth-child(11){
+      margin-left: 53%;
+    }
+    li:nth-child(12){
+      margin-left: 44%;
+    }
+    li:nth-child(13){
+      margin-left:37%;
+    }
+    li:nth-child(14){
+      margin-left:17%;
+    }
+    li:nth-child(15){
+      margin-left:84%;
+    }
+    li:nth-child(16){
+      margin-left: 6%;
+    }
+    li:nth-child(1),li:nth-child(16){
+      -webkit-animation-delay: -0.1s;
+      -moz-animation-delay: -0.1s;
+      -o-animation-delay: -0.1s;
+      animation-delay: -0.1s;
+    }
+    li:nth-child(2),li:nth-child(12){
+      -webkit-animation-delay: -2.7s;
+      -moz-animation-delay: -2.7s;
+      -o-animation-delay: -2.7s;
+      animation-delay: -2.7s;
+    }
+    li:nth-child(3),li:nth-child(13){
+      -webkit-animation-delay: -1.5s;
+      -moz-animation-delay: -1.5s;
+      -o-animation-delay: -1.5s;
+      animation-delay: -1.5s;
+    }
+    li:nth-child(4),li:nth-child(13){
+      -webkit-animation-delay: -2.5s;
+      -moz-animation-delay: -2.5s;
+      -o-animation-delay: -2.5s;
+      animation-delay: -2.5s;
+    }
+    li:nth-child(5),li:nth-child(9){
+      -webkit-animation-delay: -1.3s;
+      -moz-animation-delay: -1.3s;
+      -o-animation-delay: -1.3s;
+      animation-delay: -1.3s;
+    }
+    li:nth-child(11){
+      -webkit-animation-delay: 1s;
+      -moz-animation-delay: 1s;
+      -o-animation-delay: 1s;
+      animation-delay: 1s;
+    }
+    li:nth-child(6),li:nth-child(15){
+      -webkit-animation-delay: -1s;
+      -moz-animation-delay: -1s;
+      -o-animation-delay: -1s;
+      animation-delay: -1s;
+    }
+    li:nth-child(7),li:nth-child(10){
+      -webkit-animation-delay: -1.8s;
+      -moz-animation-delay: -1.8s;
+      -o-animation-delay: -1.8s;
+      animation-delay: -1.8s;
+    }
+    li:nth-child(8),li:nth-child(14){
+      -webkit-animation-delay: -0.7s;
+      -moz-animation-delay: -0.7s;
+      -o-animation-delay: -0.7s;
+      animation-delay: -0.7s;
+    }
   }
+  
   .content{
-    border: 1px solid yellow;
-    height: 48%;
+    // border: 1px solid yellow;
+    // box-sizing: border-box;
+    height: 49%;
   }
   .footer{
-    border: 1px solid black;
-    height: 12%;
-    display: flex;
     position: absolute;
+    // border: 1px solid black;
+    // box-sizing: border-box;
+    height: 11%;
+    display: flex;
     z-index: 500;
     bottom: 0;
     width: 100%;
-    // background-color: #F7F7FA;
-    // bottom: 10%;
-    // border: 1px solid black;
-    width: 100%;
-    // height: 30%;
+    color: #FFFFFF;
+    text-align: center;
+    // font-size: 10px;
     .des-btn{
       display: block;
       flex: 1;
       padding: 5px 0;
-      font-size: 10;
-      color: blue;
-      text-align: center;
-      // position: absolute;
-      // width: 40px;
       img{
-        // width: 40px;
-        height: 40px;
+        height: 60%;
       }
     }
   }
 }
+@keyframes bubble {
+  from {
+    // left: 0;
+    // top: 0;
+    opacity: 1;
+  } to {
+    // left: 10px;
+    // top: 30px;
+    opacity: 0.5;
+  }
+}
+
+@keyframes hidder {
+  from {
+    left: 10px;
+    top: 30px;
+    opacity: 1;
+  } to {
+    left: 10px;
+    top: 50px;
+    opacity: 0;
+  }
+}
+
 </style>

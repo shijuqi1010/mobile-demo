@@ -82,52 +82,34 @@ export default {
       loading: true,
       tip: false,
       userInfo:[{
-        text: 1
+        text: 1111111
       },
       {
-        text: 2
+        text: 2111111
       },
       {
-        text: 3
+        text: 31111
       },
       {
-        text: 4
+        text: 41111
       },
       {
-        text: 5
+        text: 50000
       },
       {
-        text: 6
+        text: 60000
       },
       {
-        text: 7
+        text: 72222
       },
       {
-        text: 8
+        text: 83333
       },
       {
-        text: 9
+        text: 94444
       },
       {
-        text: 10
-      },
-      {
-        text: 11
-      },
-      {
-        text: 12
-      },
-      {
-        text: 13
-      },
-      {
-        text: 14
-      },
-      {
-        text: 15
-      },
-      {
-        text: 16
+        text: 101111
       }
       ]
     }
@@ -186,29 +168,42 @@ export default {
   right: 0;
   bottom: 0;
   font-weight: normal;
-  // overflow: hidden;
-  background: url("https://img1.aylives.cn/f66f947d9b754a6b8f78c3831e1b7ccc.png"); //667
-  // background: url("https://img1.aylives.cn/461c200bee644dd1ab915c924398ba8a.png"); //812
+  overflow: hidden;
+  background-image: url("https://img1.aylives.cn/7fce378fdd1448838838ee553ff248ca.png"); //667
   background-repeat: no-repeat;
   background-position: center center;
   background-size: cover;
   @media only screen and (device-width: 375px) and (device-height: 812px) {
-    background: url("https://img1.aylives.cn/461c200bee644dd1ab915c924398ba8a.png");
+    // background-image: url("https://img1.aylives.cn/0472e8034ba54187ba399ca916623a17.png");
+  }
+  @media only screen and (min-width: 768px) {
+    background-image: url("https://img1.aylives.cn/2e0ce14d7a1e44d6b4359389549f3b55.png");
+    font-size: 24px;
   }
   .header{
-    // position: relative;
+    position: relative;
     // border: 1px solid red;
+    // box-sizing: border-box;
     width: 100%;
-    height: 20%;
+    height: 22%;
+    color: #F4F8FF;
+    font-size: 10px;
+    @media only screen and (min-width: 768px) {
+      font-size: 24px;
+    }
     .castle{
-      // width: 53px;
-      color: #010101;
-      // height: 38px;
-      text-align: center;
-      margin-top: 5%;
+      position: absolute;
+      // border: 1px solid red;
+      // box-sizing: border-box;
+      width: 60%;
+      text-align: left;
+      top: 24%;
       margin-left: 4%;
       .self-castle{
         position: absolute;
+        width: 40%;
+        // border: 1px solid red;
+        // box-sizing: border-box;
         img{
           width: 53px;
           height: 38px;
@@ -218,81 +213,68 @@ export default {
           }
         }
         .title{
-          font-size: 10px;
-          @media only screen and (min-width: 768px) {
-            font-size: 24px;
-          }
+          color: #010101;
         }
       }
       .point-info{
+        width: 60%;
+        // border: 1px solid black;
+        // box-sizing: border-box;
         position: absolute;
-        width: 100%;
-        text-align: center;
+        display: flex;
+        flex-direction: column;
         list-style: none;
         font-size: 10px;
-        color: #F4F8FF;
-        margin-left: 18%;
-        // left: 16%;
+        margin-left: 40%;
         text-align: left;
         @media only screen and (min-width: 768px) {
           font-size: 24px;
         }
         li{
           position: absolute;
-          display: inline-block;
           width: auto;
-          // height: 33px;
           line-height: 22px;
-          background:linear-gradient(0deg,rgba(113,146,255,1) 0%,rgba(35,224,254,1) 100%);
-          border-radius:10px;
+          background: linear-gradient(0deg,rgba(113,146,255,1) 0%,rgba(35,224,254,1) 100%);
+          border-radius: 10px;
           @media only screen and (min-width: 768px) {
             border-radius: 30px;
-            line-height: 66px;
-            height: 66px;
+            line-height: 50px;
           }
         }
         .point-data{
-          // margin-top: 2%;
-          padding-left: 3%;
-          padding-right: 3%;
+          padding-left: 5%;
+          padding-right: 5%;
         }
         .total-point{
-          margin-top: 10%;
+          margin-top: 30%;
+          @media only screen and (min-width: 768px) {
+            margin-top: 24%;
+          }
         }
       }
     }
     .introduce{
+      position: absolute;
       display: flex;
       flex-direction: column;
-      position: absolute;
       z-index: 500;
-      top: 1%;
+      top: 24%;
       right: -2%;
       width: 20%;
-      // height: 100px;
-      // border: 1px solid black;
-      text-align: left;
       list-style: none;
-      font-size: 10px;
-      color: #F4F8FF;
       text-align: center;
-      padding: 10px 0;
       @media only screen and (min-width: 768px) {
         font-size: 24px;
       }
       li{
         display: block;
         flex: 1;
-        // padding: 5px 0;
-        // font-size: 10px;
-        color: #ffffff;
-        line-height: 22px;
+        line-height: 20px;
         background:linear-gradient(0deg,rgba(255,164,101,1) 0%,rgba(255,190,127,1) 100%);
         border-radius: 8px;
         @media only screen and (min-width: 768px) {
           border-radius: 30px;
-          line-height: 66px;
-          height: 66px;
+          line-height: 42px;
         }
       }
       .introduce-data{
@@ -300,37 +282,52 @@ export default {
         padding-right: 4%;
       }
       li:nth-child(2){
-        margin-top: 20%;
-        margin-bottom: 20%;
+        margin-top: 18%;
+        margin-bottom: 18%;
+        @media only screen and (min-width: 768px) {
+          margin-top: 10%;
+          margin-bottom: 10%;
+        }
       }
     }
   }
   .vip-animation{
-    // border: 1px solid red;
     width: 100%;
-    height: 20%;
-    position: relative;
+    height: 19%;
     .animation{
-      animation: bubble 2s infinite linear alternate;
-      border: 1px solid black;
       position: absolute;
+      font-size: 12px;
+      animation: bubble 5s infinite linear alternate;
+      -webkit-animation: bubble 5s infinite linear alternate;
+      -moz-animation: bubble 5s infinite linear alternate;
+      -o-animation: bubble 5s infinite linear alternate;
       animation-fill-mode: both; /*播放后的状态*/
       transform-origin: center bottom; /*设置动画旋转元素的基点为：居中靠下*/
       cursor: pointer;
       .bubble{
-        position: absolute;
+        // position: absolute;
         width: 20px;
         height: 17px;
-        // position: relative;
+      }
+      .text{
+        position: absolute;
         left: 50%;
         transform: translateX(-50%);
         -webkit-transform: translateX(-50%);
       }
-      .text{
-        position: absolute;
-        // line-height: 14px;
-        font-size: 12px;
-        margin-top: 12px;
+      @media only screen and (max-width: 320px) {
+        font-size: 10px;
+        .bubble{
+          width: 16px;
+          height: 14px;
+        }
+      }
+      @media only screen and (min-width: 768px) {
+        font-size: 20px;
+        .bubble{
+          width: 42px;
+          height: 36px;
+        }
       }
     }
     .animation:hover{
@@ -348,34 +345,52 @@ export default {
       display: inline-block;
     }
     li:nth-child(1){
-      margin-left: 66%;
+      margin-top: 30%;
+      margin-left: 20%;
+      @media only screen and (min-width: 768px) {
+        margin-top: 26%;
+        margin-left: 14%;
+      }
     }
     li:nth-child(2){
-      margin-left: 21%;
+      margin-top: 34%;
+      margin-left: 8%;
+      @media only screen and (min-width: 768px) {
+        margin-top: 0%;
+        margin-left: -14%;
+      }
     }
     li:nth-child(3){
-      margin-left:78%;
+      margin-top: 4%;
+      margin-left: -30%;
     }
     li:nth-child(4){
-      margin-left: 10%;
+      margin-top: 16%;
+      margin-left: -47%;
     }
     li:nth-child(5){
-      margin-left: 24%;
+      margin-top: 6%;
+      margin-left: 19%;
     }
     li:nth-child(6){
-      margin-left: 92%;
+      margin-top: 17%;
+      margin-left: 12%;
     }
     li:nth-child(7){
-      margin-left: 50%;
+      margin-top: 0;
+      margin-left: 0;
     }
     li:nth-child(8){
-      margin-left: 68%;
+      margin-top: 12%;
+      margin-left: -5%;
     }
     li:nth-child(9){
-      margin-left: 57%;
+      margin-top: 10%;
+      margin-left: -18%;
     }
     li:nth-child(10){
-      margin-left: 31%;
+      margin-top: 24%;
+      margin-left: -2%;
     }
     li:nth-child(11){
       margin-left: 53%;
@@ -451,53 +466,45 @@ export default {
     }
   }
   
-  // .content{
-  //   border: 1px solid yellow;
-  //   height: 44%;
-  // }
+  .content{
+    // border: 1px solid yellow;
+    // box-sizing: border-box;
+    height: 49%;
+  }
   .footer{
+    position: absolute;
     // border: 1px solid black;
+    // box-sizing: border-box;
     height: 11%;
     display: flex;
-    position: absolute;
     z-index: 500;
     bottom: 0;
     width: 100%;
+    color: #FFFFFF;
+    text-align: center;
+    // font-size: 10px;
     .des-btn{
       display: block;
       flex: 1;
       padding: 5px 0;
-      font-size: 10px;
-      color: blue;
-      text-align: center;
-      // position: absolute;
-      // width: 40px;
       img{
-        // width: 40px;
         height: 60%;
       }
     }
   }
 }
-
 @keyframes bubble {
   from {
-    left: 0;
-    top: 0;
+    // left: 0;
+    // top: 0;
+    opacity: 1;
   } to {
-    left:0;
-    top: 70%;
+    // left: 10px;
+    // top: 30px;
+    opacity: 0.5;
   }
 }
-@-webkit-keyframes bubble {
-  from {
-    left: 0;
-    top: 0;
-  } to {
-    left: 0;
-    top: 70%;
-  }
-}
+
 @keyframes hidder {
   from {
     left: 10px;
