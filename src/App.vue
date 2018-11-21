@@ -30,6 +30,7 @@ html {
 body {
   margin: 0;
   padding: 0;
+  -webkit-text-size-adjust: none; 
   font-size: 12px; /*实际相当于14px*/
 }
 * {

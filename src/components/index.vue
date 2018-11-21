@@ -24,9 +24,9 @@
           <li class="introduce-data" @click="jumpToRank">
             <span>排名</span>
           </li>
-          <li class="introduce-data total-point">
+          <!-- <li class="introduce-data total-point">
             <span>秘籍</span>
-          </li>
+          </li> -->
           <li class="introduce-data total-point">
             <span>共建计划</span>
           </li>
@@ -184,6 +184,7 @@ export default {
   right: 0;
   bottom: 0;
   font-weight: normal;
+  -webkit-text-size-adjust: none;
   overflow: hidden;
   background-image: url("https://img1.aylives.cn/7fce378fdd1448838838ee553ff248ca.png"); //667
   background-repeat: no-repeat;
@@ -290,7 +291,7 @@ export default {
       li{
         display: block;
         flex: 1;
-        line-height: 20px;
+        line-height: 24px;
         background:linear-gradient(0deg,rgba(255,164,101,1) 0%,rgba(255,190,127,1) 100%);
         border-radius: 8px;
         @media only screen and (min-width: 768px) {
@@ -303,11 +304,11 @@ export default {
         padding-right: 4%;
       }
       li:nth-child(2){
-        margin-top: 16%;
-        margin-bottom: 16%;
+        margin-top: 26%;
+        // margin-bottom: 16%;
         @media only screen and (min-width: 768px) {
           margin-top: 5%;
-          margin-bottom: 5%;
+          // margin-bottom: 5%;
         }
       }
     }
@@ -315,9 +316,12 @@ export default {
   .vip-animation{
     width: 100%;
     height: 19%;
+    color: #ffffff;
     .animation{
       position: absolute;
-      font-size: 12px;
+      font-size: 62.5% !important;
+      // font-size: 6px;
+      // font-size: 12px;
       animation: bubble 5s infinite linear alternate;
       -webkit-animation: bubble 5s infinite linear alternate;
       -moz-animation: bubble 5s infinite linear alternate;
@@ -337,14 +341,14 @@ export default {
         -webkit-transform: translateX(-50%);
       }
       @media only screen and (max-width: 320px) {
-        font-size: 10px;
+        font-size: 5px;
         .bubble{
           width: 16px;
           height: 14px;
         }
       }
       @media only screen and (min-width: 768px) {
-        font-size: 20px;
+        font-size: 16px;
         .bubble{
           width: 42px;
           height: 36px;
