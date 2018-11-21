@@ -1,67 +1,57 @@
 <template>
   <div class="des-index">
-    <!-- <transition name="fade"> -->
-      <div class="header">
-        <div class="castle">
-          <a class="self-castle" href="/#/getPoints">
-            <img src="../assets/castle.png" alt="">
-            <p class="title">我的城堡</p>
-          </a>
-          <!-- <div class="self-castle">
-            <img src="../assets/castle.png" alt="">
-            <p class="title">我的城堡</p>
-          </div> -->
-          <ul class="point-info">
-            <li class="point-data">
-              <span>奥克积分：{{ points }}</span>
-            </li>
-            <li class="point-data total-point">
-              <span>算力：{{ totalPoints }}</span>
-            </li>
-          </ul>
+    <div class="header">
+      <div class="castle">
+        <div class="self-castle">
+          <img src="../assets/castle.png" alt="">
+          <p class="title">我的城堡</p>
         </div>
-        <ul class="introduce">
-          <li class="introduce-data" @click="jumpToRank">
-            <span>排名</span>
+        <ul class="point-info">
+          <li class="point-data">
+            <span>奥克积分：{{ points }}</span>
           </li>
-          <li class="introduce-data total-point">
-            <span>秘籍</span>
-          </li>
-          <li class="introduce-data total-point">
-            <span>共建计划</span>
+          <li class="point-data total-point">
+            <span>算力：{{ totalPoints }}</span>
           </li>
         </ul>
       </div>
-
-      <ul class="vip-animation">
-        <li class="animation" v-if="userInfo.length <= 10" v-for="(item, index) in userInfo" :key="index">
-          <img class="bubble" :id="index" src="../assets/stone.png" alt="">
-          <span class="text">{{item.text}}</span>
+      <ul class="introduce">
+        <li class="introduce-data">
+          <span>排名</span>
         </li>
-        <li class="animation" v-if="userInfo.length > 10" v-for="(item, index) in userInfo" :key="index">
-          <img class="bubble" :id="index" src="../assets/stone.png" alt="">
-          <span class="text">{{item.text}}</span>
+        <li class="introduce-data total-point">
+          <span>秘籍</span>
+        </li>
+        <li class="introduce-data total-point">
+          <span>共建计划</span>
         </li>
       </ul>
+    </div>
 
-      <div class="content">
-      </div>
+    <ul class="vip-animation">
+      <li class="animation" v-for="(item, index) in userInfo" :key="index">
+        <img class="bubble" :id="index" src="../assets/stone.png" alt="">
+        <span class="text">{{item.text}}</span>
+      </li>
+    </ul>
 
-      <div class="footer">
-        <div class="des-btn" @click="getPoints">
-          <img src="../assets/energy.png" alt="">
-          <p>获取能量</p>
-        </div>
-        <div class="des-btn btn">
-          <img src="../assets/share.png" alt="">
-          <p>邀请好友</p>
-        </div>
-        <div class="des-btn btn">
-          <img src="../assets/store.png" alt="">
-          <p>市场</p>
-        </div>
+    <div class="content">
+    </div>
+
+    <div class="footer">
+      <div class="des-btn" @click="getPoints">
+        <img src="../assets/energy.png" alt="">
+        <p>获取能量</p>
       </div>
-    <!-- </transition> -->
+      <div class="des-btn btn">
+        <img src="../assets/share.png" alt="">
+        <p>邀请好友</p>
+      </div>
+      <div class="des-btn btn">
+        <img src="../assets/store.png" alt="">
+        <p>市场</p>
+      </div>
+    </div>
   </div>
 </template>
 
@@ -92,16 +82,16 @@ export default {
       loading: true,
       tip: false,
       userInfo:[{
-        text: 10000
+        text: 1111111
       },
       {
-        text: 20000
+        text: 2111111
       },
       {
-        text: 30000
+        text: 31111
       },
       {
-        text: 40000
+        text: 41111
       },
       {
         text: 50000
@@ -110,19 +100,16 @@ export default {
         text: 60000
       },
       {
-        text: 70000
+        text: 72222
       },
       {
-        text: 80000
+        text: 83333
       },
       {
-        text: 90000
+        text: 94444
       },
       {
         text: 101111
-      },
-      {
-        text: 111111
       }
       ]
     }
@@ -166,9 +153,6 @@ export default {
     },
     getPoints () {
       this.$router.push({ path: "/getPoints"})
-    },
-    jumpToRank () {
-      this.$router.push({ path: "/rank"})
     }
   }
 };
@@ -195,12 +179,6 @@ export default {
   @media only screen and (min-width: 768px) {
     background-image: url("https://img1.aylives.cn/2e0ce14d7a1e44d6b4359389549f3b55.png");
     font-size: 24px;
-  }
-  .fade-enter-active, .fade-leave-active {
-    transition: all 0.4s cubic-bezier(0.22, 1.48, 0.45, 0.98);
-  }
-  .fade-enter, .fade-leave-active {
-    opacity: 0;
   }
   .header{
     position: relative;
@@ -244,7 +222,6 @@ export default {
         // box-sizing: border-box;
         position: absolute;
         display: flex;
-        display: -webkit-flex;
         flex-direction: column;
         list-style: none;
         font-size: 10px;
@@ -345,6 +322,13 @@ export default {
           height: 14px;
         }
       }
+      @media only screen and (max-width: 360px) {
+        font-size: 11px;
+        .bubble{
+          width: 18px;
+          height: 15px;
+        }
+      }
       @media only screen and (min-width: 768px) {
         font-size: 20px;
         .bubble{
@@ -354,20 +338,20 @@ export default {
       }
     }
     .animation:hover{
-      animation-duration: 2s; /*动画时间*/
+      animation-duration:5s; /*动画时间*/
       // animation-fill-mode: both; /*播放后的状态*/
       animation-name: hidder;
       animation-direction: alternate;
       animation-timing-function:linear;
       animation-iteration-count: 1; /*动作循环的次数：infinite 无限循环*/
-      // transform-origin: center bottom; /*设置动画旋转元素的基点为：居中靠下*/
+      transform-origin: center bottom; /*设置动画旋转元素的基点为：居中靠下*/
       cursor: pointer;
     }
     li{
       list-style: none;
       display: inline-block;
     }
-    li:nth-child(1),li:nth-child(11){
+    li:nth-child(1){
       margin-top: 30%;
       margin-left: 20%;
       @media only screen and (min-width: 768px) {
@@ -375,7 +359,7 @@ export default {
         margin-left: 14%;
       }
     }
-    li:nth-child(2),li:nth-child(12){
+    li:nth-child(2){
       margin-top: 34%;
       margin-left: 8%;
       @media only screen and (min-width: 768px) {
@@ -383,39 +367,57 @@ export default {
         margin-left: -14%;
       }
     }
-    li:nth-child(3),li:nth-child(13){
+    li:nth-child(3){
       margin-top: 4%;
       margin-left: -30%;
     }
-    li:nth-child(4),li:nth-child(14){
+    li:nth-child(4){
       margin-top: 16%;
       margin-left: -47%;
     }
-    li:nth-child(5),li:nth-child(15){
+    li:nth-child(5){
       margin-top: 6%;
       margin-left: 19%;
     }
-    li:nth-child(6),li:nth-child(16){
+    li:nth-child(6){
       margin-top: 17%;
       margin-left: 12%;
     }
-    li:nth-child(7),li:nth-child(17){
+    li:nth-child(7){
       margin-top: 0;
       margin-left: 0;
     }
-    li:nth-child(8),li:nth-child(18){
+    li:nth-child(8){
       margin-top: 12%;
       margin-left: -5%;
     }
-    li:nth-child(9),li:nth-child(9){
+    li:nth-child(9){
       margin-top: 10%;
       margin-left: -18%;
     }
-    li:nth-child(10),li:nth-child(20){
+    li:nth-child(10){
       margin-top: 24%;
       margin-left: -2%;
     }
-    li:nth-child(1),li:nth-child(11){
+    li:nth-child(11){
+      margin-left: 53%;
+    }
+    li:nth-child(12){
+      margin-left: 44%;
+    }
+    li:nth-child(13){
+      margin-left:37%;
+    }
+    li:nth-child(14){
+      margin-left:17%;
+    }
+    li:nth-child(15){
+      margin-left:84%;
+    }
+    li:nth-child(16){
+      margin-left: 6%;
+    }
+    li:nth-child(1),li:nth-child(16){
       -webkit-animation-delay: -0.1s;
       -moz-animation-delay: -0.1s;
       -o-animation-delay: -0.1s;
@@ -433,25 +435,25 @@ export default {
       -o-animation-delay: -1.5s;
       animation-delay: -1.5s;
     }
-    li:nth-child(4),li:nth-child(14){
+    li:nth-child(4),li:nth-child(13){
       -webkit-animation-delay: -2.5s;
       -moz-animation-delay: -2.5s;
       -o-animation-delay: -2.5s;
       animation-delay: -2.5s;
     }
-    li:nth-child(5),li:nth-child(15){
+    li:nth-child(5),li:nth-child(9){
       -webkit-animation-delay: -1.3s;
       -moz-animation-delay: -1.3s;
       -o-animation-delay: -1.3s;
       animation-delay: -1.3s;
     }
-    li:nth-child(6),li:nth-child(16){
+    li:nth-child(11){
       -webkit-animation-delay: 1s;
       -moz-animation-delay: 1s;
       -o-animation-delay: 1s;
       animation-delay: 1s;
     }
-    li:nth-child(7),li:nth-child(17){
+    li:nth-child(6),li:nth-child(15){
       -webkit-animation-delay: -1s;
       -moz-animation-delay: -1s;
       -o-animation-delay: -1s;
@@ -463,7 +465,7 @@ export default {
       -o-animation-delay: -1.8s;
       animation-delay: -1.8s;
     }
-    li:nth-child(8),li:nth-child(18){
+    li:nth-child(8),li:nth-child(14){
       -webkit-animation-delay: -0.7s;
       -moz-animation-delay: -0.7s;
       -o-animation-delay: -0.7s;
@@ -498,22 +500,22 @@ export default {
     }
   }
 }
-// @keyframes bubble {
-//   from {
-//     // left: 0;
-//     // top: 0;
-//     opacity: 1;
-//   } to {
-//     // left: 10px;
-//     // top: 30px;
-//     opacity: 0.5;
-//   }
-// }
+@keyframes bubble {
+  from {
+    // left: 0;
+    // top: 0;
+    opacity: 1;
+  } to {
+    // left: 10px;
+    // top: 30px;
+    opacity: 0.5;
+  }
+}
 
 @keyframes hidder {
   from {
-    // left: 10px;
-    // top: 30px;
+    left: 10px;
+    top: 30px;
     opacity: 1;
   } to {
     left: 10px;

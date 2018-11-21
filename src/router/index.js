@@ -2,6 +2,9 @@ import Vue from 'vue'
 import Router from 'vue-router'
 import index from '@/components/index'
 import getPoints from '@/components/getPoints'
+import personalCenter from '@/components/personalCenter'
+import rank from '@/components/rank'
+import explain from '@/components/explain'
 import test from '@/components/test'
 import animation from '@/components/animation'
 
@@ -23,17 +26,25 @@ export default new Router({
       component: getPoints
     },
     {
-      path: '/test',
-      name: 'test',
-      component: test
+      path: '/personalCenter',
+      name: 'personalCenter',
+      component: personalCenter
     },
     {
-      path: '/animation',
-      name: 'animation',
+      path: '/rank',
+      name: 'rank',
       meta: {
-        title: '浮动'
+        title: '排名'
       },
-      component: animation
+      component: rank
+    },
+    {
+      path: '/explain',
+      name: 'explain',
+      meta: {
+        title: '奥克秘籍'
+      },
+      component: explain
     }
   ]
 })

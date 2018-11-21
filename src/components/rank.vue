@@ -1,6 +1,6 @@
 <template>
   <div class="des-index">
-    <!-- <transition name="fade"> -->
+    <transition-group name="fade">
       <div class="header">
         <div class="castle">
           <a class="self-castle" href="/#/getPoints">
@@ -61,7 +61,7 @@
           <p>市场</p>
         </div>
       </div>
-    <!-- </transition> -->
+    </transition-group>
   </div>
 </template>
 
@@ -244,7 +244,6 @@ export default {
         // box-sizing: border-box;
         position: absolute;
         display: flex;
-        display: -webkit-flex;
         flex-direction: column;
         list-style: none;
         font-size: 10px;
@@ -498,17 +497,6 @@ export default {
     }
   }
 }
-// @keyframes bubble {
-//   from {
-//     // left: 0;
-//     // top: 0;
-//     opacity: 1;
-//   } to {
-//     // left: 10px;
-//     // top: 30px;
-//     opacity: 0.5;
-//   }
-// }
 
 @keyframes hidder {
   from {
