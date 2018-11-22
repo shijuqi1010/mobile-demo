@@ -9,7 +9,6 @@
         </div>
       </div>
     </div>
-    <!-- <a class="share-btn" href="/#/sharePage">分享至微信</a> -->
     <div class="share-btn" @click="share">分享至微信</div>
     
   </div>

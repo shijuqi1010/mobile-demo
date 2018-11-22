@@ -6,10 +6,6 @@
           <img src="../assets/castle.png" alt="">
           <p class="title">我的城堡</p>
         </router-link>
-        <!-- <a class="self-castle" href="/#/personalCenter">
-          <img src="../assets/castle.png" alt="">
-          <p class="title">我的城堡</p>
-        </a> -->
         <ul class="point-info">
           <li class="point-data">
             <span>奥克积分：{{ points }}</span>
@@ -40,18 +36,18 @@
     </div>
 
     <div class="footer">
-      <a class="des-btn" href="/#/getPoints">
-        <img src="../assets/energy.png" alt="">
+      <router-link class="des-btn" to="/getPoints">
+        <img src="../assets/energy.png">
         <p>获取能量</p>
-      </a>
-      <a class="des-btn btn" href="/#/share">
-        <img src="../assets/share.png" alt="">
+      </router-link>
+      <router-link class="des-btn btn" to="/share">
+        <img src="../assets/share.png">
         <p>邀请好友</p>
-      </a>
-      <a class="des-btn btn" href="/#/store">
-        <img src="../assets/store.png" alt="">
+      </router-link>
+      <router-link class="des-btn btn" to="/store">
+        <img src="../assets/store.png">
         <p>市场</p>
-      </a>
+      </router-link>
     </div>
   </div>
 </template>
