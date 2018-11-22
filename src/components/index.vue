@@ -2,10 +2,14 @@
   <div class="des-index">
     <div class="header">
       <div class="castle">
-        <a class="self-castle" href="/#/personalCenter">
+        <router-link to="/personalCenter" class="self-castle">
           <img src="../assets/castle.png" alt="">
           <p class="title">我的城堡</p>
-        </a>
+        </router-link>
+        <!-- <a class="self-castle" href="/#/personalCenter">
+          <img src="../assets/castle.png" alt="">
+          <p class="title">我的城堡</p>
+        </a> -->
         <ul class="point-info">
           <li class="point-data">
             <span>奥克积分：{{ points }}</span>
