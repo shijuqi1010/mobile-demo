@@ -41,9 +41,16 @@ a img {
   border: 0;
 }
 
-a {
+a,
+a:link,
+a:hover,
+a:visited {
+  color: inherit;
   text-decoration: none;
+  font-size: 14px;
+  display: block;
 }
+
 
 #app {
   font-family: 'Avenir', Helvetica, Arial, sans-serif;

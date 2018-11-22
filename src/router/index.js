@@ -1,12 +1,15 @@
 import Vue from 'vue'
 import Router from 'vue-router'
 import index from '@/components/index'
-import getPoints from '@/components/getPoints'
-import personalCenter from '@/components/personalCenter'
+import getPoints from '@/components/points/index'
+import store from '@/components/store'
+import personalCenter from '@/components/castle/index'
+import explain from '@/components/castle/explain'
 import rank from '@/components/rank'
-import explain from '@/components/explain'
-import test from '@/components/test'
-import animation from '@/components/animation'
+
+import share from '@/components/share/index'
+import sharePage from '@/components/share/sharePage'
+import donateSteps from '@/components/points/donateSteps'
 
 Vue.use(Router)
 
@@ -26,8 +29,19 @@ export default new Router({
       component: getPoints
     },
     {
+      path: '/store',
+      name: 'store',
+      meta: {
+        title: '市场'
+      },
+      component: store
+    },
+    {
       path: '/personalCenter',
       name: 'personalCenter',
+      meta: {
+        title: '我的城堡'
+      },
       component: personalCenter
     },
     {
@@ -45,6 +59,30 @@ export default new Router({
         title: '奥克秘籍'
       },
       component: explain
+    },
+    {
+      path: '/donateSteps',
+      name: 'donateSteps',
+      meta: {
+        title: '捐步'
+      },
+      component: donateSteps
+    },
+    {
+      path: '/share',
+      name: 'share',
+      meta: {
+        title: '邀请邻居'
+      },
+      component: share
+    },
+    {
+      path: '/sharePage',
+      name: 'sharePage',
+      meta: {
+        title: '分享'
+      },
+      component: sharePage
     }
   ]
 })

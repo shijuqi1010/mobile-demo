@@ -1,67 +1,54 @@
 <template>
   <div class="des-index">
-    <!-- <transition name="fade"> -->
-      <div class="header">
-        <div class="castle">
-          <a class="self-castle" href="/#/getPoints">
-            <img src="../assets/castle.png" alt="">
-            <p class="title">我的城堡</p>
-          </a>
-          <!-- <div class="self-castle">
-            <img src="../assets/castle.png" alt="">
-            <p class="title">我的城堡</p>
-          </div> -->
-          <ul class="point-info">
-            <li class="point-data">
-              <span>奥克积分：{{ points }}</span>
-            </li>
-            <li class="point-data total-point">
-              <span>算力：{{ totalPoints }}</span>
-            </li>
-          </ul>
-        </div>
-        <ul class="introduce">
-          <li class="introduce-data" @click="jumpToRank">
-            <span>排名</span>
+    <div class="header">
+      <div class="castle">
+        <a class="self-castle" href="/#/personalCenter">
+          <img src="../assets/castle.png" alt="">
+          <p class="title">我的城堡</p>
+        </a>
+        <ul class="point-info">
+          <li class="point-data">
+            <span>奥克积分：{{ points }}</span>
           </li>
-          <!-- <li class="introduce-data total-point">
-            <span>秘籍</span>
-          </li> -->
-          <li class="introduce-data total-point">
-            <span>共建计划</span>
+          <li class="point-data total-point">
+            <span>算力：{{ totalPoints }}</span>
           </li>
         </ul>
       </div>
-
-      <ul class="vip-animation">
-        <li class="animation" v-if="userInfo.length <= 10" v-for="(item, index) in userInfo" :key="index">
-          <img class="bubble" :id="index" src="../assets/stone.png" alt="">
-          <span class="text">{{item.text}}</span>
+      <ul class="introduce">
+        <li class="introduce-data" @click="jumpToRank">
+          <span>排名</span>
         </li>
-        <li class="animation" v-if="userInfo.length > 10" v-for="(item, index) in userInfo" :key="index">
-          <img class="bubble" :id="index" src="../assets/stone.png" alt="">
-          <span class="text">{{item.text}}</span>
+        <li class="introduce-data total-point">
+          <span>共建计划</span>
         </li>
       </ul>
+    </div>
 
-      <div class="content">
-      </div>
+    <ul class="vip-animation">
+      <li class="animation" v-show="showBubble" v-for="(item, index) in userInfo" :key="index" @click="collect">
+        <img class="bubble" :id="index" src="../assets/stone.png" alt="">
+        <span class="text">{{item.text}}</span>
+      </li>
+    </ul>
 
-      <div class="footer">
-        <div class="des-btn" @click="getPoints">
-          <img src="../assets/energy.png" alt="">
-          <p>获取能量</p>
-        </div>
-        <div class="des-btn btn">
-          <img src="../assets/share.png" alt="">
-          <p>邀请好友</p>
-        </div>
-        <div class="des-btn btn">
-          <img src="../assets/store.png" alt="">
-          <p>市场</p>
-        </div>
-      </div>
-    <!-- </transition> -->
+    <div class="content">
+    </div>
+
+    <div class="footer">
+      <a class="des-btn" href="/#/getPoints">
+        <img src="../assets/energy.png" alt="">
+        <p>获取能量</p>
+      </a>
+      <a class="des-btn btn" href="/#/share">
+        <img src="../assets/share.png" alt="">
+        <p>邀请好友</p>
+      </a>
+      <a class="des-btn btn" href="/#/store">
+        <img src="../assets/store.png" alt="">
+        <p>市场</p>
+      </a>
+    </div>
   </div>
 </template>
 
@@ -91,6 +78,7 @@ export default {
       uploaded: false,
       loading: true,
       tip: false,
+      showBubble: true,
       userInfo:[{
         text: 10000
       },
@@ -120,9 +108,6 @@ export default {
       },
       {
         text: 101111
-      },
-      {
-        text: 111111
       }
       ]
     }
@@ -164,8 +149,11 @@ export default {
         }
       })
     },
-    getPoints () {
-      this.$router.push({ path: "/getPoints"})
+    collect (index) {
+      alert('collect')
+      console.log(index);
+
+      this.showBubble = false
     },
     jumpToRank () {
       this.$router.push({ path: "/rank"})
@@ -200,9 +188,6 @@ export default {
   .header{
     position: relative;
     top: 7%;
-    // top: 44px;
-    // border: 1px solid red;
-    // box-sizing: border-box;
     width: 100%;
     height: 22%;
     color: #F4F8FF;
@@ -216,13 +201,10 @@ export default {
       // box-sizing: border-box;
       width: 60%;
       text-align: left;
-      // top: 24%;
       margin-left: 4%;
       .self-castle{
         position: absolute;
-        // width: 40%;
-        // border: 1px solid red;
-        // box-sizing: border-box;
+        text-align: center;
         img{
           width: 53px;
           height: 38px;
@@ -294,7 +276,7 @@ export default {
         flex: 1;
         line-height: 24px;
         background:linear-gradient(0deg,rgba(255,164,101,1) 0%,rgba(255,190,127,1) 100%);
-        border-radius: 8px;
+        border-radius: 10px;
         @media only screen and (min-width: 768px) {
           border-radius: 30px;
           line-height: 42px;
@@ -306,10 +288,11 @@ export default {
       }
       li:nth-child(2){
         margin-top: 26%;
-        // margin-bottom: 16%;
+        @media only screen and (max-width: 320px) {
+          margin-top: 12%;
+        }
         @media only screen and (min-width: 768px) {
-          margin-top: 5%;
-          // margin-bottom: 5%;
+          margin-top: 15%;
         }
       }
     }
@@ -357,16 +340,16 @@ export default {
         }
       }
     }
-    .animation:hover{
-      animation-duration: 2s; /*动画时间*/
-      // animation-fill-mode: both; /*播放后的状态*/
-      animation-name: hidder;
-      animation-direction: alternate;
-      animation-timing-function:linear;
-      animation-iteration-count: 1; /*动作循环的次数：infinite 无限循环*/
-      // transform-origin: center bottom; /*设置动画旋转元素的基点为：居中靠下*/
-      cursor: pointer;
-    }
+    // .animation:hover{
+    //   animation-duration: 2s; /*动画时间*/
+    //   // animation-fill-mode: both; /*播放后的状态*/
+    //   animation-name: hidder;
+    //   animation-direction: alternate;
+    //   animation-timing-function:linear;
+    //   animation-iteration-count: 1; /*动作循环的次数：infinite 无限循环*/
+    //   // transform-origin: center bottom; /*设置动画旋转元素的基点为：居中靠下*/
+    //   cursor: pointer;
+    // }
     li{
       list-style: none;
       display: inline-block;
@@ -482,10 +465,7 @@ export default {
   }
   .footer{
     position: absolute;
-    // border: 1px solid black;
-    // box-sizing: border-box;
     height: 12%;
-    // height: 68px;
     display: flex;
     display: -webkit-flex;
     display: -ms-flex;
@@ -494,10 +474,7 @@ export default {
     width: 100%;
     color: #FFFFFF;
     text-align: center;
-    // font-size: 10px;
-    @media only screen and (min-width: 768px) {
-      height: 128px;
-    }
+    font-size: 10px;
     .des-btn{
       display: block;
       font-size: 12px;
@@ -510,10 +487,6 @@ export default {
       }
       img{
         height: 60%;
-        width: 40px;
-        @media only screen and (min-width: 768px) {
-          width: 76px;
-        }
       }
     }
   }
@@ -532,8 +505,8 @@ export default {
 
 @keyframes hidder {
   from {
-    // left: 10px;
-    // top: 30px;
+    left: 10px;
+    top: 30px;
     opacity: 1;
   } to {
     left: 10px;
