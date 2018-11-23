@@ -25,12 +25,32 @@
       </ul>
     </div>
 
+    <transition name="fade" v-if="showFirst">
     <ul class="vip-animation">
-      <li class="animation" v-show="showBubble" v-for="(item, index) in userInfo" :key="index" @click="collect">
+      <li class="animation" v-for="(item, index) in userInfo1" :key="index" :id="`id${item.id}`" @click="collect(item)">
         <img class="bubble" :id="index" src="../assets/stone.png" alt="">
         <span class="text">{{item.text}}</span>
       </li>
     </ul>
+    </transition>
+
+    <transition name="fade" v-else-if="showSecond">
+    <ul class="vip-animation" >
+      <li class="animation" v-for="(item, index) in userInfo2" :key="index" :id="`id${item.id}`" @click="collect(item)">
+        <img class="bubble" :id="index" src="../assets/stone.png" alt="">
+        <span class="text">{{item.text}}</span>
+      </li>
+    </ul>
+    </transition>
+
+    <transition name="fade" v-else>
+    <ul class="vip-animation">
+      <li class="animation">
+        <img class="bubble" src="../assets/stone.png" alt="">
+        <countdown class="count-down" :time='countDownTime'></countdown>
+      </li>
+    </ul>
+    </transition>
 
     <div class="content">
     </div>
@@ -53,13 +73,16 @@
 </template>
 
 <script>
-import loading from "./loading.vue"
 import api from "../config/api.js"
 import Util from "../utils/utils"
+import loading from "./loading.vue"
+import countdown from "./countdown.vue"
+import  Velocity from 'velocity-animate'
 
 export default {
   components: {
-    loading
+    loading,
+    countdown
   },
   data() {
     return {
@@ -75,39 +98,58 @@ export default {
       num: "",
       id: "",
       clickAble: true,
-      uploaded: false,
       loading: true,
       tip: false,
-      showBubble: true,
-      userInfo:[{
+      // showBubble: true,
+      countDownTime: 600,
+      userInfo1:[{
+        id: 1,
         text: 10000
       },
       {
+        id: 2,
         text: 20000
       },
       {
+        id: 3,
         text: 30000
       },
       {
+        id: 4,
         text: 40000
       },
       {
+        id: 5,
         text: 50000
       },
       {
+        id: 6,
         text: 60000
+      }
+      ],
+      userInfo2:[{
+        id: 1,
+        text: 11111
       },
       {
-        text: 70000
+        id: 2,
+        text: 21111
       },
       {
-        text: 80000
+        id: 3,
+        text: 31111
       },
       {
-        text: 90000
+        id: 4,
+        text: 41111
       },
       {
-        text: 101111
+        id: 5,
+        text: 51111
+      },
+      {
+        id: 6,
+        text: 61111
       }
       ]
     }
@@ -115,12 +157,31 @@ export default {
   created() {
     this.init()
   },
-  mounted() {
-    if (this.currentRoomId === 0) {
-      this.$toast('您还不是奥园业主，请先认证房屋。', 1500)
-    } else {
-      this.getParam()
+  computed: {
+    showFirst () {
+      if (this.userInfo1 && this.userInfo1.length <= 6) {
+        return true
+      }
+    },
+    showSecond () {
+      if (this.showFirst) {
+        return false
+      }
     }
+  },
+  // watch: {
+  //   showFirst(newVal) {
+  //     if (this.userInfo1 && this.userInfo1.length <= 6) {
+  //       return
+  //     }
+  //   }
+  // },
+  mounted() {
+    // if (this.currentRoomId === 0) {
+    //   this.$toast('您还不是奥园业主，请先认证房屋。', 1500)
+    // } else {
+    //   this.getParam()
+    // }
   },
   methods: {
     init() {
@@ -149,11 +210,33 @@ export default {
         }
       })
     },
-    collect (index) {
-      alert('collect')
-      console.log(index);
+    collect (item) {
+      let index = item.id
+      let oId = document.getElementById(`id${index}`)
+      if (this.showFirst) {
+        if (this.userInfo1.length > 1) {
+          this.userInfo1.length--
+          console.log("------", this.userInfo1.length);
+        } else {
+          this.showFirst = false
+          this.showSecond = true
+        }
+      }
 
-      this.showBubble = false
+      if (this.showSecond) {
+        this.userInfo2.length--
+        // if (this.userInfo2.length === 0) {
+        //   this.showSecond = false
+        // }
+      }
+
+      Velocity(oId,
+        {
+          top: 40,
+          opacity: 0
+        }, {
+        duration: 1000
+      })
     },
     jumpToRank () {
       this.$router.push({ path: "/rank"})
@@ -325,6 +408,13 @@ export default {
         transform: translateX(-50%);
         -webkit-transform: translateX(-50%);
       }
+      .count-down{
+        position: absolute;
+        width: 80px;
+        left: 50%;
+        transform: translateX(-50%);
+        -webkit-transform: translateX(-50%);
+      }
       @media only screen and (max-width: 320px) {
         font-size: 5px;
         .bubble{
@@ -354,53 +444,33 @@ export default {
       list-style: none;
       display: inline-block;
     }
-    li:nth-child(1),li:nth-child(11){
-      margin-top: 30%;
-      margin-left: 20%;
-      @media only screen and (min-width: 768px) {
-        margin-top: 26%;
-        margin-left: 14%;
-      }
-    }
-    li:nth-child(2),li:nth-child(12){
-      margin-top: 34%;
-      margin-left: 8%;
-      @media only screen and (min-width: 768px) {
-        margin-top: 0%;
-        margin-left: -14%;
-      }
-    }
-    li:nth-child(3),li:nth-child(13){
-      margin-top: 4%;
-      margin-left: -30%;
-    }
-    li:nth-child(4),li:nth-child(14){
-      margin-top: 16%;
-      margin-left: -47%;
-    }
-    li:nth-child(5),li:nth-child(15){
-      margin-top: 6%;
-      margin-left: 19%;
-    }
-    li:nth-child(6),li:nth-child(16){
-      margin-top: 17%;
-      margin-left: 12%;
-    }
-    li:nth-child(7),li:nth-child(17){
+    li:nth-child(1),li:nth-child(7){
       margin-top: 0;
       margin-left: 0;
     }
-    li:nth-child(8),li:nth-child(18){
-      margin-top: 12%;
-      margin-left: -5%;
+    li:nth-child(2),li:nth-child(8){
+      margin-top: 11%;
+      margin-left: 13%;
     }
-    li:nth-child(9),li:nth-child(9){
-      margin-top: 10%;
+    li:nth-child(3),li:nth-child(9){
+      margin-top: 4%;
       margin-left: -18%;
     }
-    li:nth-child(10),li:nth-child(20){
-      margin-top: 24%;
-      margin-left: -2%;
+    li:nth-child(4),li:nth-child(10){
+      margin-top: 13%;
+      margin-left: -30%;
+    }
+    li:nth-child(5),li:nth-child(11){
+      margin-top: 23%;
+      margin-left: 22%;
+      @media only screen and (min-width: 768px) {
+        margin-top: 12%;
+        margin-left: 0%;
+      }
+    }
+    li:nth-child(6),li:nth-child(12){
+      margin-top: 27%;
+      margin-left: 6%;
     }
     li:nth-child(1),li:nth-child(11){
       -webkit-animation-delay: -0.1s;
@@ -482,6 +552,7 @@ export default {
       -webkit-box-flex: 1;
       -ms-flex: 1;
       padding: 5px 0;
+      height: 100%;
       @media only screen and (min-width: 768px) {
         font-size: 24px;
       }
@@ -490,6 +561,13 @@ export default {
       }
     }
   }
+}
+
+.fade-enter-active, .fade-leave-active {
+  transition: opacity .5s;
+}
+.fade-enter, .fade-leave-to /* .fade-leave-active below version 2.1.8 */ {
+  opacity: 0;
 }
 // @keyframes bubble {
 //   from {

@@ -8,7 +8,7 @@ import 'core-js/fn/object/assign' // Object.assign引起的页面显示空白
 import Toast from 'vue-toast-component'
 
 Vue.use(Toast)
- 
+
 Vue.config.productionTip = false
 
 /* eslint-disable no-new */

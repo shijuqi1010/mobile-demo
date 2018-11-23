@@ -47,7 +47,6 @@ a:hover,
 a:visited {
   color: inherit;
   text-decoration: none;
-  font-size: 14px;
   display: block;
 }
 

@@ -10,12 +10,14 @@
     "build": "node build/build.js"
   },
   "dependencies": {
+    "animate.css": "^3.7.0",
     "axios": "^0.18.0",
     "babel-polyfill": "^6.26.0",
     "jade": "^1.11.0",
     "less-loader": "^4.1.0",
     "stylus": "^0.54.5",
     "stylus-loader": "^3.0.2",
+    "velocity-animate": "^1.5.2",
     "vue": "^2.5.2",
     "vue-router": "^3.0.1",
     "vue-toast-component": "^2.0.0",
