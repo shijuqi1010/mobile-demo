@@ -25,29 +25,29 @@
       </ul>
     </div>
 
-    <transition name="fade" v-if="showFirst">
-    <ul class="vip-animation">
+    <transition name="fade">
+    <ul class="vip-animation" v-if="showFirst">
       <li class="animation" v-for="(item, index) in userInfo1" :key="index" :id="`id${item.id}`" @click="collect(item)">
-        <img class="bubble" :id="index" src="../assets/stone.png" alt="">
+        <img class="bubble" src="../assets/stone.png" alt="">
         <span class="text">{{item.text}}</span>
       </li>
     </ul>
     </transition>
 
-    <transition name="fade" v-else-if="showSecond">
-    <ul class="vip-animation" >
+    <transition name="fade">
+    <ul class="vip-animation" v-if="showSecond">
       <li class="animation" v-for="(item, index) in userInfo2" :key="index" :id="`id${item.id}`" @click="collect(item)">
-        <img class="bubble" :id="index" src="../assets/stone.png" alt="">
+        <img class="bubble" src="../assets/stone.png" alt="">
         <span class="text">{{item.text}}</span>
       </li>
     </ul>
     </transition>
 
-    <transition name="fade" v-else>
-    <ul class="vip-animation">
+    <transition name="fade">
+    <ul class="vip-animation" v-if="showWait">
       <li class="animation">
         <img class="bubble" src="../assets/stone.png" alt="">
-        <countdown class="count-down" :time='countDownTime'></countdown>
+        <countdown class="count-down" :time="countDownTime"></countdown>
       </li>
     </ul>
     </transition>
@@ -88,7 +88,6 @@ export default {
     return {
       token: "",
       currentRoomId: "",
-      uploadText: "",
       points: 0,
       totalPoints: 0,
       city: "",
@@ -100,7 +99,10 @@ export default {
       clickAble: true,
       loading: true,
       tip: false,
-      // showBubble: true,
+      count: 0,
+      showFirst: true,
+      showSecond: false,
+      showWait: false,
       countDownTime: 600,
       userInfo1:[{
         id: 1,
@@ -128,27 +130,27 @@ export default {
       }
       ],
       userInfo2:[{
-        id: 1,
+        id: 11,
         text: 11111
       },
       {
-        id: 2,
+        id: 12,
         text: 21111
       },
       {
-        id: 3,
+        id: 13,
         text: 31111
       },
       {
-        id: 4,
+        id: 14,
         text: 41111
       },
       {
-        id: 5,
+        id: 15,
         text: 51111
       },
       {
-        id: 6,
+        id: 16,
         text: 61111
       }
       ]
@@ -158,21 +160,20 @@ export default {
     this.init()
   },
   computed: {
-    showFirst () {
-      if (this.userInfo1 && this.userInfo1.length <= 6) {
-        return true
-      }
-    },
-    showSecond () {
-      if (this.showFirst) {
-        return false
-      }
-    }
   },
   // watch: {
-  //   showFirst(newVal) {
-  //     if (this.userInfo1 && this.userInfo1.length <= 6) {
-  //       return
+  //   count (newVal) {
+  //     // this.showFirst = false
+  //     // this.showSecond = false
+  //     // this.showWait = false
+  //     if (this.count === 6) {
+  //       debugger
+  //       this.showFirst = false
+  //       if (this.userInfo2 && this.userInfo2.length <= 6) {
+  //         // this.showSecond = true
+  //       } else {
+  //         this.showWait = true
+  //       }
   //     }
   //   }
   // },
@@ -213,30 +214,33 @@ export default {
     collect (item) {
       let index = item.id
       let oId = document.getElementById(`id${index}`)
-      if (this.showFirst) {
-        if (this.userInfo1.length > 1) {
-          this.userInfo1.length--
-          console.log("------", this.userInfo1.length);
-        } else {
-          this.showFirst = false
-          this.showSecond = true
+      this.count++
+      console.log("count:", this.count);
+
+      Velocity(oId,{
+        top: 40,
+        opacity: 0
+      }, {
+        duration: 1000,
+        complete: function() {
+          // oId.parentNode.removeChild(oId)
         }
-      }
-
-      if (this.showSecond) {
-        this.userInfo2.length--
-        // if (this.userInfo2.length === 0) {
-        //   this.showSecond = false
-        // }
-      }
-
-      Velocity(oId,
-        {
-          top: 40,
-          opacity: 0
-        }, {
-        duration: 1000
       })
+
+      this.refresh(item.text)
+
+      if (this.count === 6) {
+        this.showFirst = false
+        this.showSecond = true
+      }
+      if (this.count === 12) {
+        this.showSecond = false
+        this.showWait = true
+      }
+    },
+    refresh (point) {
+      // alert('refresh')
+      this.points += point
     },
     jumpToRank () {
       this.$router.push({ path: "/rank"})
@@ -430,107 +434,37 @@ export default {
         }
       }
     }
-    // .animation:hover{
-    //   animation-duration: 2s; /*动画时间*/
-    //   // animation-fill-mode: both; /*播放后的状态*/
-    //   animation-name: hidder;
-    //   animation-direction: alternate;
-    //   animation-timing-function:linear;
-    //   animation-iteration-count: 1; /*动作循环的次数：infinite 无限循环*/
-    //   // transform-origin: center bottom; /*设置动画旋转元素的基点为：居中靠下*/
-    //   cursor: pointer;
-    // }
     li{
       list-style: none;
       display: inline-block;
     }
-    li:nth-child(1),li:nth-child(7){
-      margin-top: 0;
-      margin-left: 0;
+    li:nth-child(1){
+      top: 24%;
+      left: 50%;
     }
-    li:nth-child(2),li:nth-child(8){
-      margin-top: 11%;
-      margin-left: 13%;
+    li:nth-child(2){
+      top: 36%;
+      left: 53%;
     }
-    li:nth-child(3),li:nth-child(9){
-      margin-top: 4%;
-      margin-left: -18%;
+    li:nth-child(3){
+      top: 28%;
+      left: 68%;
     }
-    li:nth-child(4),li:nth-child(10){
-      margin-top: 13%;
-      margin-left: -30%;
+    li:nth-child(4){
+      top: 30%;
+      left: 36%;
     }
-    li:nth-child(5),li:nth-child(11){
-      margin-top: 23%;
-      margin-left: 22%;
-      @media only screen and (min-width: 768px) {
-        margin-top: 12%;
-        margin-left: 0%;
-      }
+    li:nth-child(5){
+      top: 23%;
+      left: 28%;
     }
-    li:nth-child(6),li:nth-child(12){
-      margin-top: 27%;
-      margin-left: 6%;
-    }
-    li:nth-child(1),li:nth-child(11){
-      -webkit-animation-delay: -0.1s;
-      -moz-animation-delay: -0.1s;
-      -o-animation-delay: -0.1s;
-      animation-delay: -0.1s;
-    }
-    li:nth-child(2),li:nth-child(12){
-      -webkit-animation-delay: -2.7s;
-      -moz-animation-delay: -2.7s;
-      -o-animation-delay: -2.7s;
-      animation-delay: -2.7s;
-    }
-    li:nth-child(3),li:nth-child(13){
-      -webkit-animation-delay: -1.5s;
-      -moz-animation-delay: -1.5s;
-      -o-animation-delay: -1.5s;
-      animation-delay: -1.5s;
-    }
-    li:nth-child(4),li:nth-child(14){
-      -webkit-animation-delay: -2.5s;
-      -moz-animation-delay: -2.5s;
-      -o-animation-delay: -2.5s;
-      animation-delay: -2.5s;
-    }
-    li:nth-child(5),li:nth-child(15){
-      -webkit-animation-delay: -1.3s;
-      -moz-animation-delay: -1.3s;
-      -o-animation-delay: -1.3s;
-      animation-delay: -1.3s;
-    }
-    li:nth-child(6),li:nth-child(16){
-      -webkit-animation-delay: 1s;
-      -moz-animation-delay: 1s;
-      -o-animation-delay: 1s;
-      animation-delay: 1s;
-    }
-    li:nth-child(7),li:nth-child(17){
-      -webkit-animation-delay: -1s;
-      -moz-animation-delay: -1s;
-      -o-animation-delay: -1s;
-      animation-delay: -1s;
-    }
-    li:nth-child(7),li:nth-child(10){
-      -webkit-animation-delay: -1.8s;
-      -moz-animation-delay: -1.8s;
-      -o-animation-delay: -1.8s;
-      animation-delay: -1.8s;
-    }
-    li:nth-child(8),li:nth-child(18){
-      -webkit-animation-delay: -0.7s;
-      -moz-animation-delay: -0.7s;
-      -o-animation-delay: -0.7s;
-      animation-delay: -0.7s;
+    li:nth-child(6){
+      top: 27%;
+      left: 6%;
     }
   }
   
   .content{
-    // border: 1px solid yellow;
-    // box-sizing: border-box;
     height: 49%;
   }
   .footer{
@@ -564,33 +498,9 @@ export default {
 }
 
 .fade-enter-active, .fade-leave-active {
-  transition: opacity .5s;
+  transition: opacity 3s;
 }
 .fade-enter, .fade-leave-to /* .fade-leave-active below version 2.1.8 */ {
-  opacity: 0;
+  opacity: 0.2;
 }
-// @keyframes bubble {
-//   from {
-//     // left: 0;
-//     // top: 0;
-//     opacity: 1;
-//   } to {
-//     // left: 10px;
-//     // top: 30px;
-//     opacity: 0.5;
-//   }
-// }
-
-@keyframes hidder {
-  from {
-    left: 10px;
-    top: 30px;
-    opacity: 1;
-  } to {
-    left: 10px;
-    top: 50px;
-    opacity: 0;
-  }
-}
-
 </style>
