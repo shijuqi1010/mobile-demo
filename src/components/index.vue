@@ -27,9 +27,10 @@
 
     <transition name="fade">
     <ul class="vip-animation" v-if="showFirst">
-      <li class="animation" v-for="(item, index) in userInfo1" :key="index" :id="`id${item.id}`" @click="collect(item)">
+      <li class="animation" v-for="(item, index) in userInfo1" :key="index" :id="`id${item.id}`" @click="collect(item)" ref='toast'>
         <img class="bubble" src="../assets/stone.png" alt="">
         <span class="text">{{item.text}}</span>
+        <!-- <vue-toast ref='toast'></vue-toast> -->
       </li>
     </ul>
     </transition>
@@ -78,10 +79,12 @@ import Util from "../utils/utils"
 import loading from "./loading.vue"
 import countdown from "./countdown.vue"
 import  Velocity from 'velocity-animate'
+import { Toast} from 'vux'
 
 export default {
   components: {
     loading,
+    Toast,
     countdown
   },
   data() {
@@ -217,6 +220,9 @@ export default {
       this.count++
       console.log("count:", this.count);
 
+      // this.$toast(this.count, 1000)
+
+      //动画
       Velocity(oId,{
         top: 40,
         opacity: 0
@@ -226,6 +232,13 @@ export default {
           // oId.parentNode.removeChild(oId)
         }
       })
+
+      //声音
+      Util.sound()
+
+      // this.$toasted.show('hello billo', {
+      //   position: 'top-center',
+      //   duration: 3000})
 
       this.refresh(item.text)
 
@@ -239,7 +252,6 @@ export default {
       }
     },
     refresh (point) {
-      // alert('refresh')
       this.points += point
     },
     jumpToRank () {
@@ -264,6 +276,7 @@ export default {
   background-image: url("https://img1.aylives.cn/7fce378fdd1448838838ee553ff248ca.png"); //667
   background-repeat: no-repeat;
   background-position: center center;
+  // background-size: 100% auto;
   background-size: cover;
   @media only screen and (device-width: 375px) and (device-height: 812px) {
     // background-image: url("https://img1.aylives.cn/0472e8034ba54187ba399ca916623a17.png");
@@ -494,6 +507,14 @@ export default {
         height: 60%;
       }
     }
+  }
+  .wh-toast {
+    position: fixed;
+    z-index: 9999;
+    line-height: 17px;
+    left: 50%;
+    transform: translate(-50%, 0);
+    top: 50px;
   }
 }
 

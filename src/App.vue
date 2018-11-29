@@ -50,6 +50,11 @@ a:visited {
   display: block;
 }
 
+ul{
+  margin-block-start: 0;
+  margin-block-end: 0;
+  padding-inline-start: 0;
+}
 
 #app {
   font-family: 'Avenir', Helvetica, Arial, sans-serif;

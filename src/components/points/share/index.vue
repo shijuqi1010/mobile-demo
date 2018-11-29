@@ -15,9 +15,9 @@
 </template>
 
 <script>
-import loading from '../loading.vue'
-import api from '../../config/api.js'
-import Util from '../../utils/utils'
+import loading from '../../loading.vue'
+import api from '../../../config/api.js'
+import Util from '../../../utils/utils'
 
 export default {
   components: {

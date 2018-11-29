@@ -21,6 +21,7 @@
     "vue": "^2.5.2",
     "vue-router": "^3.0.1",
     "vue-toast-component": "^2.0.0",
+    "vue-toasted": "^1.1.25",
     "vux": "^2.9.2",
     "vux-loader": "^1.2.9"
   },

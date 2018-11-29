@@ -251,7 +251,7 @@
 </style>
 
 <script>
-import Api from '../../config/api.js'
+import Api from '../../../config/api.js'
 export default {
   data () {
     return {

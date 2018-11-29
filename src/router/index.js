@@ -2,13 +2,14 @@ import Vue from 'vue'
 import Router from 'vue-router'
 import index from '@/components/index'
 import getPoints from '@/components/points/index'
+import record from '@/components/points/record'
 import store from '@/components/store'
 import personalCenter from '@/components/castle/index'
 import explain from '@/components/castle/explain'
 import rank from '@/components/rank'
 
-import share from '@/components/share/index'
-import sharePage from '@/components/share/sharePage'
+import share from '@/components/points/share/index'
+import sharePage from '@/components/points/share/sharePage'
 import donateSteps from '@/components/points/donateSteps'
 
 Vue.use(Router)
@@ -27,6 +28,14 @@ export default new Router({
         title: '算力任务'
       },
       component: getPoints
+    },
+    {
+      path: '/record',
+      name: 'record',
+      meta: {
+        title: '算力记录'
+      },
+      component: record
     },
     {
       path: '/store',

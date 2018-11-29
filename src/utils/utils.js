@@ -25,13 +25,34 @@ class Utils {
   }
 
   urlGetparam (key, url) {
-    var match = (url || location.search).match(new RegExp('(\\?|&)' + key + '=([^&]*)'))
+    let match = (url || location.search).match(new RegExp('(\\?|&)' + key + '=([^&]*)'))
   
     if (match) {
       return decodeURIComponent(match[2])
     } else {
       return null
     }
+  }
+
+  sound () {
+    window.AudioContext = window.AudioContext || window.webkitAudioContext
+    if (!window.AudioContext) {
+      return
+    }
+
+    let audioCtx = new AudioContext()
+    let frequency = 520
+    let oscillator = audioCtx.createOscillator()
+    let gainNode = audioCtx.createGain()
+    oscillator.connect(gainNode)
+    gainNode.connect(audioCtx.destination)
+    oscillator.type = 'sine'
+    oscillator.frequency.value = frequency
+    gainNode.gain.setValueAtTime(0, audioCtx.currentTime)
+    gainNode.gain.linearRampToValueAtTime(1, audioCtx.currentTime + 0.01)
+    oscillator.start(audioCtx.currentTime)
+    gainNode.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + 1)
+    oscillator.stop(audioCtx.currentTime + 1)
   }
 }
 
