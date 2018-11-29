@@ -30,8 +30,8 @@
     </div>
 
     <transition name="fade">
-    <ul class="vip-animation" v-if="showFirst">
-      <li class="animation" v-for="(item, index) in userInfo1" :key="index" :id="`id${item.id}`" @click="collect(item)" ref='toast'>
+    <ul class="vip-animation" v-show="showFirst">
+      <li class="animation" v-for="(item, index) in userInfo1" :key="index" :id="`id${item.id}`" @click="collect(item)">
         <img class="bubble" src="../assets/stone.png" alt="">
         <span class="text">{{item.text}}</span>
       </li>
@@ -39,7 +39,7 @@
     </transition>
 
     <transition name="fade">
-    <ul class="vip-animation" v-if="showSecond">
+    <ul class="vip-animation" v-show="showSecond">
       <li class="animation" v-for="(item, index) in userInfo2" :key="index" :id="`id${item.id}`" @click="collect(item)">
         <img class="bubble" src="../assets/stone.png" alt="">
         <span class="text">{{item.text}}</span>
@@ -48,7 +48,7 @@
     </transition>
 
     <transition name="fade">
-    <ul class="vip-animation" v-if="showWait">
+    <ul class="vip-animation" v-show="showWait">
       <li class="animation">
         <img class="bubble" src="../assets/stone.png" alt="">
         <countdown class="count-down" :time="countDownTime"></countdown>
@@ -224,7 +224,6 @@ export default {
       let oId = document.getElementById(`id${index}`)
       this.count++
       console.log("count:", this.count);
-
       // this.$toast(this.count, 1000)
 
       //动画

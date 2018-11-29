@@ -37,6 +37,7 @@ class Utils {
   sound () {
     window.AudioContext = window.AudioContext || window.webkitAudioContext
     if (!window.AudioContext) {
+      alert('AudioContext error')
       return
     }
 
@@ -53,6 +54,7 @@ class Utils {
     oscillator.start(audioCtx.currentTime)
     gainNode.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + 1)
     oscillator.stop(audioCtx.currentTime + 1)
+    // audioCtx.close()
   }
 }
 
