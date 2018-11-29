@@ -15,7 +15,7 @@
 </template>
 
 <script>
-import loading from '../../loading.vue'
+import loading from '../../public/loading.vue'
 import api from '../../../config/api.js'
 import Util from '../../../utils/utils'
 

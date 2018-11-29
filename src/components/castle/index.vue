@@ -14,13 +14,13 @@
         </li>
       </ul>
     </div>
-    <div class="detail">
+    <!-- <div class="detail">
       奥克积分{{points}}
-    </div>
+    </div> -->
 
     <ul class="menu">
-      <li>奥克基地</li>
       <li>我的算力</li>
+      <li>我的奥克积分</li>
       <li>我的订单</li>
     </ul>
   </div>

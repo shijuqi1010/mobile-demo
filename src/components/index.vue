@@ -16,11 +16,15 @@
         </ul>
       </div>
       <ul class="introduce">
-        <li class="introduce-data" @click="jumpToRank">
-          <span>排名</span>
+        <li class="introduce-data">
+          <router-link to="/rank">
+            排名
+          </router-link>
         </li>
         <li class="introduce-data total-point">
-          <span>共建计划</span>
+          <router-link to="/explain">
+            奥克基地
+          </router-link>
         </li>
       </ul>
     </div>
@@ -30,7 +34,6 @@
       <li class="animation" v-for="(item, index) in userInfo1" :key="index" :id="`id${item.id}`" @click="collect(item)" ref='toast'>
         <img class="bubble" src="../assets/stone.png" alt="">
         <span class="text">{{item.text}}</span>
-        <!-- <vue-toast ref='toast'></vue-toast> -->
       </li>
     </ul>
     </transition>
@@ -61,6 +64,10 @@
         <img src="../assets/energy.png">
         <p>获取能量</p>
       </router-link>
+      <router-link class="des-btn btn" to="/build">
+        <img src="../assets/build.png">
+        <p>共建计划</p>
+      </router-link>
       <router-link class="des-btn btn" to="/share">
         <img src="../assets/share.png">
         <p>邀请好友</p>
@@ -76,14 +83,12 @@
 <script>
 import api from "../config/api.js"
 import Util from "../utils/utils"
-import loading from "./loading.vue"
-import countdown from "./countdown.vue"
+import countdown from "./public/countdown.vue"
 import  Velocity from 'velocity-animate'
 import { Toast} from 'vux'
 
 export default {
   components: {
-    loading,
     Toast,
     countdown
   },
