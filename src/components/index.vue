@@ -60,7 +60,7 @@
     </div>
 
     <div class="footer">
-      <router-link class="des-btn" to="/getPoints">
+      <router-link class="des-btn" to="/points">
         <img src="../assets/energy.png">
         <p>获取能量</p>
       </router-link>

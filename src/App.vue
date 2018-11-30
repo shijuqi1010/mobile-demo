@@ -55,6 +55,12 @@ ul{
   margin-block-end: 0;
   padding-inline-start: 0;
 }
+ input{
+  border: none;
+  outline: none;
+  -moz-appearance: none;
+  -webkit-appearance: none;
+}
 
 #app {
   font-family: 'Avenir', Helvetica, Arial, sans-serif;

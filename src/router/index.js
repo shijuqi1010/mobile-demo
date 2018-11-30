@@ -11,6 +11,7 @@ import share from '@/components/points/share/index'
 import sharePage from '@/components/points/share/sharePage'
 import donateSteps from '@/components/points/donateSteps'
 import signIn from '@/components/points/signIn'
+import attention from '@/components/points/attention'
 
 Vue.use(Router)
 
@@ -84,6 +85,14 @@ export default new Router({
         title: '健康生活之城'
       },
       component: signIn
+    },
+    {
+      path: '/attention',
+      name: 'attention',
+      meta: {
+        title: '关注公众号'
+      },
+      component: attention
     },
     {
       path: '/share',
