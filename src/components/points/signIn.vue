@@ -53,12 +53,25 @@ export default {
   .sign {
     text-align: left;
     width: 100%;
-    height: 517px;
-    background-image: url('https://img1.aylives.cn/b5ce8717481742d0951854d8cfaa2fa4.png');
+    height: 470px;
+    background-image: url('https://img1.aylives.cn/159a85b0074e4187899618edc191cef9.png');
     background-repeat: no-repeat;
     background-position: center center;
-    background-size: 100% auto;
-    // background-size: cover;
+    background-size: cover;
+    @media only screen and (device-width: 375px) and (device-height: 812px) {
+      background-image: url('https://img1.aylives.cn/9235a26c171148b69b5eaf0be36cf04c.png');
+      height: 600px;
+    }
+
+    @media only screen and (device-width: 411px) and (device-height: 823px) {
+      background-image: url('https://img1.aylives.cn/9235a26c171148b69b5eaf0be36cf04c.png');
+      height: 658px;
+    }
+
+    @media only screen and (min-width: 768px) {
+      height: 960px;
+    }
+
     .sign-text{
       color: #333333;
       font-size: 14px;
@@ -72,7 +85,7 @@ export default {
     .sign-img{
       width: 64px;
       height: 64px;
-      margin-top: 8%;
+      margin-top: 18%;
       margin-left: 70%;
       @media only screen and (min-width: 768px) {
         width: 100px;
@@ -81,7 +94,7 @@ export default {
     }
   }
   .text{
-    margin: 0 20px;
+    margin: 20px 20px;
     text-align: left;
     .title{
       color: #333333;
@@ -95,7 +108,7 @@ export default {
     .explain{
       list-style: none;
       color: #333333;
-      line-height: 20px;
+      line-height: 24px;
       font-size: 12px;
       @media only screen and (min-width: 768px) {
         line-height: 40px;

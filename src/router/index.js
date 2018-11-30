@@ -3,7 +3,7 @@ import Router from 'vue-router'
 import index from '@/components/index'
 import rank from '@/components/rank'
 import explain from '@/components/explain'
-import getPoints from '@/components/points/index'
+import points from '@/components/points/index'
 import record from '@/components/points/record'
 import store from '@/components/store/index'
 import personalCenter from '@/components/castle/index'
@@ -38,12 +38,12 @@ export default new Router({
       component: explain
     },
     {
-      path: '/getPoints',
-      name: 'getPoints',
+      path: '/points',
+      name: 'points',
       meta: {
         title: '算力任务'
       },
-      component: getPoints
+      component: points
     },
     {
       path: '/record',

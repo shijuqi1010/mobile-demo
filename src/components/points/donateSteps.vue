@@ -15,6 +15,9 @@
             </span>
           </x-circle>
         </div>
+        <p class="notice">
+          完成2000步后点击“兑换算力”才能获得算力哦
+        </p>
         <div v-if="clickAble" class="donate-btn" @click="donate">兑换算力</div>
         <div v-else class="donate-btn-disable">兑换算力</div>
       </div>
@@ -45,7 +48,7 @@
         规则
       </div>
       <div class="donate-explain">
-        普通用户兑换一次可得1个算力，认证成为奥园业主、家属、租客参与兑换可得2个算力；
+        每日仅限兑换1次，普通用户兑换一次可得1个算力，认证成为奥园业主、家属、租客参与兑换可得2个算力；
       </div>
     </div>
   </div>
@@ -59,26 +62,34 @@
   overflow: hidden;
   background: #FFFFFF;
   .steps-container{
-    // width: 375px;
-    // width: 100%;
+    width: 100%;
     height: 517px;
     // border: 1px solid red;
     box-sizing: border-box;
-    background: url('https://img1.aylives.cn/caf09e48a5274487aee2ac28f0289857.png');
+    background-image: url('https://img1.aylives.cn/ac78d2c752c6438195682678be837af8.png');
     background-size: cover;
     background-position: center;
+    @media only screen and (device-width: 375px) and (device-height: 812px) {
+      background-image: url('https://img1.aylives.cn/1d372d34d9b846b3a128569d87a04e4d.png');
+      height: 600px;
+    }
+
+    @media only screen and (device-width: 411px) and (device-height: 823px) {
+      background-image: url('https://img1.aylives.cn/1d372d34d9b846b3a128569d87a04e4d.png');
+      height: 658px;
+    }
+
     @media only screen and (min-width: 768px) {
       height: 1040px;
     }
     .step-content{
-      // border: 1px solid red;
       .step-detail{
         margin: auto;
-        padding: 40px 0;
+        padding-top: 40px;
         width: 124px;
         height: 124px;
         @media only screen and (min-width: 768px) {
-          padding: 88px 0;
+          padding-top: 60px;
           width: 324px;
           height: 324px;
         }
@@ -99,6 +110,15 @@
           }
         }
       }
+      .notice{
+        font-size: 12px;
+        color: #FFFFFF;
+        margin: 30px 0 20px 0;
+        @media only screen and (min-width: 768px) {
+          font-size: 26px;
+          margin: 40px 0;
+        }
+      }
       .donate-btn{
         margin: auto;
         color: #FFFFFF;
@@ -117,6 +137,8 @@
         }
       }
       .donate-btn-disable{
+        margin: auto;
+        width: 90%;
         color: #979797;
         line-height: 40px;
         margin-top: 18px;
@@ -148,7 +170,7 @@
         -webkit-box-flex: 1;
         justify-content: convert;
         overflow: hidden;
-        padding: 8px;
+        padding: 2px;
         color: #FFFFFF;
         li:nth-child(1){
           justify-content: flex-start;
@@ -160,14 +182,14 @@
           font-size: 24px;
           padding-bottom: 5px;
           @media only screen and (min-width: 768px) {
-            padding-bottom: 20px;
-            font-size: 40px;
+            padding-bottom: 15px;
+            font-size: 36px;
           }
         }
         .donate-text{
           font-size: 12px;
           @media only screen and (min-width: 768px) {
-            font-size: 32px;
+            font-size: 28px;
           }
         }
       }
@@ -235,15 +257,15 @@ export default {
       if (this.isDonated) {
         return 0
       } else {
-        if (this.todaySteps >= 50000) {
+        if (this.todaySteps >= 2000) {
           return 100
         } else {
-          return this.todaySteps / 50000 * 100
+          return this.todaySteps / 2000 * 100
         }
       }
     },
     clickAble () {
-      if (this.todaySteps >= 100 && !this.isDonated) {
+      if (this.todaySteps >= 2000 && !this.isDonated) {
         return true
       } else {
         return false

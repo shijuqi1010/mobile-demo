@@ -3,12 +3,34 @@
     <div class="general-task">
       <p class="title">普通任务</p>
       <ul class="des-general">
-        <li>签到</li>
-        <li>运动捐步</li>
-        <li>认证房屋</li>
-        <li>关注公众号</li>
-        <li>邀请邻居</li>
-        <li>租住</li>
+        <li>
+          <router-link to="/signIn">
+            签到
+          </router-link>
+        </li>
+        <li>
+          <router-link to="/donateSteps">
+            运动捐步
+          </router-link>
+        </li>
+        <li>
+          认证房屋
+        </li>
+        <li>
+          <router-link to="/attention">
+            关注公众号
+          </router-link>
+        </li>
+        <li>
+          <router-link to="/share">
+            邀请邻居
+          </router-link>
+        </li>
+        <li>
+          <router-link to="/donateSteps">
+            租住
+          </router-link>
+        </li>
       </ul>
     </div>
     <div class="special-task">
