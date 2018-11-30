@@ -10,6 +10,7 @@ import personalCenter from '@/components/castle/index'
 import share from '@/components/points/share/index'
 import sharePage from '@/components/points/share/sharePage'
 import donateSteps from '@/components/points/donateSteps'
+import signIn from '@/components/points/signIn'
 
 Vue.use(Router)
 
@@ -72,9 +73,17 @@ export default new Router({
       path: '/donateSteps',
       name: 'donateSteps',
       meta: {
-        title: '捐步'
+        title: '天天运动'
       },
       component: donateSteps
+    },
+    {
+      path: '/signIn',
+      name: 'signIn',
+      meta: {
+        title: '健康生活之城'
+      },
+      component: signIn
     },
     {
       path: '/share',

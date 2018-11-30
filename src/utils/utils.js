@@ -42,6 +42,7 @@ class Utils {
     }
 
     let audioCtx = new AudioContext()
+    console.log("audioCtx", audioCtx)
     let frequency = 520
     let oscillator = audioCtx.createOscillator()
     let gainNode = audioCtx.createGain()
