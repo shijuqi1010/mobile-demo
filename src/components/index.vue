@@ -379,7 +379,7 @@ export default {
         display: block;
         flex: 1;
         line-height: 24px;
-        background:linear-gradient(0deg,rgba(255,164,101,1) 0%,rgba(255,190,127,1) 100%);
+        background: linear-gradient(0deg,rgba(255,104,0,1) 0%,rgba(255,158,63,1) 100%);
         border-radius: 10px;
         @media only screen and (min-width: 768px) {
           border-radius: 30px;
@@ -508,17 +508,11 @@ export default {
         font-size: 24px;
       }
       img{
-        height: 60%;
+        height: 50%;
+        // width: 40px;
+        // height: 40px;
       }
     }
-  }
-  .wh-toast {
-    position: fixed;
-    z-index: 9999;
-    line-height: 17px;
-    left: 50%;
-    transform: translate(-50%, 0);
-    top: 50px;
   }
 }
 

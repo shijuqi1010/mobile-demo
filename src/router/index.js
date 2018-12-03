@@ -15,8 +15,12 @@ import attention from '@/components/points/attention'
 
 Vue.use(Router)
 
-export default new Router({
+const router = new Router({
   routes: [
+    // { 
+    //   path: '/', 
+    //   redirect: '/index' 
+    // },
     {
       path: '/index',
       name: 'index',
@@ -41,10 +45,9 @@ export default new Router({
     {
       path: '/points',
       name: 'points',
-      meta: {
-        title: '算力任务'
-      },
-      component: points
+      meta: { title: '算力任务' },
+      component: points,
+      // children: [{ path: '/points/:id', component: signIn, name:'signIn'}]
     },
     {
       path: '/record',
@@ -112,3 +115,27 @@ export default new Router({
     }
   ]
 })
+
+router.beforeEach((to, from, next) => {
+  /* 路由发生变化修改页面title */
+  if (to.meta.title) {
+    document.title = to.meta.title
+  }
+  
+  if (/\/http/.test(to.path)) {
+    let url = to.path.split('http')[1]
+    window.location.href = `http${url}`
+  } else {
+    next()
+  }
+
+  const t = to.path
+  const f = from.path
+  if (t === '/points' && f.indexOf(t) >= 0) {
+    next(false)
+  } else {
+    next()
+  }
+})
+
+export default router

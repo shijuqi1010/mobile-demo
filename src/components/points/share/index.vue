@@ -68,7 +68,7 @@ export default {
           this.name = res.data.data.name
           this.id = res.data.data.id
         } else {
-          this.$toast(res.data.msg, 1500)
+          // this.$toast(res.data.msg, 1500)
         }
       })
     },

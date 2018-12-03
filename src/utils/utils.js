@@ -34,15 +34,18 @@ class Utils {
     }
   }
 
+  audioCtx = new AudioContext() 
+  // to solve:
+  // Uncaught DOMException: Failed to construct 'AudioContext': The number of hardware contexts provided (6) is greater than or equal to the maximum bound (6).
+
   sound () {
     window.AudioContext = window.AudioContext || window.webkitAudioContext
     if (!window.AudioContext) {
-      alert('AudioContext error')
       return
     }
 
-    let audioCtx = new AudioContext()
-    console.log("audioCtx", audioCtx)
+    // let audioCtx = new AudioContext()
+    let audioCtx = this.audioCtx
     let frequency = 520
     let oscillator = audioCtx.createOscillator()
     let gainNode = audioCtx.createGain()
@@ -55,7 +58,6 @@ class Utils {
     oscillator.start(audioCtx.currentTime)
     gainNode.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + 1)
     oscillator.stop(audioCtx.currentTime + 1)
-    // audioCtx.close()
   }
 }
 
