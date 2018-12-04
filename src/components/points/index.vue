@@ -3,7 +3,11 @@
     <div class="points-banner">
       <ul class="top">
         <li>当前算力</li>
-        <li>算力记录</li>
+        <li>
+          <router-link to="/record">
+            算力记录
+          </router-link>
+        </li>
       </ul>
       <p class="center"> {{points}} </p>
       <p class="explain" > 算力越高，获取的奥克积分越多 </p>
@@ -34,6 +38,7 @@
         </li>
       </ul>
     </div>
+    <router-view/>
   </div>
 </template>
 
@@ -219,9 +224,6 @@ export default {
         margin-left: 2.5%; 
         margin-right: 2.5%; 
       }
-      li.active, li:hover{
-        box-shadow: 0px 0px 4px 4px RGBA(197, 218, 239, 1) inset, 0px 0px 4px 0px rgba(183,183,183,0.5);
-      }
     }
   }
   .special-task {
@@ -298,9 +300,6 @@ export default {
       li:nth-child(2),li:nth-child(5){
         margin-left: 2.5%; 
         margin-right: 2.5%; 
-      }
-      li.active, li:hover{
-        box-shadow: 0px 0px 4px 4px RGBA(197, 218, 239, 1) inset, 0px 0px 4px 0px rgba(183,183,183,0.5);
       }
     }
   }

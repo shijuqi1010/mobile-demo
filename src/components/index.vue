@@ -169,22 +169,8 @@ export default {
   },
   computed: {
   },
-  // watch: {
-  //   count (newVal) {
-  //     // this.showFirst = false
-  //     // this.showSecond = false
-  //     // this.showWait = false
-  //     if (this.count === 6) {
-  //       debugger
-  //       this.showFirst = false
-  //       if (this.userInfo2 && this.userInfo2.length <= 6) {
-  //         // this.showSecond = true
-  //       } else {
-  //         this.showWait = true
-  //       }
-  //     }
-  //   }
-  // },
+  watch: {
+  },
   mounted() {
     // if (this.currentRoomId === 0) {
     //   this.$toast('您还不是奥园业主，请先认证房屋。', 1500)
@@ -205,8 +191,8 @@ export default {
       this.currentRoomId = Util.pageUrlGetValue("currentRoomId")
       Util.setCookie("currentRoomId", this.currentRoomId, "aylives.cn")
     },
-    getParam() {
-      api.Axios.get(api.USERINFO).then(res => {
+    getStone() {
+      api.Axios.get(api.STONE).then(res => {
         if (res.data.code === 200) {
           this.area = res.data.data.agencyName
           this.city = res.data.data.cityName
@@ -223,7 +209,6 @@ export default {
       let index = item.id
       let oId = document.getElementById(`id${index}`)
       this.count++
-      console.log("count:", this.count);
       // this.$toast(this.count, 1000)
 
       //动画
@@ -320,6 +305,7 @@ export default {
         .title{
           margin: auto;
           color: #010101;
+          font-weight: bold;
         }
       }
       .point-info{

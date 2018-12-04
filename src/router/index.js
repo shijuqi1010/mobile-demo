@@ -47,7 +47,6 @@ const router = new Router({
       name: 'points',
       meta: { title: '算力任务' },
       component: points,
-      // children: [{ path: '/points/:id', component: signIn, name:'signIn'}]
     },
     {
       path: '/record',
@@ -125,14 +124,6 @@ router.beforeEach((to, from, next) => {
   if (/\/http/.test(to.path)) {
     let url = to.path.split('http')[1]
     window.location.href = `http${url}`
-  } else {
-    next()
-  }
-
-  const t = to.path
-  const f = from.path
-  if (t === '/points' && f.indexOf(t) >= 0) {
-    next(false)
   } else {
     next()
   }

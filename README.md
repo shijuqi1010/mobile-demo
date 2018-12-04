@@ -17,7 +17,12 @@ npm run build
 # build for production and view the bundle analyzer report
 npm run build --report
 ```
+## 原型
+Refer to [Documentation](https://pro.modao.cc/app/TEs7jkqdfkXhL3q29XJEYvWhzrGpVt1#screen=s3D3C0A8E941540542138160) for more information
+
 ## 文件目录
+
+```
 src---|
       |--index.html: 入口文件
       |--App.vue
@@ -26,8 +31,11 @@ src---|
       |--config: 配置文件(用于接口配置)
       |--router: 路由文件
       |--utils: 工具类文件
+```
 
 ## 组件（components）详细目录结构
+
+```
 index:奥克城首页
 rank: 排名
 explain: 奥克基地
@@ -63,3 +71,6 @@ public: 公共组件
       |--countdown: 倒计时
       |--loading: 正在加载中
       |--tip: 弹出框
+```
+
+## 接口文档

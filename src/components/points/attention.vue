@@ -78,7 +78,7 @@ export default {
     color: #666666;
     font-size: 14px;
     // border: 1px solid red;
-    box-shadow: 0px 1px 0px 0px rgba(169,169,169,0.5);
+    box-shadow: 0px 0.5px 0px 0px rgba(169,169,169,0.5);
     .title{
       font-size: 24px;
     }
