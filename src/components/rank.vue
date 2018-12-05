@@ -1,24 +1,29 @@
 <template>
   <div class="des-rank">
     <div class="header">
-      <p>奥克城荣誉榜</p>
-      <ul>
-        <li>
-          奥克城总注册居民 {{num}}
+      <p class="title">奥克城荣誉榜</p>
+      <ul class="data">
+        <li class="total-num">
+          <p>{{ num }}</p>
+          <p>奥克城总注册居民</p>
         </li>
-        <li>
-          我的算力排名 {{points}}
+        <li class="rank">
+          <p>{{ points }}</p>
+          <p>我的算力排名</p>
         </li>
       </ul>
+      <div class="explain">
+        算力是记录“奥居民”对奥克城发展所作的贡献量，也是获取奥克积分数量的主要因素，算力越高，单位时间内矿海生成的奥克积分就越多。算力分为2种，一种是永久算力，即一旦获取，永远不会消失，另一种是临时算力，即获取后过一段时间会逐渐减半最后归零。
+      </div>
     </div>
     <div class="content">
-      <p>算力排行榜</p>
-      <x-table :cell-bordered="false" style="background-color:#fff;">
+      <p class="title">算力排行榜</p>
+      <x-table :cell-bordered="false" :content-bordered="false" style="background-color:#fff;">
         <thead>
           <tr>
-            <th>名次</th>
-            <th>账户</th>
-            <th>算力值</th>
+            <th class="t-head">名次</th>
+            <th class="t-head">居民</th>
+            <th class="t-head">算力</th>
           </tr>
         </thead>
         <tbody>
@@ -103,37 +108,84 @@ export default {
   top: 0;
   left: 0;
   right: 0;
-  bottom: 0;
+  // bottom: 0;
   font-weight: normal;
-  overflow: hidden;
+  overflow: auto;
   .header{
-    position: relative;
-    border: 1px solid red;
-    box-sizing: border-box;
-    width: 100%;
-    height: 22%;
-    font-size: 12px;
-    @media only screen and (min-width: 768px) {
-      font-size: 24px;
+    height: 376px;
+    background-image: url("https://img1.aylives.cn/07b5600cbd81466e880383d70983ea7d.png");
+    background-size: 100% 100%;
+    background-position: center;
+    text-align: center;
+    .user-img{
+      margin-top: 8px; 
+      width: 65px;
+      height: 65px;
+      border-radius: 50%;
+      list-style: none;
+    }
+    .title{
+      padding: 78px 0 32px;
+    }
+    .data{
+      list-style: none;
+      position: relative;
+      display: flex;
+      justify-content: center;
+      font-size: 20px;
+      color: #FFFFFF;
+      padding-bottom: 20px;
+      top: -10px;
+      li{
+        display: inline-block;
+        p:nth-child(1){
+          font-size: 20px;
+          margin: 8px;
+        }
+        p:nth-child(2){
+          font-size: 12px;
+        }
+      }
+      .total-num{
+        text-align: center;
+        padding-right: 120px; 
+      }
+      .rank{
+        text-align: center;
+      }
+    }
+    .explain{
+      text-align: left;
+      margin: 20px 20px;
+      font-size: 12px;
+      color: #ffffff;
     }
   }
   .content{
-    border: 1px solid yellow;
-    box-sizing: border-box;
-    height: 49%;
+    z-index: 999;
+    width: 100%;
+    background-color: #ffffff;
+    overflow: auto;
+    font-size: 14px;
+    border-radius: 20px 20px 0 0;
+    list-style: none;
+    margin-top: -20px;
+    .vux-table td:before, .vux-table th:before{
+      border: none;
+    }
+    .vux-table:after{
+      border: none;
+    }
+    .title{
+      font-size: 18px;
+      color: #FF6800;
+      line-height: 25px;
+      margin: 20px;
+    }
+    .t-head{
+      font-size: 14px;
+      color: #FFA235;
+    }
   }
 }
-
-@keyframes hidder {
-  from {
-    // left: 10px;
-    // top: 30px;
-    opacity: 1;
-  } to {
-    left: 10px;
-    top: 50px;
-    opacity: 0;
-  }
-}
-
 </style>

@@ -7,6 +7,7 @@ import points from '@/components/points/index'
 import record from '@/components/points/record'
 import store from '@/components/store/index'
 import personalCenter from '@/components/castle/index'
+import detail from '@/components/castle/detail'
 import share from '@/components/points/share/index'
 import sharePage from '@/components/points/share/sharePage'
 import donateSteps from '@/components/points/donateSteps'
@@ -68,9 +69,17 @@ const router = new Router({
       path: '/personalCenter',
       name: 'personalCenter',
       meta: {
-        title: '我的城堡'
+        title: '奥克城 健康生活之城'
       },
       component: personalCenter
+    },
+    {
+      path: '/detail',
+      name: 'detail',
+      meta: {
+        title: '积分明细'
+      },
+      component: detail
     },
     {
       path: '/donateSteps',

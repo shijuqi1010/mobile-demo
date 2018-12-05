@@ -4,24 +4,36 @@
       <img class="user-img" :src="personalInfo.userAvater">
       <ul class="explain">
         <li class="name">
-          {{name}}
+          {{personalInfo.name}}
         </li>
         <li class="title">
-          {{honor}}
+          {{personalInfo.honor}}
         </li>
         <li class="rank">
-          第{{rank}}名市民
+          第{{personalInfo.rank}}名市民
         </li>
       </ul>
     </div>
-    <!-- <div class="detail">
-      奥克积分{{points}}
-    </div> -->
 
     <ul class="menu">
-      <li>我的算力</li>
-      <li>我的奥克积分</li>
-      <li>我的订单</li>
+      <li class="bitspin">
+        <router-link class="record" to="/record">
+          <span>我的算力</span>
+          <img src="../../assets/arrow.png" alt="">
+        </router-link>
+      </li>
+      <li class="points">
+        <router-link class="record" to="/detail">
+          <span>我的奥克积分</span>
+          <img src="../../assets/arrow.png" alt="">
+        </router-link>
+      </li>
+      <li class="code">
+        <router-link class="record" to="/share">
+          <span>我的邀请码</span>
+          <img src="../../assets/arrow.png" alt="">
+        </router-link>
+      </li>
     </ul>
   </div>
 </template>
@@ -30,12 +42,12 @@
 export default {
   data () {
     return {
-      name: 'paopao',
-      honor: '奥克城创世居民',
-      rank: '',
+      // name: 'paopao',
+      // honor: '奥克城创世居民',
+      // rank: '',
       points: '',
       msg: '',
-      personalInfo: '',
+      personalInfo: {userAvater: 'https://img1.aylives.cn/ee1284f082b34dca8b5ec5e3d67ad125.jpg', name: '某某某',honor: '奥克城创世居民',rank: 2018},
       userId: '',
       delId: '',
       allPreviewerList: [],
@@ -65,101 +77,66 @@ export default {
   text-align: left;
   overflow: auto;
   .center-info{
-    height: 200px;
-    // top: -8px; 
-    background-color: aqua;
-    // background-image: url("//img1.aylives.cn/cf05cd18b85f44a0bd812e0858ce2cf5.png");
-    // background-size: 100% 100%;
-    // background-position: center;
+    height: 205px;
+    background-image: url("https://img1.aylives.cn/e5d42ae0d07b4fae879d36c09ad6da30.png");
+    background-size: 100% 100%;
+    background-position: center;
     text-align: center;
+    list-style: none;
     .user-img{
-      margin-top: 18px; 
-      width: 65px;
-      height: 65px;
+      margin-top: 40px; 
+      width: 60px;
+      height: 60px;
       border-radius: 50%;
-      list-style: none;
     }
     .explain{
-      list-style: none;
       position: relative;
-      // display: flex;
-      // justify-content: center;
-      font-size: 16px;
+      font-size: 14px;
       padding-bottom: 20px;
       top: -10px;
-      li{
-        // display: inline-block;
-        p:nth-child(1){
-          font-size: 20px;
-        }
-        p:nth-child(2){
-          font-size: 10px;
-        }
+      .name{
+        margin: 12px 0;
       }
-      .share-code{
-        text-align: center;
-        padding-right: 120px; 
-      }
-      .rank{
-        text-align: center;
+      .title, .rank{
+        font-size: 12px;
+        line-height: 20px;
       }
     }
-  }
-  .detail{
-    text-align: left;
-    height: 50px;
-    background: #666666;
   }
   .menu{
-    margin: 0;
-    padding: 0;
-    top: 0;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    background-color: green;
+    width: 100%;
+    background-color: #ffffff;
     overflow: auto;
-    .confirm-box{
-      position: relative;
-      width: 250px;
-      height: 156px;
-      background:rgba(255,255,255,1);
-      top: 50%;
-      transform: translateY(-50%);
-      left: 50%;
-      transform: translateX(-50%);
-      font-size: 14px;
-      color: #666666;
-      border-radius: 6px;
-      overflow: hidden;
-      .confirm-title{
-        font-size: 20px;
-        color: #333333;
-        margin: 12px 0 20px 20px;
-      }
-      .confirm-content{
-        margin-left: 20px;
-      }
-      .confirm-btn{
-        bottom: -36px;
+    font-size: 14px;
+    height: 320px;
+    border-radius: 20px 20px 0 0;
+    list-style: none;
+    margin-top: -20px;
+    li{
+      height: 56px;
+      line-height: 56px;
+      box-shadow: 0px 0.5px 0px 0px rgba(206,206,206,0.5);
+      .record{
+        margin: 0 20px;
         position: relative;
-        .btn-cancle{
-          position: absolute;
-          right: 70px;
+        span{
+          text-align: middle;
         }
-        .btn-confirm{
+        img{
+          vertical-align: middle;
           position: absolute;
-          right: 20px;
-          color: #FFD100;
+          right: 0;
+          top: 50%;
+          transform: translateY(-50%);
+          -webkit-transform: translateY(-50%);
+          width: 5px;
+          height: 11px;
         }
       }
     }
-  }
-  .msg-notice{
-    // margin: 30px 80px 20px 80px;
-    position: absolute;
-    left: 50%;
-    transform: translateX(-50%);
+    .bitspin{
+      margin-top: 20px;
+    }
   }
 }
 </style>

@@ -36,7 +36,7 @@ src---|
 ## 组件（components）详细目录结构
 
 ```
-index:奥克城首页
+index: 奥克城首页
 rank: 排名
 explain: 奥克基地
 castle: 我的城堡
