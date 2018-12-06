@@ -66,18 +66,17 @@ export default {
 <style scoped lang="less">
 .des-share{
   width: 100%;
-  height: 120%;
-  // position: fixed;
+  position: relative;
   top: 0;
   left: 0;
   right: 0;
   overflow: hidden;
   .share-container{
     width: 100%;
-    height: 517px;
+    height: 656px;
     padding-top: 20%;
     box-sizing: border-box;
-    background-image: url('https://img1.aylives.cn/ac78d2c752c6438195682678be837af8.png');
+    background-image: url('https://img1.aylives.cn/4035fd85c8bf4a33804fa4e4e9edc278.png');
     background-size: cover;
     background-position: center;
     @media only screen and (device-width: 375px) and (device-height: 812px) {
@@ -104,6 +103,14 @@ export default {
       top: 3%;
       color: #ffffff;
       font-size: 14px;
+      @media only screen and (min-width: 768px) {
+        border-radius: 24px;
+        line-height: 60px;
+        width: 120px;
+        padding-right: 10px;
+        right: -20px;
+        font-size: 24px;
+      }
     }
     .share-content{
       // border: 1px solid red;
@@ -148,17 +155,16 @@ export default {
     }
   }
   .explain{
-    // width: 86%;
-    border: 1px solid red;
     margin: 0 30px;
     text-align: left;
-    padding: 18px 0;
     // line-height: 28px;
     .explain-title{
       color: #FF6800;
       font-size: 16px;
       line-height: 28px;
+      padding: 18px 0 12px;
       @media only screen and (min-width: 768px) {
+        padding: 38px 0;
         line-height: 60px;
         font-size: 42px;
       }

@@ -60,10 +60,11 @@ build: 共建计划
       |--green: 小区绿化
       |exchange: 闲置物品兑换
       |     |--index: 兑换主页
-      |     |--pblish: 发布
-      |     |--exchange: 兑换
-      |     |--sendOut: 送出的
-      |     |--receive: 领取
+      |     |--push: 发布界面
+      |     |--exchange: 兑换物品页面
+      |     |--pblish: 我发布的
+      |     |--productDetail: 宝贝详情
+      |     |--receive: 我领到的
 store: 市场
       |--index: 市场主页
       |--prize: 抽奖(共用之前的抽奖)
