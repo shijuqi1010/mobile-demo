@@ -1,165 +1,159 @@
 <template>
-  <div class="des-personal">
-    <div class="center-info">
-      <img class="user-img" :src="personalInfo.userAvater">
-      <ul class="explain">
-        <li class="name">
-          {{name}}
+  <div class="des-detail">
+    <div class="detail-banner">
+      <p class="top">奥克积分总数</p>
+      <p class="center"> {{totalPoints}} </p>
+    </div>
+    <div class="introduct">
+      <p class="title">简介</p>
+      <p class="content"> 奥克积分是奥克城居民在奥克城日常生活中活动的奖励，记录着每个“奥居民”为奥克城的发展所贡献的点点滴滴，可以通过日常矿海的生长和其他活动奖励获得奥克积分，使用奥克积分可以在兑换奥克城里的虚拟物品或现实世界的实物奖品和服务，奥克积分总量有限。 </p>
+    </div>
+
+    <div class="point-detail">
+      <p class="title">积分明细</p>
+      <ul class="record-list">
+        <li>
+          <div class="left">
+            <p>日常领取</p>
+            <p class="time">{{time}}</p>
+          </div>
+          <div class="right">+{{point}}</div>
         </li>
-        <li class="title">
-          {{honor}}
+        <li>
+          <div class="left">
+            <p>积分兑换</p>
+            <p class="time">{{time}}</p>
+          </div>
+          <div class="right">+{{point}}</div>
         </li>
-        <li class="rank">
-          第{{rank}}名市民
+        <li>
+          <div class="left">
+            <p>闲置物品互赠</p>
+            <p class="time">{{time}}</p>
+          </div>
+          <div class="right">+{{point}}</div>
         </li>
       </ul>
     </div>
-    <div class="detail">
-      奥克积分{{points}}
-    </div>
-
-    <ul class="menu">
-      <li>我的算力</li>
-      <li>我的奥克积分</li>
-      <li>我的订单</li>
-    </ul>
   </div>
 </template>
 
 <script>
+
 export default {
+  name: 'points',
   data () {
     return {
-      name: 'paopao',
-      honor: '奥克城创世居民',
-      rank: '',
-      points: '',
-      msg: '',
-      personalInfo: '',
-      userId: '',
-      delId: '',
-      allPreviewerList: [],
-      showConfirm: false,
-      scrollBottom: false,
-      showDelete: false,
-      count: 0,
-      pageSize: 5,
+      token: '',
+      roomId: '',
+      num: 0,
+      owner: 0,
+      totalPoints: 3883,
+      point: 1.999999,
+      time: '2018-10-24 10:00',
+      recordlist: null
     }
   },
-  mounted () {
+  created () {
   },
-  computed: {
+  computed:{
+  },
+  mounted () {
+    this.getHistoryPoints()
   },
   methods: {
   }
 }
 </script>
-
-<style scoped lang="less">
-.des-personal{
-  width: 100%;
-  padding: 0;
-  top: 0;
-  left: 0;
-  right: 0;
-  text-align: left;
-  overflow: auto;
-  .center-info{
-    height: 144px;
-    top: -8px; 
-    background-image: url("//img1.aylives.cn/cf05cd18b85f44a0bd812e0858ce2cf5.png");
-    background-size: 100% 100%;
+<style lang="less" scoped>
+.des-detail{
+  .detail-banner{
+    height: 100px;
+    background: url("https://img1.aylives.cn/1d4cb7ada42241b5be8c2f66a250ba65.png");
+    background-size: cover;
     background-position: center;
-    text-align: center;
-    .user-img{
-      margin-top: 8px; 
-      width: 65px;
-      height: 65px;
-      border-radius: 50%;
-      list-style: none;
+    color: #ffffff;
+    @media only screen and (min-width: 768px) {
+      height: 280px;
+      line-height: 80px;
     }
-    .explain{
-      list-style: none;
-      position: relative;
-      // display: flex;
-      // justify-content: center;
-      font-size: 16px;
-      padding-bottom: 20px;
-      top: -10px;
-      li{
-        // display: inline-block;
-        p:nth-child(1){
-          font-size: 20px;
-        }
-        p:nth-child(2){
-          font-size: 10px;
-        }
+    .top{
+      font-size: 12px;
+      padding-top: 10px;
+      padding-left: 20px;
+      display: flex;
+      display: -webkit-flex;
+      display: -ms-flex;
+      @media only screen and (min-width: 768px) {
+        font-size: 24px;
       }
-      .share-code{
-        text-align: center;
-        padding-right: 120px; 
-      }
-      .rank{
-        text-align: center;
+    }
+    .center{
+      font-size: 36px;
+      line-height: 50px;
+      @media only screen and (min-width: 768px) {
+        font-size: 50px;
+        line-height: 80px;
       }
     }
   }
-  .detail{
+  .introduct{
     text-align: left;
-    height: 50px;
-    background: #666666;
+    color: #333333;
+    margin: 28px 20px 36px;
+    .title{
+      margin-bottom: 20px;
+      font-size: 20px;
+    }
+    .content{
+      font-size: 14px;
+      line-height: 20px;
+    }
   }
-  .menu{
-    margin: 0;
+  .point-detail {
+    width: 100%;
     padding: 0;
     top: 0;
-    bottom: 0;
     left: 0;
     right: 0;
-    background-color: green;
-    overflow: auto;
-    .confirm-box{
-      position: relative;
-      width: 250px;
-      height: 156px;
-      background:rgba(255,255,255,1);
-      top: 50%;
-      transform: translateY(-50%);
-      left: 50%;
-      transform: translateX(-50%);
+    bottom: 0;
+    border-top: 10px solid rgba(251,251,251,1);
+    .title{
+      margin: 30px 20px;
+      text-align: left;
+      font-size: 20px;
+      color: #333333;
+    }
+    .record-list {
+      color: #2F3542;
       font-size: 14px;
-      color: #666666;
-      border-radius: 6px;
-      overflow: hidden;
-      .confirm-title{
-        font-size: 20px;
-        color: #333333;
-        margin: 12px 0 20px 20px;
-      }
-      .confirm-content{
-        margin-left: 20px;
-      }
-      .confirm-btn{
-        bottom: -36px;
+      line-height: 24px;
+      list-style: none;
+      li{
+        box-shadow: 0px 1px 0px 0px rgba(206,206,206,0.5);
         position: relative;
-        .btn-cancle{
+        margin: 0 20px;
+        // border: 1px solid red;
+        height: 56px;
+        .left{
           position: absolute;
-          right: 70px;
+          text-align: left;
+          align-items: center;
+          font-size: 16px;
+          line-height: 40px;
+          .time{
+            font-size: 10px;
+            line-height: 12px;
+          }
         }
-        .btn-confirm{
+        .right{
           position: absolute;
-          right: 20px;
-          color: #FFD100;
+          right: 0;
+          font-size: 20px;
+          line-height: 56px;
         }
       }
     }
-  }
-  .msg-notice{
-    // margin: 30px 80px 20px 80px;
-    position: absolute;
-    left: 50%;
-    transform: translateX(-50%);
   }
 }
 </style>
-

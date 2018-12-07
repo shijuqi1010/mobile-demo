@@ -2,11 +2,13 @@
   <div class="des-share">
     <div class="share-container">
       <div class="share" @click="share">分享</div>
+      <img src="" alt="">
       <div class="share-content">
         <div class="title">
           <p>奥园物业与你共同欢迎</p>
           <p>新邻居入住奥克城</p>
         </div>
+        <img src="../../../assets/shareBg.png" alt="">
         <div class="code">
           <p>-您的邀请码-</p>
           <p class="share-code">{{shareCode}}</p>
@@ -22,7 +24,7 @@
       <div class="explain-title">
         规则
       </div>
-      <div class="donate-explain">
+      <div class="explain-text">
         每邀请一个邻居，普通用户可获得个10个算力，业主及家属租客可获得20个算力，每人上限邀请20次。
       </div>
     </div>
@@ -56,7 +58,7 @@ export default {
     init () {
     },
     share () {
-      let img = "https://img1.aylives.cn/ac78d2c752c6438195682678be837af8.png"
+      let img = "https://img1.aylives.cn/72887d5cf9864c9586f6395c0a1980d7.png"
       document.location = `jsinteractive://share?url=https://h5.aylives.cn/points/#/sharePage?image=${img}`
     }
   }
@@ -74,22 +76,15 @@ export default {
   .share-container{
     width: 100%;
     height: 656px;
-    padding-top: 20%;
+    padding-top: 28%;
     box-sizing: border-box;
-    background-image: url('https://img1.aylives.cn/4035fd85c8bf4a33804fa4e4e9edc278.png');
+    background-image: url('https://img1.aylives.cn/c2b707b85b7f4e988409c837b96dc597.png');
     background-size: cover;
     background-position: center;
-    @media only screen and (device-width: 375px) and (device-height: 812px) {
-      background-image: url('https://img1.aylives.cn/1d372d34d9b846b3a128569d87a04e4d.png');
-      height: 600px;
-    }
-
-    @media only screen and (device-width: 411px) and (device-height: 823px) {
-      background-image: url('https://img1.aylives.cn/1d372d34d9b846b3a128569d87a04e4d.png');
-      height: 658px;
-    }
 
     @media only screen and (min-width: 768px) {
+      background-image: url('https://img1.aylives.cn/1d372d34d9b846b3a128569d87a04e4d.png');
+      padding-top: 12%;
       height: 1040px;
     }
     .share{
@@ -100,7 +95,7 @@ export default {
       width: 66px;
       padding-right: 5px;
       right: -10px;
-      top: 3%;
+      top: 1.5%;
       color: #ffffff;
       font-size: 14px;
       @media only screen and (min-width: 768px) {
@@ -116,7 +111,7 @@ export default {
       // border: 1px solid red;
       padding-top: 6%;
       width: 76%;
-      height: 74%;
+      height: 82%;
       margin: auto;
       font-size: 18px;
       text-align: center;
@@ -127,12 +122,24 @@ export default {
         border-radius: 24px;
       }
       .title{
-        margin-top: 13%;
+        margin-top: 10%;
         color: #000000;
-
+        @media only screen and (min-width: 768px) {
+          margin-top: 2%;
+        }
+      }
+      img{
+        width: 142px;
+        height: 142px;
+        margin: 9% 0;
+        @media only screen and (min-width: 768px) {
+          width: 220px;
+          height: 220px;
+           margin: 5% 0;
+        }
       }
       .code{
-        margin: 11%;
+        margin-bottom: 2%;
         color: #FFB17C;
         .share-code{
           color: #FF6800;
@@ -155,11 +162,11 @@ export default {
     }
   }
   .explain{
-    margin: 0 30px;
+    margin: 0 20px 20px;
     text-align: left;
     // line-height: 28px;
     .explain-title{
-      color: #FF6800;
+      // color: #FF6800;
       font-size: 16px;
       line-height: 28px;
       padding: 18px 0 12px;
@@ -169,7 +176,7 @@ export default {
         font-size: 42px;
       }
     }
-    .donate-explain{
+    .explain-text{
       list-style: none;
       color: #333333;
       font-size: 12px;

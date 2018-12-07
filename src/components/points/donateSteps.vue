@@ -197,7 +197,7 @@
   }
   .explain{
     // height: 50px;
-    margin: 12px 30px;
+    margin: 12px 20px;
     text-align: left;
     // line-height: 28px;
     .explain-title{

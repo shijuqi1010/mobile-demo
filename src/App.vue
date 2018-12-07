@@ -41,6 +41,11 @@ a:visited {
   display: block;
 }
 
+p{
+  margin-block-end: 0;
+  margin-block-start: 0;
+}
+
 ul{
   margin-block-start: 0;
   margin-block-end: 0;
@@ -58,7 +63,7 @@ ul{
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
-  // color: #2c3e50;
+  color: #333333;
   margin: 0;
   padding: 0;
   -webkit-text-size-adjust: none;

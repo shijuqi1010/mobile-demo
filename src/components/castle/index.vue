@@ -78,7 +78,7 @@ export default {
   overflow: auto;
   .center-info{
     height: 205px;
-    background-image: url("https://img1.aylives.cn/e5d42ae0d07b4fae879d36c09ad6da30.png");
+    background-image: url("https://img1.aylives.cn/db85c2032b3c422c934154d0269436df.png");
     background-size: 100% 100%;
     background-position: center;
     text-align: center;

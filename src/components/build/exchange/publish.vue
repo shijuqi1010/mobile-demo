@@ -1,6 +1,11 @@
 <template>
-  <div class="product-body">
+  <div class="des-publish">
     <!-- <scroller :on-infinite = "infinite" :on-refresh = "refresh"> -->
+    <div class="tips">
+      <img class="tip-icon" src="../../../assets/tips.png" alt="">
+      <span class="tips-text">首次发布可获得10奥克积分，每次发布可获得2算力</span>
+      <img class="close" src="../../../assets/close.png" alt="">
+    </div>
 
     <div class="des-info">
       <ul class="product-list-info">
@@ -29,7 +34,7 @@
 </template>
 
 <style scoped lang="less">
-.product-body{
+.des-publish{
   width: 100%;
   margin: 0;
   padding: 0;
@@ -40,6 +45,35 @@
   text-align: left;
   overflow: hidden;
   background:rgba(249,249,249,1);
+  .tips{
+    background: #ffffff;
+    position: relative;
+    font-size: 12px;
+    text-align: left;
+    margin: 0px 10px 0 20px;
+    // border-bottom: 10px solid red;
+    img{
+      vertical-align: middle;
+    }
+    .tip-icon{
+      width: 16px;
+      height: 16px;
+    }
+    .tips-text{
+      line-height: 30px;
+      margin-left: 10px;
+      vertical-align: middle;
+    }
+    .close{
+      position: absolute;
+      width: 18px;
+      height: 18px;
+      right: 0;
+      top: 50%;
+      transform: translateY(-50%);
+      -webkit-transform: translateY(-50%);
+    }
+  }
   .des-info{
     // border: 1px solid green;
     // box-sizing: border-box;
@@ -51,6 +85,9 @@
       li{
         background: #ffffff;
         margin-bottom: 10px; 
+      }
+      li:nth-child(1){
+        border-top: 10px solid rgba(251, 251, 251, 1);
       }
       // li:nth-child(1){
       //   padding-top: 0;

@@ -63,7 +63,7 @@ export default {
   background: #FFFFFF;
   .build-banner{
     height: 192px;
-    background: url("https://img1.aylives.cn/1d4cb7ada42241b5be8c2f66a250ba65.png");
+    background: url("https://img1.aylives.cn/7ced0bc1262d4a4383e8a63d94da02a6.png");
     background-size: cover;
     background-position: center;
     color: #ffffff;

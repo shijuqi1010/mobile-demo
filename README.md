@@ -42,7 +42,7 @@ explain: 奥克基地
 castle: 我的城堡
       |--index: 我的城堡主页
       |--detail: 我的奥克积分
-      |--order: 我的订单
+      |--------: 我的邀请码（share）
 points: 获取算力
       |--index: 获取算力主页
       |--record: 算力记录
@@ -57,12 +57,12 @@ points: 获取算力
       |--happiness: 悦分享
 build: 共建计划
       |--index: 共建计划主页
-      |--green: 小区绿化
+      |--green: 小区绿化（二期开发）
       |exchange: 闲置物品兑换
       |     |--index: 兑换主页
       |     |--push: 发布界面
       |     |--exchange: 兑换物品页面
-      |     |--pblish: 我发布的
+      |     |--publish: 我发布的
       |     |--productDetail: 宝贝详情
       |     |--receive: 我领到的
 store: 市场

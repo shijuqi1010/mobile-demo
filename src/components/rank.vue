@@ -1,20 +1,19 @@
 <template>
   <div class="des-rank">
-    <div class="header">
-      <p class="title">奥克城荣誉榜</p>
-      <ul class="data">
-        <li class="total-num">
-          <p>{{ num }}</p>
-          <p>奥克城总注册居民</p>
-        </li>
-        <li class="rank">
-          <p>{{ points }}</p>
-          <p>我的算力排名</p>
-        </li>
-      </ul>
-      <div class="explain">
-        算力是记录“奥居民”对奥克城发展所作的贡献量，也是获取奥克积分数量的主要因素，算力越高，单位时间内矿海生成的奥克积分就越多。算力分为2种，一种是永久算力，即一旦获取，永远不会消失，另一种是临时算力，即获取后过一段时间会逐渐减半最后归零。
-      </div>
+    <img src="https://img1.aylives.cn/d41bfb4cc79943d9b3135c996c2dd27b.png" alt="">
+    <ul class="data">
+      <li class="total-num">
+        <p>{{ num }}</p>
+        <p>奥克城总注册居民</p>
+      </li>
+      <li class="rank">
+        <p>{{ rank }}</p>
+        <p>我的算力排名</p>
+      </li>
+    </ul>
+    
+    <div class="story">
+      <p>算力是记录“奥居民”对奥克城发展所作的贡献量，也是获取奥克积分数量的主要因素，算力越高，单位时间内矿海生成的奥克积分就越多。算力分为2种，一种是永久算力，即一旦获取，永远不会消失，另一种是临时算力，即获取后过一段时间会逐渐减半最后归零。</p>
     </div>
     <div class="content">
       <p class="title">算力排行榜</p>
@@ -51,7 +50,8 @@ export default {
       token: "",
       currentRoomId: "",
       uploadText: "",
-      num: 0,
+      num: 3883000000,
+      rank: 999,
       points: 0,
       id: "",
       loading: true,
@@ -104,72 +104,48 @@ export default {
 
 <style scoped lang="less">
 .des-rank {
-  padding: 0;
-  top: 0;
-  left: 0;
-  right: 0;
-  // bottom: 0;
-  font-weight: normal;
-  overflow: auto;
-  .header{
-    height: 376px;
-    background-image: url("https://img1.aylives.cn/07b5600cbd81466e880383d70983ea7d.png");
-    background-size: 100% 100%;
-    background-position: center;
-    text-align: center;
-    .user-img{
-      margin-top: 8px; 
-      width: 65px;
-      height: 65px;
-      border-radius: 50%;
-      list-style: none;
-    }
-    .title{
-      padding: 78px 0 32px;
-    }
-    .data{
-      list-style: none;
-      position: relative;
-      display: flex;
-      justify-content: center;
-      font-size: 20px;
-      color: #FFFFFF;
-      padding-bottom: 20px;
-      top: -10px;
-      li{
-        display: inline-block;
-        p:nth-child(1){
-          font-size: 20px;
-          margin: 8px;
-        }
-        p:nth-child(2){
-          font-size: 12px;
-        }
+  width: 100%;
+  height: 100%;
+  text-align: left;
+  img{
+    width: 100%;
+    height: 22%;
+  }
+  .data{
+    list-style: none;
+    position: relative;
+    display: flex;
+    justify-content: center;
+    font-size: 20px;
+    padding: 28px 20px;
+    li{
+      flex: 1;
+      -webkit-box-flex: 1;
+      -ms-flex: 1;
+      p:nth-child(1){
+        font-size: 20px;
+        font-weight:bold;
+        margin-bottom: 8px;
       }
-      .total-num{
-        text-align: center;
-        padding-right: 120px; 
-      }
-      .rank{
-        text-align: center;
+      p:nth-child(2){
+        font-size: 12px;
       }
     }
-    .explain{
-      text-align: left;
-      margin: 20px 20px;
-      font-size: 12px;
-      color: #ffffff;
+    .total-num{
+      text-align: center;
+    }
+    .rank{
+      text-align: center;
     }
   }
+  .story{
+    font-size: 12px;
+    margin: 10px 20px;
+  }
   .content{
-    z-index: 999;
-    width: 100%;
-    background-color: #ffffff;
-    overflow: auto;
+    // width: 100%;
     font-size: 14px;
-    border-radius: 20px 20px 0 0;
     list-style: none;
-    margin-top: -20px;
     .vux-table td:before, .vux-table th:before{
       border: none;
     }
@@ -178,12 +154,11 @@ export default {
     }
     .title{
       font-size: 18px;
-      color: #FF6800;
       line-height: 25px;
-      margin: 20px;
+      margin: 32px 20px;
     }
     .t-head{
-      font-size: 14px;
+      font-size: 16px;
       color: #FFA235;
     }
   }

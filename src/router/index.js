@@ -28,7 +28,7 @@ import push from '@/components/build/exchange/push'
 // 兑换物品页面
 import exchangeProduct from '@/components/build/exchange/exchange'
 // 我发布的
-import pblish from '@/components/build/exchange/pblish'
+import publish from '@/components/build/exchange/publish'
 // 宝贝详情
 import productDetail from '@/components/build/exchange/productDetail'
 // 我领到的
@@ -58,7 +58,7 @@ const router = new Router({
       path: '/explain',
       name: 'explain',
       meta: {
-        title: '奥克秘籍'
+        title: '奥克基地'
       },
       component: explain
     },
@@ -96,7 +96,7 @@ const router = new Router({
       path: '/detail',
       name: 'detail',
       meta: {
-        title: '积分明细'
+        title: '我的积分明细'
       },
       component: detail
     },
@@ -189,12 +189,12 @@ const router = new Router({
       component: receive,
     },
     {
-      path: '/pblish',
-      name: 'pblish',
+      path: '/publish',
+      name: 'publish',
       meta: {
         title: '我发布的'
       },
-      component: pblish,
+      component: publish,
     }
   ]
 })
@@ -202,6 +202,7 @@ const router = new Router({
 router.beforeEach((to, from, next) => {
   /* 路由发生变化修改页面title */
   if (to.meta.title) {
+    console.log("--title--", to.meta.title);
     document.title = to.meta.title
   }
   

@@ -41,12 +41,12 @@
           inputOfFile="images"
           :text="uploadText"
           :url="uploadUrl">
-          <img class="add-btn" src="https://img1.aylives.cn/2f3a24090ac743c9864072699d6cdf4c.png" alt="">
+          <div class="upload-btn">
+            <img src="../../../assets/upload.png" alt="">
+            <p>上传照片</p>
+          </div>
         </vue-core-image-upload>
       </div>
-    </div>
-
-    <div class="middle">
     </div>
 
     <ul class="des-menu">
@@ -102,30 +102,6 @@
       .text{
         width: 100%;
         resize: none;
-      }
-    }
-    .add-photo{
-      height: 90px;
-      // margin: 20px 20px 0 20px;
-      // border: 1px solid red;
-      .add-btn{
-        position: relative;
-        height: 90px;
-        top: 50%;
-        transform: translateY(-50%);
-      }
-      .upload{
-        width: 100%;
-        border-top: 1px solid #e1e1e1;
-        padding: 0.3rem 0;
-        span{
-          width: 3rem;
-          line-height: 0.8rem;
-          font-size: 0.42rem;
-          float: left;
-          padding-left: 0.3rem;
-          box-sizing: border-box;
-        }
       }
     }
     .upload-box {
@@ -199,25 +175,27 @@
         }
       }
       .upload-box-item {
-        height: 90px;
-      }
-      .add-btn{
-        height: 90px;
-        width: 90px;
+        .upload-btn{
+          height: 90px;
+          width: 90px;
+          text-align: center;
+          img{
+            margin-top: 22px;
+            width: 20px;
+            height: 20px;
+          }
+          p{
+            font-size: 12px;
+          }
+        }
       }
     }
   }
-  .middle{
-    width: 100%;
-    height: 10px;
-    background:rgba(251,251,251,1);
-  }
   .des-menu{
-    // border: 1px solid red;
+    border-top: 10px solid rgba(251,251,251,1);
     width: 100%;
     font-size: 14px;
     list-style: none;
-    // margin-top: -20px;
     li{
       height: 56px;
       line-height: 56px;
