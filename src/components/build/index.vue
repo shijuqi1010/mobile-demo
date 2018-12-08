@@ -5,14 +5,15 @@
     </div>
     <div class="general-task">
       <p class="task-explain">你的以下行为，都将为奥克城的发展做出贡献</p>
-      <ul class="des-general">
-        <li v-for="(item, index) of generalTaskList" :key="index" v-if="((index + 1) % 3 >= 0)">
-          <router-link :to="item.path">
-            <img class="icon" :src="item.icon" alt="">
-            <p class="type"> {{item.content}} </p>
-            <div class="rule-btn">{{item.rule}}</div>
-          </router-link>
-        </li>
+      <ul class="plan-list" v-if="planList">
+        <router-link :to="item.path" tag="li" v-for="(item, index) of planList" :key="index">
+          <img class="icon" :src="item.icon" alt="">
+          <div class="left">
+            <p>{{item.content}}</p>
+            <p class="rule">{{item.rule}}</p>
+          </div>
+          <div class="right">建设环保之城</div>
+        </router-link>
       </ul>
     </div>
     <router-view/>
@@ -31,11 +32,11 @@ export default {
       owner: 0,
       isSigned: false,
       showSign: false,
-      generalTaskList:[
-        {path: '/green', icon: 'https://img1.aylives.cn/c9218154e0124ea2a4e756f1a7b7adeb.png', content: '小区绿化', rule: '+1算力'},
-        {path: '/share', icon: 'https://img1.aylives.cn/7dc8afdf26474cd493ea599d1b1e4cc0.png', content: '邻居串门', rule: '+1算力'},
-        {path: '/donateSteps', icon: 'https://img1.aylives.cn/9f16d704770d4923afd7ebfcf7e9205a.png', content: '运动捐步', rule: '+1～2算力'},
+      planList:[
         {path: '/exchange', icon: 'https://img1.aylives.cn/8ba0229ab745411d8cf11b65f361f48c.png', content: '悦享物', rule: '+10算力'},
+        {path: '/donateSteps', icon: 'https://img1.aylives.cn/9f16d704770d4923afd7ebfcf7e9205a.png', content: '运动捐步', rule: '+1～2算力'},
+        {path: '/share', icon: 'https://img1.aylives.cn/7dc8afdf26474cd493ea599d1b1e4cc0.png', content: '邻居串门', rule: '+1算力'},
+        {path: '/green', icon: 'https://img1.aylives.cn/c9218154e0124ea2a4e756f1a7b7adeb.png', content: '小区绿化', rule: '+1算力'},
       ]
     }
   },
@@ -83,9 +84,6 @@ export default {
     }
   }
   .general-task{
-    color: #2F3542;
-    font-size: 14px;
-    line-height: 24px;
     @media only screen and (min-width: 768px) {
       font-size: 30px;
       line-height: 52px;
@@ -99,66 +97,49 @@ export default {
         line-height: 52px;
       }
     }
-    .des-general{
-      text-align: center;
+    .plan-list {
       font-size: 14px;
-      width: 100%;
-      @media only screen and (min-width: 768px) {
-        font-size: 24px;
-        line-height: 52px;
-      }
+      line-height: 24px;
+      list-style: none;
       li{
-        background: #ffffff;
-        width: 30%;
-        height: 124px;
-        margin-bottom: 25px;
-        padding-top: 20px;
-        display: inline-block;
-        box-shadow:0px 2px 8px 0px rgba(233,233,233,0.5);
-        @media only screen and (min-width: 768px) {
-          margin-bottom: 50px;
-          padding-top: 40px;
-          height: 224px;
-        }
-        img{
-          width: 26px;
-          height: 26px;
+        box-shadow: 0px 0.5px 0px 0px rgba(206,206,206,0.5);
+        position: relative;
+        margin: 0 20px;
+        height: 56px;
+        .icon{
+          position: absolute;
+          left: 0;
+          width: 20px;
+          height: 20px;
+          vertical-align: middle;
+          top: 50%;
+          transform: translateY(-50%);
+          -webkit-transform: translateY(-50%);
           @media only screen and (min-width: 768px) {
-            width: 60px;
-            height: 60px;
+            width: 54px;
+            height: 54px;
           }
         }
-        .type{
-          padding: 13px;
-          line-height: 20px;
-          font-size: 14px;
-          @media only screen and (min-width: 768px) {
-            line-height: 52px;
-            font-size: 28px;
+        .left{
+          position: absolute;
+          vertical-align: middle;
+          text-align: left;
+          align-items: center;
+          line-height: 18px;
+          left: 36px;
+          top: 50%;
+          transform: translateY(-50%);
+          -webkit-transform: translateY(-50%);
+          .rule{
+            font-size: 12px;
+            color: #FF954D;
           }
         }
-        .rule-btn{
-          color: #ffffff;
-          display: inline-block;
-          width: 88%;
-          line-height: 22px;
-          background: linear-gradient(270deg,rgba(255,104,0,1) 0%,rgba(255,158,63,1) 100%);
-          border-radius: 11px;
-          @media only screen and (min-width: 768px) {
-            line-height: 52px;
-            border-radius: 30px;
-          }
+        .right{
+          position: absolute;
+          right: 0;
+          line-height: 66px;
         }
-      }
-      li:nth-child(2),li:nth-child(5){
-        margin-left: 2.5%; 
-        margin-right: 2.5%; 
-      }
-      li:nth-child(4){
-        width: 30%;
-        float: left;
-        margin-left: 2.5%; 
-        margin-right: 2.5%;
       }
     }
   }
