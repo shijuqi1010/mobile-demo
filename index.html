@@ -8,10 +8,10 @@
     <script type="text/javascript">
       window.onerror = function(errorMessage, scriptURI, lineNumber, columnNumber, errorObj) {
         alert("errorMessage", errorMessage);
-        alert("scriptURI", scriptURI);
-        alert("lineNumber", lineNumber);
-        alert("columnNumber", columnNumber);
-        alert("errorObj", errorObj);
+        console.error("scriptURI", scriptURI);
+        console.error("lineNumber", lineNumber);
+        console.error("columnNumber", columnNumber);
+        console.error("errorObj", errorObj);
       }
     </script>
   </head>

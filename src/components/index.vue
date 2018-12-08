@@ -87,8 +87,6 @@ import countdown from "./public/countdown.vue"
 import  Velocity from 'velocity-animate'
 import { Toast} from 'vux'
 
-let audioCtx = new AudioContext() 
-
 export default {
   components: {
     Toast,
@@ -114,7 +112,6 @@ export default {
       showSecond: false,
       showWait: false,
       countDownTime: 600,
-      AudioContext: window.AudioContext || window.webkitAudioContext,
       userInfo1:[{
         id: 1,
         text: 10000
@@ -202,7 +199,7 @@ export default {
       }
 
       // let audioCtx = new AudioContext()
-      // let audioCtx = this.audioCtx
+      let audioCtx = this.audioCtx
       let frequency = 520
       let oscillator = audioCtx.createOscillator()
       let gainNode = audioCtx.createGain()
@@ -249,7 +246,6 @@ export default {
 
       //声音
       // Util.sound()
-      this.sound()
 
       // this.$toasted.show('hello billo', {
       //   position: 'top-center',
