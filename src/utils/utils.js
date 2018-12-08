@@ -34,18 +34,19 @@ class Utils {
     }
   }
 
-  audioCtx = new AudioContext() 
+  // audioCtx = new AudioContext() || new webkitAudioContext
   // to solve:
   // Uncaught DOMException: Failed to construct 'AudioContext': The number of hardware contexts provided (6) is greater than or equal to the maximum bound (6).
 
   sound () {
-    window.AudioContext = window.AudioContext || window.webkitAudioContext
+    AudioContext = window.AudioContext || window.webkitAudioContext
     if (!window.AudioContext) {
+      alert("您的浏览器不支持 AudioContext")
       return
     }
 
-    // let audioCtx = new AudioContext()
-    let audioCtx = this.audioCtx
+    let audioCtx = new AudioContext()
+    // let audioCtx = this.audioCtx
     let frequency = 520
     let oscillator = audioCtx.createOscillator()
     let gainNode = audioCtx.createGain()
