@@ -7,8 +7,8 @@
       <img class="close" src="../../../assets/close.png" alt="">
     </div>
     <div class="des-info">
-      <ul class="product-list-info">
-        <li class="product-info" v-for="(item, listIndex) in productList" :key="listIndex">
+      <ul class="product-list-info" v-if="receiveList">
+        <li class="product-info" v-for="(item, listIndex) in receiveList" :key="listIndex">
           <div class="product-list">
             <img class="product-img" :src="item.productImg">
             <div class="content-right">
@@ -20,16 +20,16 @@
           </div>
         </li>
       </ul>
-      <!-- <div v-else>
+      <div v-else>
         <p class="msg">{{ msg }}</p>
-      </div> -->
+      </div>
     </div>
 
-    <tip 
-      :tip-model="tipModel" 
-      @closedialog="tipModel.showTip = false"
+    <tips-model
+      :tips-model="tipsModel" 
+      @closedialog="tipsModel.showTips = false"
       @confirm="confirm">
-    </tip>
+    </tips-model>
 
     <!-- </scroller> -->
   </div>
@@ -145,10 +145,9 @@
       }
     }
     .msg{
-      // margin: 30px 80px 20px 80px;
-      position: absolute;
-      left: 50%;
-      transform: translateX(-50%);
+      text-align: center;
+      padding-top: 15px;
+      background: #ffffff;
     }
   }
 }
@@ -157,11 +156,11 @@
 <script>
 import Api from '../../../config/api.js'
 import Util from '../../../utils/utils'
-import tip from '../../public/tip'
+import tipsModel from '../../public/tipsModel'
 
 export default {
   components: {
-    tip
+    tipsModel
   },
   data () {
     return {
@@ -177,22 +176,24 @@ export default {
       showHappiness: false,
       count: 0,
       pageSize: 5,
-      productList:[
-        {productImg: 'https://img1.aylives.cn/2f3a24090ac743c9864072699d6cdf4c.png', productName: '山东栗子100g', points: '50奥克积分'},
-        {productImg: 'https://img1.aylives.cn/2f3a24090ac743c9864072699d6cdf4c.png', productName: '山东栗子100g', points: '50奥克积分'},
-        {productImg: 'https://img1.aylives.cn/2f3a24090ac743c9864072699d6cdf4c.png', productName: '山东栗子100g', points: '50奥克积分'},
-        {productImg: 'https://img1.aylives.cn/2f3a24090ac743c9864072699d6cdf4c.png', productName: '山东栗子100g', points: '50奥克积分'},
-        {productImg: 'https://img1.aylives.cn/2f3a24090ac743c9864072699d6cdf4c.png', productName: '山东栗子100g', points: '50奥克积分'},
-        {productImg: 'https://img1.aylives.cn/2f3a24090ac743c9864072699d6cdf4c.png', productName: '山东栗子100g', points: '50奥克积分'},
-        {productImg: 'https://img1.aylives.cn/2f3a24090ac743c9864072699d6cdf4c.png', productName: '山东栗子100g', points: '50奥克积分'},
-        {productImg: 'https://img1.aylives.cn/2f3a24090ac743c9864072699d6cdf4c.png', productName: '山东栗子100g', points: '50奥克积分'},
-        {productImg: 'https://img1.aylives.cn/2f3a24090ac743c9864072699d6cdf4c.png', productName: '山东栗子100g', points: '50奥克积分'},
-        {productImg: 'https://img1.aylives.cn/2f3a24090ac743c9864072699d6cdf4c.png', productName: '山东栗子100g', points: '50奥克积分'},
-        {productImg: 'https://img1.aylives.cn/2f3a24090ac743c9864072699d6cdf4c.png', productName: '山东栗子100g', points: '50奥克积分'},
-        {productImg: 'https://img1.aylives.cn/2f3a24090ac743c9864072699d6cdf4c.png', productName: '山东栗子100g', points: '50奥克积分'}
-      ],
-      tipModel: {
-        showTip: false,
+      receiveList: null,
+      // receiveList:[
+      //   {productImg: 'https://img1.aylives.cn/2f3a24090ac743c9864072699d6cdf4c.png', productName: '山东栗子100g', points: '50奥克积分'},
+      //   {productImg: 'https://img1.aylives.cn/2f3a24090ac743c9864072699d6cdf4c.png', productName: '山东栗子100g', points: '50奥克积分'},
+      //   {productImg: 'https://img1.aylives.cn/2f3a24090ac743c9864072699d6cdf4c.png', productName: '山东栗子100g', points: '50奥克积分'},
+      //   {productImg: 'https://img1.aylives.cn/2f3a24090ac743c9864072699d6cdf4c.png', productName: '山东栗子100g', points: '50奥克积分'},
+      //   {productImg: 'https://img1.aylives.cn/2f3a24090ac743c9864072699d6cdf4c.png', productName: '山东栗子100g', points: '50奥克积分'},
+      //   {productImg: 'https://img1.aylives.cn/2f3a24090ac743c9864072699d6cdf4c.png', productName: '山东栗子100g', points: '50奥克积分'},
+      //   {productImg: 'https://img1.aylives.cn/2f3a24090ac743c9864072699d6cdf4c.png', productName: '山东栗子100g', points: '50奥克积分'},
+      //   {productImg: 'https://img1.aylives.cn/2f3a24090ac743c9864072699d6cdf4c.png', productName: '山东栗子100g', points: '50奥克积分'},
+      //   {productImg: 'https://img1.aylives.cn/2f3a24090ac743c9864072699d6cdf4c.png', productName: '山东栗子100g', points: '50奥克积分'},
+      //   {productImg: 'https://img1.aylives.cn/2f3a24090ac743c9864072699d6cdf4c.png', productName: '山东栗子100g', points: '50奥克积分'},
+      //   {productImg: 'https://img1.aylives.cn/2f3a24090ac743c9864072699d6cdf4c.png', productName: '山东栗子100g', points: '50奥克积分'},
+      //   {productImg: 'https://img1.aylives.cn/2f3a24090ac743c9864072699d6cdf4c.png', productName: '山东栗子100g', points: '50奥克积分'}
+      // ],
+      msg: '',
+      tipsModel: {
+        showTips: false,
         title: '确认收货',
         content: '您确认收到邻居的物品吗？确认收货后您的积分将转到邻居的账户上，且无法追回哦。',
       }
@@ -211,7 +212,7 @@ export default {
       alert("确认收货")
     },
     received() {
-      this.tipModel.showTip = true
+      this.tipsModel.showTips = true
     }
   }
 }

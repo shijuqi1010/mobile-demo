@@ -1,10 +1,10 @@
 <template>
   <transition name="fade">
-    <div class="des-tip" v-if='tipModel.showTip'>
+    <div class="des-tip" v-if='tipsModel.showTips'>
       <div class="tip-container">
-        <p class="tip-title">{{tipModel.title}}</p>
+        <p class="tip-title">{{tipsModel.title}}</p>
         <div class="tip-content">
-          <p class="tip-text">{{tipModel.content}}</p>
+          <p class="tip-text">{{tipsModel.content}}</p>
         </div>
         <div class="tip-btn">
           <span @click="cancel"> 取消 </span>
@@ -17,8 +17,8 @@
 
 <script>
 export default {
-  name: 'tip-modal',
-  props: ["tipModel"],
+  name: 'tips-model',
+  props: ["tipsModel"],
   data: function() {
     return {
     }

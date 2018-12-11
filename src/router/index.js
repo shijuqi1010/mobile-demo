@@ -37,6 +37,8 @@ import receive from '@/components/build/exchange/receive'
 // 市场
 import store from '@/components/store/index'
 
+// import model from '@/components/public/model'
+
 Vue.use(Router)
 
 const router = new Router({

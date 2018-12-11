@@ -8,7 +8,7 @@
     </div>
 
     <div class="des-info">
-      <ul class="product-list-info">
+      <ul class="product-list-info" v-if="productList">
         <li class="product-info" v-for="(item, listIndex) in productList" :key="listIndex">
           <div class="product-list">
             <img class="product-img" :src="item.productImg">
@@ -24,15 +24,15 @@
           </div>
         </li>
       </ul>
-      <!-- <div v-else>
+      <div v-else>
         <p class="msg">{{ msg }}</p>
-      </div> -->
+      </div>
     </div>
-    <tip 
-      :tip-model="tipModel" 
-      @closedialog="tipModel.showTip = false"
+    <tips-model 
+      :tips-model="tipsModel" 
+      @closedialog="tipsModel.showTips = false"
       @confirm="confirm">
-    </tip>
+    </tips-model>
     <!-- </scroller> -->
   </div>
 </template>
@@ -182,10 +182,9 @@
       }
     }
     .msg{
-      // margin: 30px 80px 20px 80px;
-      position: absolute;
-      left: 50%;
-      transform: translateX(-50%);
+      background: #ffffff;
+      text-align: center;
+      padding-top: 15px;
     }
   }
 }
@@ -194,7 +193,7 @@
 <script>
 import Api from '../../../config/api.js'
 import Util from '../../../utils/utils'
-import tip from '../../public/tip'
+import tipsModel from '../../public/tipsModel'
 
 export default {
   data () {
@@ -211,29 +210,31 @@ export default {
       showHappiness: false,
       count: 0,
       pageSize: 5,
-      productList:[
-        {productImg: 'https://img1.aylives.cn/2f3a24090ac743c9864072699d6cdf4c.png', productName: '山东栗子100g', points: '50奥克积分', neighbTel:'18765643241'},
-        {productImg: 'https://img1.aylives.cn/2f3a24090ac743c9864072699d6cdf4c.png', productName: '山东栗子100g', points: '50奥克积分', neighbTel:'18765643241'},
-        {productImg: 'https://img1.aylives.cn/2f3a24090ac743c9864072699d6cdf4c.png', productName: '山东栗子100g', points: '50奥克积分', neighbTel:'18765643241'},
-        {productImg: 'https://img1.aylives.cn/2f3a24090ac743c9864072699d6cdf4c.png', productName: '山东栗子100g', points: '50奥克积分', neighbTel:'18765643241'},
-        {productImg: 'https://img1.aylives.cn/2f3a24090ac743c9864072699d6cdf4c.png', productName: '山东栗子100g', points: '50奥克积分', neighbTel:'18765643241'},
-        {productImg: 'https://img1.aylives.cn/2f3a24090ac743c9864072699d6cdf4c.png', productName: '山东栗子100g', points: '50奥克积分', neighbTel:'18765643241'},
-        {productImg: 'https://img1.aylives.cn/2f3a24090ac743c9864072699d6cdf4c.png', productName: '山东栗子100g', points: '50奥克积分', neighbTel:'18765643241'},
-        {productImg: 'https://img1.aylives.cn/2f3a24090ac743c9864072699d6cdf4c.png', productName: '山东栗子100g', points: '50奥克积分', neighbTel:'18765643241'},
-        {productImg: 'https://img1.aylives.cn/2f3a24090ac743c9864072699d6cdf4c.png', productName: '山东栗子100g', points: '50奥克积分', neighbTel:'18765643241'},
-        {productImg: 'https://img1.aylives.cn/2f3a24090ac743c9864072699d6cdf4c.png', productName: '山东栗子100g', points: '50奥克积分', neighbTel:'18765643241'},
-        {productImg: 'https://img1.aylives.cn/2f3a24090ac743c9864072699d6cdf4c.png', productName: '山东栗子100g', points: '50奥克积分', neighbTel:'18765643241'},
-        {productImg: 'https://img1.aylives.cn/2f3a24090ac743c9864072699d6cdf4c.png', productName: '山东栗子100g', points: '50奥克积分', neighbTel:'18765643241'}
-      ],
-      tipModel: {
-        showTip: false,
+      productList: null,
+      // productList:[
+      //   {productImg: 'https://img1.aylives.cn/2f3a24090ac743c9864072699d6cdf4c.png', productName: '山东栗子100g', points: '50奥克积分', neighbTel:'18765643241'},
+      //   {productImg: 'https://img1.aylives.cn/2f3a24090ac743c9864072699d6cdf4c.png', productName: '山东栗子100g', points: '50奥克积分', neighbTel:'18765643241'},
+      //   {productImg: 'https://img1.aylives.cn/2f3a24090ac743c9864072699d6cdf4c.png', productName: '山东栗子100g', points: '50奥克积分', neighbTel:'18765643241'},
+      //   {productImg: 'https://img1.aylives.cn/2f3a24090ac743c9864072699d6cdf4c.png', productName: '山东栗子100g', points: '50奥克积分', neighbTel:'18765643241'},
+      //   {productImg: 'https://img1.aylives.cn/2f3a24090ac743c9864072699d6cdf4c.png', productName: '山东栗子100g', points: '50奥克积分', neighbTel:'18765643241'},
+      //   {productImg: 'https://img1.aylives.cn/2f3a24090ac743c9864072699d6cdf4c.png', productName: '山东栗子100g', points: '50奥克积分', neighbTel:'18765643241'},
+      //   {productImg: 'https://img1.aylives.cn/2f3a24090ac743c9864072699d6cdf4c.png', productName: '山东栗子100g', points: '50奥克积分', neighbTel:'18765643241'},
+      //   {productImg: 'https://img1.aylives.cn/2f3a24090ac743c9864072699d6cdf4c.png', productName: '山东栗子100g', points: '50奥克积分', neighbTel:'18765643241'},
+      //   {productImg: 'https://img1.aylives.cn/2f3a24090ac743c9864072699d6cdf4c.png', productName: '山东栗子100g', points: '50奥克积分', neighbTel:'18765643241'},
+      //   {productImg: 'https://img1.aylives.cn/2f3a24090ac743c9864072699d6cdf4c.png', productName: '山东栗子100g', points: '50奥克积分', neighbTel:'18765643241'},
+      //   {productImg: 'https://img1.aylives.cn/2f3a24090ac743c9864072699d6cdf4c.png', productName: '山东栗子100g', points: '50奥克积分', neighbTel:'18765643241'},
+      //   {productImg: 'https://img1.aylives.cn/2f3a24090ac743c9864072699d6cdf4c.png', productName: '山东栗子100g', points: '50奥克积分', neighbTel:'18765643241'}
+      // ],
+      msg: '',
+      tipsModel: {
+        showTips: false,
         title: '确认删除',
         content: '您确定要删除该宝贝吗',
       }
     }
   },
   components: {
-    tip
+    tipsModel
   },
   created () {
   },
@@ -245,7 +246,7 @@ export default {
     getList () {
     },
     del () {
-      this.tipModel.showTip = true
+      this.tipsModel.showTips = true
     },
     confirm() {
       alert("确定删除该宝贝")

@@ -50,9 +50,12 @@
     </div>
 
     <ul class="des-menu">
-      <li class="record bitspin">
+      <li class="record bitspin" @click="showSelect">
         <span>分类</span>
-        <img src="../../../assets/arrow.png" alt="">
+        <div class="choose">
+          <span>{{ selected }}</span>
+          <img src="../../../assets/arrow.png" alt="">
+        </div>
       </li>
       <li class="record points">
         <span>一口价</span>
@@ -77,19 +80,19 @@
       确认发布
     </div>
 
+
+    <select-model 
+      :select-model="selectModel" 
+      @closedialog="selectModel.showSelect = false"
+      @getSelected="getSelected">
+    </select-model>
+
   </div>
 </template>
 
 <style scoped lang="less">
 .des-push{
   width: 100%;
-  margin: 0;
-  padding: 0;
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  text-align: left;
   overflow: hidden;
   background-color: #ffffff;
   .describe{
@@ -102,6 +105,10 @@
       .text{
         width: 100%;
         resize: none;
+      }
+      @media only screen and (min-width: 768px) {
+        font-size: 24px;
+        line-height: 52px;
       }
     }
     .upload-box {
@@ -192,51 +199,76 @@
     }
   }
   .des-menu{
+    text-align: left;
     border-top: 10px solid rgba(251,251,251,1);
     width: 100%;
     font-size: 14px;
     list-style: none;
+    @media only screen and (min-width: 768px) {
+      font-size: 24px;
+      // line-height: 52px;
+    }
     li{
-      height: 56px;
       line-height: 56px;
       box-shadow: 0px 0.5px 0px 0px rgba(206,206,206,0.5);
+      @media only screen and (min-width: 768px) {
+        line-height: 88px;
+      }
     }
     .record{
       margin: 0 20px;
       position: relative;
+      @media only screen and (min-width: 768px) {
+        margin: 0 50px;
+      }
       .right{
         position: absolute;
         right: 0;
       }
-      img{
-        vertical-align: middle;
+      .choose{
         position: absolute;
         right: 0;
         top: 50%;
         transform: translateY(-50%);
         -webkit-transform: translateY(-50%);
+      }
+      img{
+        vertical-align: middle;
         width: 5px;
         height: 11px;
+        margin-left: 10px;
+        @media only screen and (min-width: 768px) {
+          width: 10px;
+          height: 22px;
+          margin-left: 30px;
+        }
       }
     }
   }
   .explain{
-    // border: 1px solid red;
     text-align: left;
     margin: 10px 20px;
     font-size: 12px;
     color: #666666;
+    @media only screen and (min-width: 768px) {
+      margin: 30px 50px;
+      font-size: 20px;
+    }
   }
   .push-btn{
     color: #ffffff;
     width: 90%;
     margin: auto;
     margin-bottom: 20px;
-    // margin: 10px 20px;
     text-align: center;
     line-height: 44px;
     background: linear-gradient(270deg,rgba(255,104,0,1) 0%,rgba(255,146,39,1) 100%);
     border-radius: 8px;
+    @media only screen and (min-width: 768px) {
+      line-height: 66px;
+      border-radius: 26px;
+      margin-bottom: 50px;
+    }
   }
 }
 </style>
@@ -245,7 +277,9 @@
 import { XCircle, XButton, XTextarea, TransferDom, Flexbox, FlexboxItem } from 'vux'
 import VueCoreImageUpload from 'vue-core-image-upload'
 import Api from '../../../config/api.js'
-import { setTimeout } from 'timers';
+import { setTimeout } from 'timers'
+import selectModel from '../../public/selectModel'
+
 export default {
   directives: {
     TransferDom
@@ -256,7 +290,8 @@ export default {
     XTextarea,
     VueCoreImageUpload,
     Flexbox,
-    FlexboxItem
+    FlexboxItem,
+    selectModel
   },
   data () {
     return {
@@ -269,9 +304,19 @@ export default {
       },
       uploadImg1: '',
       pushBtn: true,
-      content: ''
+      content: '',
+      selected: '书籍',
+      selectModel: {
+        showSelect: false,
+        selectList: ['书籍', '母婴', '家居', '美妆', '数码', '鞋服', '其他']
+      }
     }
   },
+  // computed: {
+  //   selected () {
+  //     return this.$store.state.selected
+  //   }
+  // },
   methods: {
     pushPhoto () {
       let params = {
@@ -336,6 +381,13 @@ export default {
       if (err) {
         this.$toast('图片不可以超过10MB', 1000)
       }
+    },
+    showSelect() {
+      this.selectModel.showSelect = true
+    },
+    getSelected(selectedOpt) {
+      this.selected = selectedOpt
+      console.log("push-getSelected", this.selected);
     }
   }
 }

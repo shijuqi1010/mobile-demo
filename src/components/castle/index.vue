@@ -1,16 +1,18 @@
 <template>
   <div class="des-personal">
-    <div class="center-info" v-if="personalInfo">
-      <img class="user-img" :src="personalInfo.avater">
-      <p class="name">{{personalInfo.name}}</p>
-      <ul class="honor">
-        <li class="title">
-          {{personalInfo.identity}}
-        </li>
-        <li class="rank">
-          第{{personalInfo.position}}名市民
-        </li>
-      </ul>
+    <div class="center-info">
+      <div v-if="personalInfo">
+        <img class="user-img" :src="personalInfo.avater">
+        <p class="name">{{personalInfo.name}}</p>
+        <ul class="honor">
+          <li class="title">
+            {{personalInfo.identity}}
+          </li>
+          <li class="rank">
+            第{{personalInfo.position}}名市民
+          </li>
+        </ul>
+      </div>
     </div>
 
     <ul class="menu">
@@ -55,7 +57,6 @@ export default {
   methods: {
     getUserInfo() {
       api.Axios.get(api.USERINFO).then(res => {
-        console.log('res', res);
         if (res.data.code === 200) {
           this.personalInfo = res.data.data.aokeUser
         } else {
