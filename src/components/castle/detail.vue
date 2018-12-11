@@ -11,47 +11,31 @@
 
     <div class="point-detail">
       <p class="title">积分明细</p>
-      <ul class="record-list">
-        <li>
-          <div class="left">
-            <p>日常领取</p>
-            <p class="time">{{time}}</p>
-          </div>
-          <div class="right">+{{point}}</div>
-        </li>
-        <li>
-          <div class="left">
-            <p>积分兑换</p>
-            <p class="time">{{time}}</p>
-          </div>
-          <div class="right">+{{point}}</div>
-        </li>
-        <li>
-          <div class="left">
-            <p>闲置物品互赠</p>
-            <p class="time">{{time}}</p>
-          </div>
-          <div class="right">+{{point}}</div>
-        </li>
-      </ul>
+      <ul class="record-list" v-if="pointslist">
+      <li v-for="(item, index) in pointslist" :key="index">
+        <div class="left">
+          <p>{{item.source}}</p>
+          <p class="time">{{item.createTime}}</p>
+        </div>
+        <div class="right">{{item.aokePointCn}}</div>
+      </li>
+    </ul>
     </div>
   </div>
 </template>
 
 <script>
+import api from "../../config/api.js"
+import Util from "../../utils/utils"
 
 export default {
-  name: 'points',
+  name: 'detail',
   data () {
     return {
       token: '',
       roomId: '',
-      num: 0,
-      owner: 0,
-      totalPoints: 3883,
-      point: 1.999999,
-      time: '2018-10-24 10:00',
-      recordlist: null
+      totalPoints: 0,
+      pointslist: null
     }
   },
   created () {
@@ -59,9 +43,20 @@ export default {
   computed:{
   },
   mounted () {
-    this.getHistoryPoints()
+    this.getDetail()
   },
   methods: {
+    getDetail() {
+      api.Axios.get(api.DETAIL).then(res => {
+        console.log('res', res);
+        if (res.data.code === 200) {
+          this.pointslist = res.data.data.aokePointsRecords
+          this.totalPoints = res.data.data.minePoints
+        } else {
+          this.$toast(res.data.msg, 1500)
+        }
+      })
+    }
   }
 }
 </script>

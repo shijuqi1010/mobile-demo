@@ -3,7 +3,7 @@
     <!-- <scroller :on-infinite = "infinite" :on-refresh = "refresh"> -->
     <div class="tips">
       <img class="tip-icon" src="../../../assets/tips.png" alt="">
-      <span class="tips-text">首次发布可获得10奥克积分，每次发布可获得2算力</span>
+      <span class="tips-text">首次发布可获得10奥克积分，每次发布可获得15算力</span>
       <img class="close" src="../../../assets/close.png" alt="">
     </div>
     <div class="des-info">
@@ -15,7 +15,7 @@
               <span class="product-name">{{item.productName}}</span>
               <div class="product">{{item.points}}</div>
               <div class="product">7天后自动确认收货</div>
-              <div class="confirm-btn">确认收货</div>
+              <div class="confirm-btn" @click="received">确认收货</div>
             </div>
           </div>
         </li>
@@ -24,6 +24,12 @@
         <p class="msg">{{ msg }}</p>
       </div> -->
     </div>
+
+    <tip 
+      :tip-model="tipModel" 
+      @closedialog="tipModel.showTip = false"
+      @confirm="confirm">
+    </tip>
 
     <!-- </scroller> -->
   </div>
@@ -151,8 +157,12 @@
 <script>
 import Api from '../../../config/api.js'
 import Util from '../../../utils/utils'
+import tip from '../../public/tip'
 
 export default {
+  components: {
+    tip
+  },
   data () {
     return {
       userInfo: [],
@@ -181,6 +191,11 @@ export default {
         {productImg: 'https://img1.aylives.cn/2f3a24090ac743c9864072699d6cdf4c.png', productName: '山东栗子100g', points: '50奥克积分'},
         {productImg: 'https://img1.aylives.cn/2f3a24090ac743c9864072699d6cdf4c.png', productName: '山东栗子100g', points: '50奥克积分'}
       ],
+      tipModel: {
+        showTip: false,
+        title: '确认收货',
+        content: '您确认收到邻居的物品吗？确认收货后您的积分将转到邻居的账户上，且无法追回哦。',
+      }
     }
   },
   created () {
@@ -192,6 +207,12 @@ export default {
     },
     getList () {
     },
+    confirm() {
+      alert("确认收货")
+    },
+    received() {
+      this.tipModel.showTip = true
+    }
   }
 }
 </script>

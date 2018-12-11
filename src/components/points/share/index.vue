@@ -11,11 +11,11 @@
         <img src="../../../assets/shareBg.png" alt="">
         <div class="code">
           <p>-您的邀请码-</p>
-          <p class="share-code">{{shareCode}}</p>
+          <p class="share-code">{{ shareCode }}</p>
         </div>
         <div class="share-detail">
           <p>我已邀请{{ invited }}位邻居</p>
-          <p>获得{{ point }}算力</p>
+          <p>获得{{ power }}算力</p>
           <p>还能邀请{{ canInvite }}位</p>
         </div>
       </div>
@@ -25,40 +25,49 @@
         规则
       </div>
       <div class="explain-text">
-        每邀请一个邻居，普通用户可获得个10个算力，业主及家属租客可获得20个算力，每人上限邀请20次。
+        每邀请一个邻居，普通用户可获得个20个算力，业主及家属租客可获得40个算力，每人上限邀请20次。
       </div>
     </div>
   </div>
 </template>
 
 <script>
-import Api from '../../../config/api.js'
+import api from '../../../config/api.js'
 import Util from '../../../utils/utils'
 export default {
   data () {
     return {
       shareCode: 'AY3883',
-      invited: 8,
-      point: 80,
-      canInvite: 12,
-      rank: 0,
+      invited: 0,
+      power: 0,
+      canInvite: 0,
       token: '',
       currentRoomId: '',
-      isDonated: false
+      shareImg: ''
     }
   },
-  created () {
+  created() {
   },
-  mounted () {
-    this.init()
-  },
-  computed: {
+  mounted() {
+    this.getShareInfo()
   },
   methods: {
-    init () {
+    getShareInfo() {
+      api.Axios.get(api.SHARE).then(res => {
+        console.log('res', res);
+        if (res.data.code === 200) {
+          this.shareCode = res.data.data.inviteCode
+          this.invited = res.data.data.invitePerson
+          this.power = res.data.data.invitePersonPower
+          this.canInvite = res.data.data.leftInvitePerson
+          this.shareImg = res.data.data.invitePic
+        } else {
+          this.$toast(res.data.msg, 1500)
+        }
+      })
     },
     share () {
-      let img = "https://img1.aylives.cn/72887d5cf9864c9586f6395c0a1980d7.png"
+      let img = this.shareImg // "https://img1.aylives.cn/72887d5cf9864c9586f6395c0a1980d7.png"
       document.location = `jsinteractive://share?url=https://h5.aylives.cn/points/#/sharePage?image=${img}`
     }
   }

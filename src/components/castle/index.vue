@@ -1,16 +1,14 @@
 <template>
   <div class="des-personal">
-    <div class="center-info">
-      <img class="user-img" :src="personalInfo.userAvater">
-      <ul class="explain">
-        <li class="name">
-          {{personalInfo.name}}
-        </li>
+    <div class="center-info" v-if="personalInfo">
+      <img class="user-img" :src="personalInfo.avater">
+      <p class="name">{{personalInfo.name}}</p>
+      <ul class="honor">
         <li class="title">
-          {{personalInfo.honor}}
+          {{personalInfo.identity}}
         </li>
         <li class="rank">
-          第{{personalInfo.rank}}名市民
+          第{{personalInfo.position}}名市民
         </li>
       </ul>
     </div>
@@ -39,30 +37,32 @@
 </template>
 
 <script>
+import api from "../../config/api.js"
+import Util from "../../utils/utils"
+
 export default {
   data () {
     return {
-      // name: 'paopao',
-      // honor: '奥克城创世居民',
-      // rank: '',
-      points: '',
       msg: '',
-      personalInfo: {userAvater: 'https://img1.aylives.cn/ee1284f082b34dca8b5ec5e3d67ad125.jpg', name: '某某某',honor: '奥克城创世居民',rank: 2018},
-      userId: '',
-      delId: '',
-      allPreviewerList: [],
-      showConfirm: false,
-      scrollBottom: false,
-      showDelete: false,
-      count: 0,
-      pageSize: 5,
+      personalInfo: null,
     }
   },
-  mounted () {
+  created() {
   },
-  computed: {
+  mounted() {
+    this.getUserInfo()
   },
   methods: {
+    getUserInfo() {
+      api.Axios.get(api.USERINFO).then(res => {
+        console.log('res', res);
+        if (res.data.code === 200) {
+          this.personalInfo = res.data.data.aokeUser
+        } else {
+          this.$toast(res.data.msg, 1500)
+        }
+      })
+    }
   }
 }
 </script>
@@ -82,24 +82,35 @@ export default {
     background-size: 100% 100%;
     background-position: center;
     text-align: center;
-    list-style: none;
     .user-img{
       margin-top: 40px; 
-      width: 60px;
-      height: 60px;
+      width: 50px;
+      height: 50px;
       border-radius: 50%;
     }
-    .explain{
-      position: relative;
+    .name{
       font-size: 14px;
-      padding-bottom: 20px;
-      top: -10px;
-      .name{
-        margin: 12px 0;
-      }
+      margin: 12px 0 8px;
+    }
+    .honor{
+      list-style: none;
+      position: relative;
+      display: flex;
+      // justify-content: center;
+      font-size: 12px;
+      line-height: 18px;
       .title, .rank{
-        font-size: 12px;
-        line-height: 20px;
+        flex: 1;
+        -webkit-box-flex: 1;
+        -ms-flex: 1;
+      }
+      li:nth-child(1){
+        // margin-right: -20%;
+        justify-content: flex-end;
+      }
+      li:nth-child(2){
+        // margin-right: -20%;
+        justify-content: flex-start;
       }
     }
   }

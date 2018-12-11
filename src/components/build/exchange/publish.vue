@@ -3,7 +3,7 @@
     <!-- <scroller :on-infinite = "infinite" :on-refresh = "refresh"> -->
     <div class="tips">
       <img class="tip-icon" src="../../../assets/tips.png" alt="">
-      <span class="tips-text">首次发布可获得10奥克积分，每次发布可获得2算力</span>
+      <span class="tips-text">首次发布可获得10奥克积分，每次发布可获得15算力</span>
       <img class="close" src="../../../assets/close.png" alt="">
     </div>
 
@@ -17,7 +17,7 @@
               <div class="product-tel">预计获得积分: {{item.points}}</div>
               <div class="product-tel">邻居联系方式: {{item.neighbTel}}</div>
               <div class="del-btn">
-                <span>删除</span>
+                <span @click="del">删除</span>
                 <span>下架</span>
               </div>
             </div>
@@ -28,7 +28,11 @@
         <p class="msg">{{ msg }}</p>
       </div> -->
     </div>
-
+    <tip 
+      :tip-model="tipModel" 
+      @closedialog="tipModel.showTip = false"
+      @confirm="confirm">
+    </tip>
     <!-- </scroller> -->
   </div>
 </template>
@@ -190,6 +194,7 @@
 <script>
 import Api from '../../../config/api.js'
 import Util from '../../../utils/utils'
+import tip from '../../public/tip'
 
 export default {
   data () {
@@ -220,7 +225,15 @@ export default {
         {productImg: 'https://img1.aylives.cn/2f3a24090ac743c9864072699d6cdf4c.png', productName: '山东栗子100g', points: '50奥克积分', neighbTel:'18765643241'},
         {productImg: 'https://img1.aylives.cn/2f3a24090ac743c9864072699d6cdf4c.png', productName: '山东栗子100g', points: '50奥克积分', neighbTel:'18765643241'}
       ],
+      tipModel: {
+        showTip: false,
+        title: '确认删除',
+        content: '您确定要删除该宝贝吗',
+      }
     }
+  },
+  components: {
+    tip
   },
   created () {
   },
@@ -231,6 +244,12 @@ export default {
     },
     getList () {
     },
+    del () {
+      this.tipModel.showTip = true
+    },
+    confirm() {
+      alert("确定删除该宝贝")
+    }
   }
 }
 </script>

@@ -104,7 +104,7 @@ const router = new Router({
       path: '/donateSteps',
       name: 'donateSteps',
       meta: {
-        title: '天天运动'
+        title: '悦跑'
       },
       component: donateSteps
     },
@@ -202,7 +202,6 @@ const router = new Router({
 router.beforeEach((to, from, next) => {
   /* 路由发生变化修改页面title */
   if (to.meta.title) {
-    console.log("--title--", to.meta.title);
     document.title = to.meta.title
   }
   

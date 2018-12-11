@@ -3,10 +3,10 @@
     <ul class="record-list" v-if="recordlist">
       <li v-for="(item, index) in recordlist" :key="index">
         <div class="left">
-          <p>{{item.type}}</p>
-          <p class="time">{{item.time}}</p>
+          <p>{{item.source}}</p>
+          <p class="time">{{item.createTime}}</p>
         </div>
-        <div class="right">+{{item.points}}</div>
+        <div class="right">+{{item.power}}</div>
       </li>
     </ul>
     <div v-else class="no-points">
@@ -16,9 +16,11 @@
 </template>
 
 <script>
+import api from "../../config/api.js"
+import Util from "../../utils/utils"
 
 export default {
-  name: 'points',
+  name: 'record',
   data () {
     return {
       token: '',
@@ -27,77 +29,23 @@ export default {
       owner: 0,
       points: 0,
       recordlist: null
-      // recordlist:[{
-      //   type: '获取算力名称',
-      //   time: '2018-11-29 10:20:00',
-      //   points: 1
-      //   }, {
-      //     type: '签到',
-      //     time: '2018-11-29 10:10:00',
-      //     points: 9
-      //   }, {
-      //     type: '关注公众号',
-      //     time: '2018-11-29 10:10:00',
-      //     points: 10
-      //   }, {
-      //     type: '运动捐步',
-      //     time: '2018-11-29 10:10:00',
-      //     points: 100
-      //   }, {
-      //     type: '抽奖',
-      //     time: '2018-11-29 10:10:00',
-      //     points: 30
-      //   }, {
-      //     type: '租住',
-      //     time: '2018-11-29 10:10:00',
-      //     points: 20
-      //   }, {
-      //     type: '邀请邻居',
-      //     time: '2018-11-29 10:10:00',
-      //     points: 40
-      //   }
-      // ],
     }
   },
-  created () {
+  created() {
   },
-  computed:{
-  },
-  mounted () {
-    this.getHistoryPoints()
+  mounted() {
+    this.getRank()
   },
   methods: {
-    getHistoryPoints() {
-      this.recordlist = [{
-        type: '获取算力名称',
-        time: '2018-11-29 10:20:00',
-        points: 1
-        }, {
-          type: '签到',
-          time: '2018-11-29 10:10:00',
-          points: 9
-        }, {
-          type: '关注公众号',
-          time: '2018-11-29 10:10:00',
-          points: 10
-        }, {
-          type: '运动捐步',
-          time: '2018-11-29 10:10:00',
-          points: 100
-        }, {
-          type: '抽奖',
-          time: '2018-11-29 10:10:00',
-          points: 30
-        }, {
-          type: '租住',
-          time: '2018-11-29 10:10:00',
-          points: 20
-        }, {
-          type: '邀请邻居',
-          time: '2018-11-29 10:10:00',
-          points: 40
+    getRank() {
+      api.Axios.get(api.RECORD).then(res => {
+        console.log('res', res);
+        if (res.data.code === 200) {
+          this.recordlist = res.data.data.aokePowerRecords
+        } else {
+          this.$toast(res.data.msg, 1500)
         }
-      ]
+      })
     }
   }
 }

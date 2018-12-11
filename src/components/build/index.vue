@@ -12,7 +12,10 @@
             <p>{{item.content}}</p>
             <p class="rule">{{item.rule}}</p>
           </div>
-          <div class="right">建设环保之城</div>
+          <div class="right">
+            <span>{{item.cityType}}</span>
+            <img src="../../assets/arrow.png" alt="">
+          </div>
         </router-link>
       </ul>
     </div>
@@ -33,10 +36,10 @@ export default {
       isSigned: false,
       showSign: false,
       planList:[
-        {path: '/exchange', icon: 'https://img1.aylives.cn/8ba0229ab745411d8cf11b65f361f48c.png', content: '悦享物', rule: '+10算力'},
-        {path: '/donateSteps', icon: 'https://img1.aylives.cn/9f16d704770d4923afd7ebfcf7e9205a.png', content: '运动捐步', rule: '+1～2算力'},
-        {path: '/share', icon: 'https://img1.aylives.cn/7dc8afdf26474cd493ea599d1b1e4cc0.png', content: '邻居串门', rule: '+1算力'},
-        {path: '/green', icon: 'https://img1.aylives.cn/c9218154e0124ea2a4e756f1a7b7adeb.png', content: '小区绿化', rule: '+1算力'},
+        {path: '/exchange', icon: 'https://img1.aylives.cn/8ba0229ab745411d8cf11b65f361f48c.png', content: '闲置免费互换', rule: '+6～15算力', cityType: '建设环保之城'},
+        {path: '/donateSteps', icon: 'https://img1.aylives.cn/9f16d704770d4923afd7ebfcf7e9205a.png', content: '悦跑', rule: '+3～6算力', cityType: '建设健康之城'},
+        {path: '/share', icon: 'https://img1.aylives.cn/7dc8afdf26474cd493ea599d1b1e4cc0.png', content: '邻居串门', rule: '+3算力', cityType: '建设和谐之城'},
+        {path: '/green', icon: 'https://img1.aylives.cn/c9218154e0124ea2a4e756f1a7b7adeb.png', content: '小区绿化', rule: '+3算力', cityType: '建设绿色之城'},
       ]
     }
   },
@@ -139,6 +142,12 @@ export default {
           position: absolute;
           right: 0;
           line-height: 66px;
+          img{
+            vertical-align: middle;
+            width: 5px;
+            height: 11px;
+            margin-left: 12px;
+          }
         }
       }
     }

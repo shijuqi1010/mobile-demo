@@ -3,7 +3,7 @@
     <img src="https://img1.aylives.cn/d41bfb4cc79943d9b3135c996c2dd27b.png" alt="">
     <ul class="data">
       <li class="total-num">
-        <p>{{ num }}</p>
+        <p>{{ totalNum }}</p>
         <p>奥克城总注册居民</p>
       </li>
       <li class="rank">
@@ -26,10 +26,10 @@
           </tr>
         </thead>
         <tbody>
-          <tr v-for="(item, index) in info" :key="index">
-            <td>{{item.rank}}</td>
+          <tr v-for="(item, index) in rankList" :key="index">
+            <td>{{item.position}}</td>
             <td>{{item.name}}</td>
-            <td>{{item.points}}</td>
+            <td>{{item.aokeWallet.aokePower}}</td>
           </tr>
         </tbody>
       </x-table>
@@ -40,6 +40,8 @@
 
 <script>
 import { XTable } from 'vux'
+import api from "../config/api.js"
+import Util from "../utils/utils"
 
 export default {
   components: {
@@ -49,62 +51,37 @@ export default {
     return {
       token: "",
       currentRoomId: "",
-      uploadText: "",
-      num: 3883000000,
-      rank: 999,
-      points: 0,
-      id: "",
+      totalNum: 0,
+      rank: 0,
       loading: true,
       tip: false,
-      info:[{
-        rank: 1,
-        name: 'qq1',
-        points: 100000
-      },
-      {
-        rank: 2,
-        name: 'qq2',
-        points: 100000
-      },
-      {
-        rank: 3,
-        name: 'qq3',
-        points: 100000
-      },
-      {
-        rank: 4,
-        name: 'qq4',
-        points: 100000
-      },
-      {
-        rank: 5,
-        name: 'qq5',
-        points: 100000
-      },
-      {
-        rank: 6,
-        name: 'qq6',
-        points: 100000
-      },
-      {
-        rank: 7,
-        name: 'qq7',
-        points: 100000
-      }]
+      rankList: null
     }
   },
   created() {
   },
   mounted() {
+    this.getRank()
   },
   methods: {
+    getRank() {
+      api.Axios.get(api.RANK).then(res => {
+        console.log('res', res);
+        if (res.data.code === 200) {
+          this.totalNum = res.data.data.aokeUserSize
+          this.rank = res.data.data.minePowerRank
+          this.rankList = res.data.data.aokeUsers
+        } else {
+          this.$toast(res.data.msg, 1500)
+        }
+      })
+    }
   }
-};
+}
 </script>
 
 <style scoped lang="less">
 .des-rank {
-  width: 100%;
   height: 100%;
   text-align: left;
   img{

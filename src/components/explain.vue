@@ -51,28 +51,36 @@
 </template>
 
 <script>
+import api from "../config/api.js"
+import Util from "../utils/utils"
 
 export default {
-  name: 'points',
+  name: 'explian',
   data () {
     return {
       token: '',
       roomId: '',
-      num: 0,
-      owner: 0,
-      totalPoints: 52100000000,
+      totalPoints: 521000000,
       points: 99999.11111,
-      time: '2018-10-24 10:00',
-      recordlist: null
     }
   },
-  created () {
+  created() {
   },
-  computed:{
-  },
-  mounted () {
+  mounted() {
+    this.getPoints()
   },
   methods: {
+    getPoints() {
+      api.Axios.get(api.EXPLAIN).then(res => {
+        console.log('res', res);
+        if (res.data.code === 200) {
+          this.recordlist = res.data.data.aokePowerRecords
+          this.points = res.data.data.lastDayPoints
+        } else {
+          this.$toast(res.data.msg, 1500)
+        }
+      })
+    }
   }
 }
 </script>

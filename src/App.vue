@@ -17,6 +17,9 @@ html {
   // -ms-text-size-adjust: 100%;
   // -webkit-text-size-adjust: 100%;
   -webkit-text-size-adjust: none; 
+  user-select: none;
+  -webkit-user-select: none;
+  -moz-user-select: none;
 }
 body {
   margin: 0;

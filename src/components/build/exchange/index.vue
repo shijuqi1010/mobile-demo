@@ -16,7 +16,7 @@
     </div>
     <div class="tips">
       <img class="tip-icon" src="../../../assets/tips.png" alt="">
-      <span class="tips-text">首次发布/兑换可获10奥克积分，每次发布可获2算力。</span>
+      <span class="tips-text">首次发布/兑换可获10奥克积分，每次发布可获15算力。</span>
       <img class="close" src="../../../assets/close.png" alt="">
     </div>
     <ul class="des-btn">

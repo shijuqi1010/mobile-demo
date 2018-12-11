@@ -11,7 +11,7 @@
             <span>奥克积分：{{ points }}</span>
           </li>
           <li class="point-data total-point">
-            <span>算力：{{ totalPoints }}</span>
+            <span>算力：{{ powers }}</span>
           </li>
         </ul>
       </div>
@@ -30,7 +30,7 @@
     </div>
 
     <transition name="fade">
-    <ul class="vip-animation" v-show="showFirst">
+    <ul class="vip-animation" v-show="showFirst && stoneList">
       <li class="animation" v-for="(item, index) in userInfo1" :key="index" :id="`id${item.id}`" @click="collect(item)">
         <img class="bubble" src="../assets/stone.png" alt="">
         <span class="text">{{item.text}}</span>
@@ -39,7 +39,7 @@
     </transition>
 
     <transition name="fade">
-    <ul class="vip-animation" v-show="showSecond">
+    <ul class="vip-animation" v-show="showSecond && stoneList">
       <li class="animation" v-for="(item, index) in userInfo2" :key="index" :id="`id${item.id}`" @click="collect(item)">
         <img class="bubble" src="../assets/stone.png" alt="">
         <span class="text">{{item.text}}</span>
@@ -48,7 +48,7 @@
     </transition>
 
     <transition name="fade">
-    <ul class="vip-animation" v-show="showWait">
+    <ul class="vip-animation" v-show="showWait && !stoneList">
       <li class="animation">
         <img class="bubble" src="../assets/stone.png" alt="">
         <countdown class="count-down" :time="countDownTime"></countdown>
@@ -97,7 +97,9 @@ export default {
       token: "",
       currentRoomId: "",
       points: 0,
-      totalPoints: 0,
+      powers: 0,
+      stoneList: null,
+      countDownTime: 0,
       city: "",
       area: "",
       status: "",
@@ -110,8 +112,7 @@ export default {
       count: 0,
       showFirst: true,
       showSecond: false,
-      showWait: false,
-      countDownTime: 600,
+      showWait: true,
       userInfo1:[{
         id: 1,
         text: 10000
@@ -172,11 +173,7 @@ export default {
   watch: {
   },
   mounted() {
-    // if (this.currentRoomId === 0) {
-    //   this.$toast('您还不是奥园业主，请先认证房屋。', 1500)
-    // } else {
-    //   this.getParam()
-    // }
+    this.getParam()
   },
   methods: {
     init() {
@@ -191,27 +188,18 @@ export default {
       this.currentRoomId = Util.pageUrlGetValue("currentRoomId")
       Util.setCookie("currentRoomId", this.currentRoomId, "aylives.cn")
     },
-    sound () {
-      // AudioContext = window.AudioContext || window.webkitAudioContext
-      if (!(window.AudioContext || window.webkitAudioContext)) {
-        alert("您的浏览器不支持 AudioContext")
-        return
-      }
-
-      // let audioCtx = new AudioContext()
-      let audioCtx = this.audioCtx
-      let frequency = 520
-      let oscillator = audioCtx.createOscillator()
-      let gainNode = audioCtx.createGain()
-      oscillator.connect(gainNode)
-      gainNode.connect(audioCtx.destination)
-      oscillator.type = 'sine'
-      oscillator.frequency.value = frequency
-      gainNode.gain.setValueAtTime(0, audioCtx.currentTime)
-      gainNode.gain.linearRampToValueAtTime(1, audioCtx.currentTime + 0.01)
-      oscillator.start(audioCtx.currentTime)
-      gainNode.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + 1)
-      oscillator.stop(audioCtx.currentTime + 1)
+    getParam() {
+      api.Axios.get(api.MAIN).then(res => {
+        console.log('res', res);
+        if (res.data.code === 200) {
+          this.points = res.data.data.aokeUser.aokeWallet.aokePoints
+          this.powers = res.data.data.aokeUser.aokeWallet.aokePower
+          this.stoneList = res.data.data.temporaryPoints
+          this.countDownTime = res.data.data.nextGenerateTime
+        } else {
+          this.$toast(res.data.msg, 1500)
+        }
+      })
     },
     getStone() {
       api.Axios.get(api.STONE).then(res => {
@@ -400,8 +388,8 @@ export default {
       }
       li:nth-child(2){
         margin-top: 26%;
-        @media only screen and (max-width: 320px) {
-          margin-top: 12%;
+        @media only screen and (max-width: 340px) {
+          margin-top: 10%;
         }
         @media only screen and (min-width: 768px) {
           margin-top: 15%;

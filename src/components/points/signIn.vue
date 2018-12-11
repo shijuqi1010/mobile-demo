@@ -9,7 +9,7 @@
     </div>
     <div class="text">
       <p class="title">规则</p>
-      <p class="explain">每签到一次可获得个1个算力，业主及家属租客可获得2个算力，每日仅限签到一次。</p>
+      <p class="explain">每签到一次可获得个3个算力，业主及家属租客可获得6个算力，每日仅限签到一次。</p>
     </div>
   </div>
 </template>
