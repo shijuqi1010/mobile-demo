@@ -34,6 +34,7 @@
 <script>
 import api from '../../../config/api.js'
 import Util from '../../../utils/utils'
+
 export default {
   data () {
     return {

@@ -15,28 +15,26 @@
 </template>
 
 <script>
+import api from '../../config/api.js'
+import Util from '../../utils/utils'
 
 export default {
   name: 'sign',
   data () {
     return {
-      token: '',
-      roomId: '',
-      num: 0,
-      owner: 0,
-      points: 0,
-      recordlist: null
+      tips: ""
     }
   },
-  created () {
-  },
-  computed:{
-  },
-  mounted () {
-  },
   methods: {
-    signIn () {
-      alert("签到")
+    signIn() {
+      api.Axios.get(api.SIGNIN).then(res => {
+        if (res.data.code === 200) {
+          this.tips = res.data.data
+          this.$toast(this.tips, 1500)
+        } else {
+          this.$toast(res.data.msg, 1500)
+        }
+      })
     }
   }
 }
@@ -75,11 +73,12 @@ export default {
     .sign-text{
       color: #333333;
       font-size: 14px;
-      line-height: 20px;
+      line-height: 24px;
       padding: 50px 0 0 20px;
       @media only screen and (min-width: 768px) {
-        line-height: 40px;
+        line-height: 50px;
         font-size: 30px;
+        padding: 60px 0 0 50px;
       }
     }
     .sign-img{
@@ -88,8 +87,8 @@ export default {
       margin-top: 18%;
       margin-left: 70%;
       @media only screen and (min-width: 768px) {
-        width: 100px;
-        height: 100px;
+        width: 120px;
+        height: 120px;
       }
     }
   }
@@ -99,24 +98,24 @@ export default {
     .title{
       color: #333333;
       font-size: 18px;
-      margin-bottom: 20px;
+      margin-bottom: 16px;
       @media only screen and (min-width: 768px) {
         line-height: 60px;
-        font-size: 42px;
+        font-size: 40px;
       }
     }
     .explain{
       list-style: none;
       color: #333333;
-      line-height: 24px;
+      line-height: 22px;
       font-size: 12px;
       @media only screen and (min-width: 768px) {
-        line-height: 40px;
-        font-size: 30px;
+        line-height: 48px;
+        font-size: 28px;
       }
     }
     @media only screen and (min-width: 768px) {
-      margin: 40px 60px;
+      margin: 40px 50px;
     }
   }
 }

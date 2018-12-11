@@ -21,6 +21,9 @@ let api = {
   // 邀请朋友
   SHARE: `${host}/aokecity/aoke/user/api/inviteurl`,
 
+  // 签到
+  SIGNIN: `${host}/aokecity/aoke/user/api/signin`,
+
 }
 
 export default api
