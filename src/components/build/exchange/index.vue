@@ -16,7 +16,7 @@
     </div>
     <div class="tips">
       <img class="tip-icon" src="../../../assets/tips.png" alt="">
-      <span class="tips-text">首次发布/兑换可获10奥克积分，每次发布可获15算力。</span>
+      <span class="tips-text">首次发布/兑换可获10奥克积分，每次发布可获15算力</span>
       <img class="close" src="../../../assets/close.png" alt="">
     </div>
     <ul class="des-btn">
@@ -175,7 +175,10 @@ export default {
     position: relative;
     font-size: 12px;
     text-align: left;
-    padding: 0px 10px 0 20px;
+    // padding: 0px 10px 0 20px;
+    @media only screen and (min-width: 360px) {
+      padding: 0px 10px 0 20px;
+    }
     @media only screen and (min-width: 768px) {
       font-size: 20px;
       padding: 0px 20px 0 30px;
@@ -189,8 +192,11 @@ export default {
     }
     .tips-text{
       line-height: 30px;
-      margin-left: 10px;
+      // margin-left: 10px;
       vertical-align: middle;
+      @media only screen and (min-width: 360px) {
+        margin-left: 10px;
+      }
       @media only screen and (min-width: 768px) {
         line-height: 50px;
       }
@@ -199,10 +205,13 @@ export default {
       position: absolute;
       width: 16px;
       height: 16px;
-      right: 10px;
+      right: 0px;
       top: 50%;
       transform: translateY(-50%);
       -webkit-transform: translateY(-50%);
+      @media only screen and (min-width: 360px) {
+        right: 10px;
+      }
     }
   }
   .des-btn{

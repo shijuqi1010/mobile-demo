@@ -52,8 +52,14 @@
     position: relative;
     font-size: 12px;
     text-align: left;
-    margin: 0px 10px 0 20px;
-    // border-bottom: 10px solid red;
+    // padding: 0px 10px 0 20px;
+    @media only screen and (min-width: 360px) {
+      padding: 0px 10px 0 20px;
+    }
+    @media only screen and (min-width: 768px) {
+      font-size: 20px;
+      padding: 0px 20px 0 30px;
+    }
     img{
       vertical-align: middle;
     }
@@ -63,17 +69,26 @@
     }
     .tips-text{
       line-height: 30px;
-      margin-left: 10px;
+      // margin-left: 10px;
       vertical-align: middle;
+      @media only screen and (min-width: 360px) {
+        margin-left: 10px;
+      }
+      @media only screen and (min-width: 768px) {
+        line-height: 50px;
+      }
     }
     .close{
       position: absolute;
-      width: 18px;
-      height: 18px;
-      right: 0;
+      width: 16px;
+      height: 16px;
+      right: 0px;
       top: 50%;
       transform: translateY(-50%);
       -webkit-transform: translateY(-50%);
+      @media only screen and (min-width: 360px) {
+        right: 10px;
+      }
     }
   }
   .des-info{
@@ -176,21 +191,21 @@ export default {
       showHappiness: false,
       count: 0,
       pageSize: 5,
-      receiveList: null,
-      // receiveList:[
-      //   {productImg: 'https://img1.aylives.cn/2f3a24090ac743c9864072699d6cdf4c.png', productName: '山东栗子100g', points: '50奥克积分'},
-      //   {productImg: 'https://img1.aylives.cn/2f3a24090ac743c9864072699d6cdf4c.png', productName: '山东栗子100g', points: '50奥克积分'},
-      //   {productImg: 'https://img1.aylives.cn/2f3a24090ac743c9864072699d6cdf4c.png', productName: '山东栗子100g', points: '50奥克积分'},
-      //   {productImg: 'https://img1.aylives.cn/2f3a24090ac743c9864072699d6cdf4c.png', productName: '山东栗子100g', points: '50奥克积分'},
-      //   {productImg: 'https://img1.aylives.cn/2f3a24090ac743c9864072699d6cdf4c.png', productName: '山东栗子100g', points: '50奥克积分'},
-      //   {productImg: 'https://img1.aylives.cn/2f3a24090ac743c9864072699d6cdf4c.png', productName: '山东栗子100g', points: '50奥克积分'},
-      //   {productImg: 'https://img1.aylives.cn/2f3a24090ac743c9864072699d6cdf4c.png', productName: '山东栗子100g', points: '50奥克积分'},
-      //   {productImg: 'https://img1.aylives.cn/2f3a24090ac743c9864072699d6cdf4c.png', productName: '山东栗子100g', points: '50奥克积分'},
-      //   {productImg: 'https://img1.aylives.cn/2f3a24090ac743c9864072699d6cdf4c.png', productName: '山东栗子100g', points: '50奥克积分'},
-      //   {productImg: 'https://img1.aylives.cn/2f3a24090ac743c9864072699d6cdf4c.png', productName: '山东栗子100g', points: '50奥克积分'},
-      //   {productImg: 'https://img1.aylives.cn/2f3a24090ac743c9864072699d6cdf4c.png', productName: '山东栗子100g', points: '50奥克积分'},
-      //   {productImg: 'https://img1.aylives.cn/2f3a24090ac743c9864072699d6cdf4c.png', productName: '山东栗子100g', points: '50奥克积分'}
-      // ],
+      // receiveList: null,
+      receiveList:[
+        {productImg: 'https://img1.aylives.cn/2f3a24090ac743c9864072699d6cdf4c.png', productName: '山东栗子100g', points: '50奥克积分'},
+        {productImg: 'https://img1.aylives.cn/2f3a24090ac743c9864072699d6cdf4c.png', productName: '山东栗子100g', points: '50奥克积分'},
+        {productImg: 'https://img1.aylives.cn/2f3a24090ac743c9864072699d6cdf4c.png', productName: '山东栗子100g', points: '50奥克积分'},
+        {productImg: 'https://img1.aylives.cn/2f3a24090ac743c9864072699d6cdf4c.png', productName: '山东栗子100g', points: '50奥克积分'},
+        {productImg: 'https://img1.aylives.cn/2f3a24090ac743c9864072699d6cdf4c.png', productName: '山东栗子100g', points: '50奥克积分'},
+        {productImg: 'https://img1.aylives.cn/2f3a24090ac743c9864072699d6cdf4c.png', productName: '山东栗子100g', points: '50奥克积分'},
+        {productImg: 'https://img1.aylives.cn/2f3a24090ac743c9864072699d6cdf4c.png', productName: '山东栗子100g', points: '50奥克积分'},
+        {productImg: 'https://img1.aylives.cn/2f3a24090ac743c9864072699d6cdf4c.png', productName: '山东栗子100g', points: '50奥克积分'},
+        {productImg: 'https://img1.aylives.cn/2f3a24090ac743c9864072699d6cdf4c.png', productName: '山东栗子100g', points: '50奥克积分'},
+        {productImg: 'https://img1.aylives.cn/2f3a24090ac743c9864072699d6cdf4c.png', productName: '山东栗子100g', points: '50奥克积分'},
+        {productImg: 'https://img1.aylives.cn/2f3a24090ac743c9864072699d6cdf4c.png', productName: '山东栗子100g', points: '50奥克积分'},
+        {productImg: 'https://img1.aylives.cn/2f3a24090ac743c9864072699d6cdf4c.png', productName: '山东栗子100g', points: '50奥克积分'}
+      ],
       msg: '',
       tipsModel: {
         showTips: false,

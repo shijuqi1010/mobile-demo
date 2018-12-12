@@ -69,7 +69,7 @@ export default {
     },
     share () {
       let img = this.shareImg // "https://img1.aylives.cn/72887d5cf9864c9586f6395c0a1980d7.png"
-      document.location = `jsinteractive://share?url=https://h5.aylives.cn/points/#/sharePage?image=${img}`
+      document.location = `jsinteractive://share?image=${img}`
     }
   }
 }
@@ -154,6 +154,7 @@ export default {
         .share-code{
           color: #FF6800;
           font-size: 40px;
+          font-weight:500;
           @media only screen and (min-width: 768px) {
             font-size: 58px;
           }

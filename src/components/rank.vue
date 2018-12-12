@@ -27,7 +27,7 @@
         </thead>
         <tbody>
           <tr v-for="(item, index) in rankList" :key="index">
-            <td>{{item.position}}</td>
+            <td>{{index+1}}</td>
             <td>{{item.name}}</td>
             <td>{{item.aokeWallet.aokePower}}</td>
           </tr>
