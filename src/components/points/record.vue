@@ -1,5 +1,6 @@
 <template>
   <div class="des-record">
+    <scroller :on-infinite = "infinite" :on-refresh = "refresh">
     <ul class="record-list" v-if="recordlist">
       <li v-for="(item, index) in recordlist" :key="index">
         <div class="left">
@@ -12,6 +13,7 @@
     <div v-else class="no-points">
       暂无算力记录
     </div>
+    </scroller>
   </div>
 </template>
 
@@ -28,24 +30,65 @@ export default {
       num: 0,
       owner: 0,
       points: 0,
-      recordlist: null
+      recordlist: null,
+      scrollBottom: false,
+      count: 0,
+      pageSize: 20
     }
   },
   created() {
   },
   mounted() {
-    this.getRank()
   },
   methods: {
-    getRank() {
-      api.Axios.get(api.RECORD).then(res => {
+    getRank(count, fn) {
+      api.Axios.get(api.RECORD,{
+        params: {
+          page: count,
+          size: this.pageSize,
+        }
+      }).then(res => {
         console.log('res', res);
         if (res.data.code === 200) {
           this.recordlist = res.data.data.aokePowerRecords
         } else {
           this.$toast(res.data.msg, 1500)
         }
+
+        if (res.data && (res.data.code === 200)) {
+          let recordlist = res.data.data.aokePowerRecords
+          if (!res.data.haveNextPage) {
+            // this.count = 0
+            this.scrollBottom = true
+            fn(true)
+          } else {
+            if (fn) fn()
+          }
+          if (count === 1) {
+            this.recordlist = recordlist
+          } else {
+            this.recordlist = this.recordlist.concat(recordlist)
+          }
+        } else {
+          this.scrollBottom = true
+          fn(true)
+          this.recordlist = null
+          // this.msg = res.data.msg
+        }
       })
+    },
+    infinite (done) {
+      if (this.scrollBottom) {
+        done(true)
+        return
+      }
+      this.count++
+      this.getRank(this.count, done)
+    },
+    refresh (done) {
+      this.count = 0
+      this.scrollBottom = false
+      this.getRank(1, done)
     }
   }
 }

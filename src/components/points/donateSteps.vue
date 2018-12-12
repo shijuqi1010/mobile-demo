@@ -19,15 +19,18 @@
           完成2000步后点击“兑换算力”才能获得算力哦
         </p>
         <div v-if="clickAble" class="donate-btn" @click="donate">兑换算力</div>
-        <div v-else class="donate-btn-disable">兑换算力</div>
+        <div v-else class="donate-btn-disable">
+          <span v-if="isDonated">兑换成功</span>
+          <span v-else>今日已兑换</span>
+        </div>
       </div>
-      <ul class="donate-info" v-if="donateData">
+      <ul class="donate-info" v-if="isDonated">
         <li>
-          <p class="donate-data">{{ donateSteps }}步</p>
+          <p class="donate-data">{{ todayPower }}</p>
           <p class="donate-text">今日已兑换算力</p>
         </li>
         <li>
-          <p class="donate-data">{{ communityDonateSteps }}步</p>
+          <p class="donate-data">{{ totalPower }}</p>
           <p class="donate-text">累计兑换算力</p>
         </li>
       </ul>
@@ -237,12 +240,8 @@ export default {
       todaySteps: 0,
       encyptSteps: 0,
       currentTime: '',
-      donateData: '',
-      donateSteps: 0,
-      communityDonateSteps: 0,
-      rank: 0,
-      token: '',
-      currentRoomId: '',
+      todayPower: 0,
+      totalPower: 0,
       isDonated: false
     }
   },
@@ -254,14 +253,10 @@ export default {
   },
   computed: {
     percent () {
-      if (this.isDonated) {
-        return 0
+      if (this.todaySteps >= 2000) {
+        return 100
       } else {
-        if (this.todaySteps >= 2000) {
-          return 100
-        } else {
-          return this.todaySteps / 2000 * 100
-        }
+        return this.todaySteps / 2000 * 100
       }
     },
     clickAble () {
@@ -277,45 +272,27 @@ export default {
       this.todaySteps = Util.pageUrlGetValue('steps')
       this.encyptSteps = Util.pageUrlGetValue('encyptSteps')
       this.currentTime = Util.pageUrlGetValue('currentTime')
-      this.token = Util.pageUrlGetValue('token')
-      this.currentRoomId = Util.pageUrlGetValue('currentRoomId')
-      
-      if (!Util.getCookie('token')) {
-        Util.setCookie('token', this.token, 'aylives.cn')
-      }
-
-      if (!Util.getCookie('currentRoomId')) {
-        Util.setCookie('currentRoomId', this.currentRoomId, 'aylives.cn')
-      }
     },
     getDonateData () {
-      Api.Axios.get(Api.DONATE_API).then(res => {
+      Api.Axios.get(Api.RUN).then(res => {
         if (res.data.code === 200) {
           if (res.data.data) {
-            this.donateData = res.data.data
-            this.donateSteps = res.data.data.donateSteps
-            this.communityDonateSteps = res.data.data.community.communityDonateSteps
-            this.rank = res.data.data.community.rank
+            this.totalPower = res.data.data.allMineStepPower
+            this.todayPower = res.data.data.todayStepPower
+            this.isDonated = res.data.data.todayDonateFlag
           }
         } else {
-          // this.$vux.toast.show({
-          //   text: res.data.msg,
-          //   type: 'success'
-          // })
-          console.log('tip', res.data.msg)
+          this.$toast(res.data.msg, 1500)
         }
       })
     },
     donate () {
-      Api.Axios.post(Api.DONATE_STEPS(this.encyptSteps, this.currentTime)).then(res => {
+      Api.Axios.post(Api.DONATE(this.encyptSteps, this.currentTime)).then(res => {
         if (res.data.code === 200) {
-          this.isDonated = true
           this.getDonateData()
+          this.$toast(res.data.data, 1500)
         } else {
-          this.$vux.toast.show({
-            text: res.data.msg,
-            type: 'warn'
-          })
+          this.$toast(res.data.msg, 1500)
         }
       })
     }

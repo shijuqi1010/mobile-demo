@@ -17,6 +17,17 @@
             <img src="../../assets/arrow.png" alt="">
           </div>
         </router-link>
+        <li @click="tips" v-for="(item, index) of planBuildList" :key="index+'-key'">
+          <img class="icon" :src="item.icon" alt="">
+          <div class="left">
+            <p>{{item.content}}</p>
+            <p class="rule">{{item.rule}}</p>
+          </div>
+          <div class="right">
+            <span>{{item.cityType}}</span>
+            <img src="../../assets/arrow.png" alt="">
+          </div>
+        </li>
       </ul>
     </div>
     <router-view/>
@@ -38,8 +49,10 @@ export default {
       planList:[
         {path: '/exchange', icon: 'https://img1.aylives.cn/8ba0229ab745411d8cf11b65f361f48c.png', content: '闲置免费互换', rule: '+6～15算力', cityType: '建设环保之城'},
         {path: '/donateSteps', icon: 'https://img1.aylives.cn/9f16d704770d4923afd7ebfcf7e9205a.png', content: '悦跑', rule: '+3～6算力', cityType: '建设健康之城'},
-        {path: '/share', icon: 'https://img1.aylives.cn/7dc8afdf26474cd493ea599d1b1e4cc0.png', content: '邻居串门', rule: '+3算力', cityType: '建设和谐之城'},
-        {path: '/green', icon: 'https://img1.aylives.cn/c9218154e0124ea2a4e756f1a7b7adeb.png', content: '小区绿化', rule: '+3算力', cityType: '建设绿色之城'},
+      ],
+      planBuildList:[
+        {path: '#', icon: 'https://img1.aylives.cn/7dc8afdf26474cd493ea599d1b1e4cc0.png', content: '邻居串门', rule: '+3算力', cityType: '建设和谐之城'},
+        {path: '#', icon: 'https://img1.aylives.cn/c9218154e0124ea2a4e756f1a7b7adeb.png', content: '小区绿化', rule: '+3算力', cityType: '建设绿色之城'},
       ]
     }
   },
@@ -48,6 +61,9 @@ export default {
   mounted () {
   },
   methods: {
+    tips() {
+      this.$toast("正在全力建设中，敬请期待", 1500)
+    },
     jumpToHappiness() {
       // window.location.href = `https://h5.aylives.cn/happy/#/happiness?token=${this.token}&currentRoomId=${this.currentRoomId}`
       // 注意需要带cookie

@@ -24,6 +24,10 @@ let api = {
   // 签到
   SIGNIN: `${host}/aokecity/aoke/user/api/signin`,
 
+  // 悦跑
+  RUN: `${host}/aokecity/aoke/step/api/data`,
+  DONATE: `${host}/aokecity/aoke/step/api/donate`,
+
 }
 
 export default api
