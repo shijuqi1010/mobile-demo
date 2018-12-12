@@ -34,33 +34,48 @@ class Utils {
     }
   }
 
-  // AudioContext = window.AudioContext || window.webkitAudioContext
-  // audioCtx = new AudioContext()
+  /*
+  * 智能机类型信息:
+  *
+  */
+  phoneType () {
+    let u = navigator.userAgent.toLowerCase()
+      if (/iphone|ipad|ipod/.test(u)) {
+        return "ios"
+      } else if (/android/.test(u)) {
+        return "android"
+      } else {
+        alert("这是其他平台：Windows、Linux")
+      }
+  }
+
+  AudioContext = window.AudioContext || window.webkitAudioContext
+  audioCtx = new AudioContext()
   // to solve:
   // Uncaught DOMException: Failed to construct 'AudioContext': The number of hardware contexts provided (6) is greater than or equal to the maximum bound (6).
 
-  // sound () {
-  //   // AudioContext = window.AudioContext || window.webkitAudioContext
-  //   if (!(window.AudioContext || window.webkitAudioContext)) {
-  //     alert("您的浏览器不支持 AudioContext")
-  //     return
-  //   }
+  sound () {
+    // AudioContext = window.AudioContext || window.webkitAudioContext
+    if (!(window.AudioContext || window.webkitAudioContext)) {
+      alert("您的浏览器不支持 AudioContext")
+      return
+    }
 
-  //   // let audioCtx = new AudioContext()
-  //   let audioCtx = this.audioCtx
-  //   let frequency = 520
-  //   let oscillator = audioCtx.createOscillator()
-  //   let gainNode = audioCtx.createGain()
-  //   oscillator.connect(gainNode)
-  //   gainNode.connect(audioCtx.destination)
-  //   oscillator.type = 'sine'
-  //   oscillator.frequency.value = frequency
-  //   gainNode.gain.setValueAtTime(0, audioCtx.currentTime)
-  //   gainNode.gain.linearRampToValueAtTime(1, audioCtx.currentTime + 0.01)
-  //   oscillator.start(audioCtx.currentTime)
-  //   gainNode.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + 1)
-  //   oscillator.stop(audioCtx.currentTime + 1)
-  // }
+    // let audioCtx = new AudioContext()
+    let audioCtx = this.audioCtx
+    let frequency = 520
+    let oscillator = audioCtx.createOscillator()
+    let gainNode = audioCtx.createGain()
+    oscillator.connect(gainNode)
+    gainNode.connect(audioCtx.destination)
+    oscillator.type = 'sine'
+    oscillator.frequency.value = frequency
+    gainNode.gain.setValueAtTime(0, audioCtx.currentTime)
+    gainNode.gain.linearRampToValueAtTime(1, audioCtx.currentTime + 0.01)
+    oscillator.start(audioCtx.currentTime)
+    gainNode.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + 1)
+    oscillator.stop(audioCtx.currentTime + 1)
+  }
 }
 
 export default new Utils()

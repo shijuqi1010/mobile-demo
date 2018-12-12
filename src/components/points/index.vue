@@ -15,13 +15,20 @@
     <div class="general-task">
       <p class="title">普通任务</p>
       <ul class="des-general">
-        <li v-for="(item, index) of generalTaskList" :key="index" v-if="((index + 1) % 3 >= 0)">
-          <router-link :to="item.path">
-            <img class="icon" :src="item.icon" alt="">
-            <!-- <img src="../../assets/points/@2x租住.png" alt=""> -->
-            <p class="type"> {{item.content}} </p>
-            <div class="rule-btn">{{item.rule}}</div>
-          </router-link>
+        <router-link :to="item.path" tag="li" v-for="(item, index) of generalTaskList" :key="index" v-if="((index + 1) % 3 >= 0)">
+          <img class="icon" :src="item.icon" alt="">
+          <p class="type"> {{item.content}} </p>
+          <div class="rule-btn">{{item.rule}}</div>
+        </router-link>
+        <li @click="toApp">
+          <img class="icon" src="https://img1.aylives.cn/74384931e9ca4501b903a9f9348b0a3d.png" alt="">
+          <p class="type"> 认证房屋 </p>
+          <div class="rule-btn"> +60算力 </div>
+        </li>
+        <li @click="tips">
+          <img class="icon" src="https://img1.aylives.cn/b5bf6d5c02d4437cae5b981b71cbfbb4.png" alt="">
+          <p class="type"> 租住 </p>
+          <div class="rule-btn"> +40算力 </div>
         </li>
       </ul>
     </div>
@@ -29,12 +36,30 @@
       
       <p class="title">专属任务</p>
       <ul class="des-special">
-        <li v-for="(item, index) of specialTaskList" :key="index" v-if="((index + 1) % 3 >= 0)">
-          <router-link :to="item.path">
-            <img class="icon" :src="item.icon" alt="">
-            <p class="type"> {{item.content}} </p>
-            <div class="rule-btn">{{item.rule}}</div>
-          </router-link>
+        <li @click="toApp">
+          <img class="icon" src="https://img1.aylives.cn/160221d2163b46bab2c64760d1075f27.png" alt="">
+          <p class="type"> 缴费 </p>
+          <div class="rule-btn"> +6算力 </div>
+        </li>
+        <li @click="toApp">
+          <img class="icon" src="https://img1.aylives.cn/288dcafe8bf844d58759b528b4e63469.png" alt="">
+          <p class="type"> APP开门 </p>
+          <div class="rule-btn"> +3算力 </div>
+        </li>
+        <li @click="jumpToHappiness">
+          <img class="icon" src="https://img1.aylives.cn/5cdc0db944b042068af4c0af2dd781f4.png" alt="">
+          <p class="type"> 悦分享发帖 </p>
+          <div class="rule-btn"> +3算力 </div>
+        </li>
+        <router-link to="/exchange" tag="li">
+          <img class="icon" src="https://img1.aylives.cn/8ba0229ab745411d8cf11b65f361f48c.png" alt="">
+          <p class="type exchange"> 闲置免费互换 </p>
+          <div class="rule-btn"> +6～15算力 </div>
+        </router-link>
+        <li @click="tips" v-for="(item, index) of planDevList" :key="index+'-key'">
+          <img class="icon" :src="item.icon" alt="">
+          <p class="type"> {{item.content}} </p>
+          <div class="rule-btn">{{item.rule}}</div>
         </li>
       </ul>
     </div>
@@ -43,13 +68,15 @@
 </template>
 
 <script>
+import api from "../../config/api.js"
+import Util from "../../utils/utils"
 
 export default {
   name: 'points',
   data () {
     return {
       token: '',
-      roomId: '',
+      currentRoomId: '',
       num: 0,
       owner: 0,
       isSigned: false,
@@ -58,30 +85,40 @@ export default {
       generalTaskList:[
         {path: '/signIn', icon: 'https://img1.aylives.cn/fa21eab5e99549d5b959b112e90008a8.png', content: '签到', rule: '+3～6算力'},
         {path: '/donateSteps', icon: 'https://img1.aylives.cn/9f16d704770d4923afd7ebfcf7e9205a.png', content: '悦跑', rule: '+3～6算力'},
-        {path: '/attention', icon: 'https://img1.aylives.cn/74384931e9ca4501b903a9f9348b0a3d.png', content: '认证房屋', rule: '+60算力'},
-        {path: '/attention', icon: 'https://img1.aylives.cn/5e258b091a674bd19a44db401b6294e3.png', content: '关注公众号', rule: '+6～12算力'},
         {path: '/share', icon: 'https://img1.aylives.cn/4827fc99f5cf4cdca26588ed2002ae5e.png', content: '邀请邻居', rule: '+20～40算力'},
-        {path: '/signIn', icon: 'https://img1.aylives.cn/b5bf6d5c02d4437cae5b981b71cbfbb4.png', content: '租住', rule: '+40算力'},
+        {path: '/attention', icon: 'https://img1.aylives.cn/5e258b091a674bd19a44db401b6294e3.png', content: '关注公众号', rule: '+6～12算力'},
+        // {path: '/#', icon: 'https://img1.aylives.cn/74384931e9ca4501b903a9f9348b0a3d.png', content: '认证房屋', rule: '+60算力'},
+        // {path: '/#', icon: 'https://img1.aylives.cn/b5bf6d5c02d4437cae5b981b71cbfbb4.png', content: '租住', rule: '+40算力'},
       ],
-      specialTaskList:[
-        {path: '/signIn', icon: 'https://img1.aylives.cn/160221d2163b46bab2c64760d1075f27.png', content: '缴费', rule: '+6算力'},
-        {path: '/donateSteps', icon: 'https://img1.aylives.cn/288dcafe8bf844d58759b528b4e63469.png', content: 'APP开门', rule: '+3算力'},
-        {path: '/attention', icon: 'https://img1.aylives.cn/5cdc0db944b042068af4c0af2dd781f4.png', content: '悦分享发帖', rule: '+3算力'},
-        {path: '/attention', icon: 'https://img1.aylives.cn/8ba0229ab745411d8cf11b65f361f48c.png', content: '闲置免费互换', rule: '+6～15算力'},
-        {path: '/share', icon: 'https://img1.aylives.cn/c9218154e0124ea2a4e756f1a7b7adeb.png', content: '小区绿化', rule: '+3算力'},
-        {path: '/signIn', icon: 'https://img1.aylives.cn/7dc8afdf26474cd493ea599d1b1e4cc0.png', content: '邻居串门', rule: '+3算力'},
+      planDevList:[
+        {path: '/#', icon: 'https://img1.aylives.cn/c9218154e0124ea2a4e756f1a7b7adeb.png', content: '小区绿化', rule: '+3算力'},
+        {path: '/#', icon: 'https://img1.aylives.cn/7dc8afdf26474cd493ea599d1b1e4cc0.png', content: '邻居串门', rule: '+3算力'},
       ]
     }
   },
   created () {
   },
   mounted () {
+    // this.toApp()
   },
   methods: {
+    tips() {
+      this.$toast("正在全力建设中，敬请期待", 1500)
+    },
     jumpToHappiness() {
-      // window.location.href = `https://h5.aylives.cn/happy/#/happiness?token=${this.token}&currentRoomId=${this.currentRoomId}`
-      // 注意需要带cookie
-      window.location.href = 'https://h5.aylives.cn/happy/#/happiness'
+      this.token = Util.getCookie('token')
+      this.currentRoomId = Util.getCookie('currentRoomId')
+      window.location.href = `https://h5.aylives.cn/happy/#/happiness?token=${this.token}&currentRoomId=${this.currentRoomId}`
+    },
+    toApp() {
+      this.$toast("app交互", 1500)
+      // if (Util.phoneType() === 'ios') {
+      //   alert('ios')
+      // } else if (Util.phoneType() === 'android') {
+      //   alert('android')
+      // } else {
+      //   alert(Util.phoneType())
+      // }
     }
   }
 }
@@ -162,12 +199,6 @@ export default {
     }
     .des-general{
       font-size: 14px;
-      // list-style: none;
-      // position: absolute;
-      // display: flex;
-      // display: -webkit-flex;
-      // display: -ms-flex;
-      // bottom: 0;
       width: 100%;
       @media only screen and (min-width: 768px) {
         font-size: 24px;
@@ -177,13 +208,10 @@ export default {
         background: #ffffff;
         width: 30%;
         height: 124px;
-        // border: 1px solid red;
-        // box-shadow: 0px 0px 4px 0px rgba(183,183,183,0.5);
         margin-bottom: 25px;
         padding-top: 20px;
         // margin-left: 2%; 
         // margin-right: 2%; 
-        // box-sizing: border-box;
         display: inline-block;
         @media only screen and (min-width: 768px) {
           margin-bottom: 50px;
@@ -231,25 +259,28 @@ export default {
     font-size: 14px;
     line-height: 24px;
     font-size: 14px;
-      // list-style: none;
-      // position: absolute;
-      height: 12%;
-      // display: flex;
-      // display: -webkit-flex;
-      // display: -ms-flex;
-      bottom: 0;
-      width: 100%;
-      text-align: center;
+    height: 12%;
+    bottom: 0;
+    width: 100%;
+    text-align: center;
     .title{
       font-size: 18px;
       line-height: 25px;
       margin: 15px 0;
+      @media only screen and (min-width: 768px) {
+        font-size: 30px;
+        line-height: 52px;
+      }
     }
     .des-special{
       list-style: none;
       // position: absolute;
       // height: 12%;
       width: 100%;
+      @media only screen and (min-width: 768px) {
+        font-size: 24px;
+        line-height: 52px;
+      }
       li{
         background: #ffffff;
         width: 30%;
@@ -282,6 +313,12 @@ export default {
           @media only screen and (min-width: 768px) {
             line-height: 52px;
             font-size: 28px;
+          }
+        }
+        .exchange{
+          @media only screen and (max-width: 360px) {
+            padding: 12px;
+            font-size: 12px;
           }
         }
         .rule-btn{

@@ -68,8 +68,15 @@ export default {
       })
     },
     share () {
-      let img = this.shareImg // "https://img1.aylives.cn/72887d5cf9864c9586f6395c0a1980d7.png"
-      document.location = `jsinteractive://share?image=${img}`
+      let img = this.shareImg
+
+      if (Util.phoneType() === 'ios') {
+        window.webkit.messageHandlers.shareImage.postMessage({imageUrl: img})
+      } else if (Util.phoneType() === 'android') {
+        window.android.shareImage(img)
+      } else {
+        this.$toast("非iOS和android系统", 1500)
+      }
     }
   }
 }

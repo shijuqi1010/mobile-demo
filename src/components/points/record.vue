@@ -56,8 +56,8 @@ export default {
         }
 
         if (res.data && (res.data.code === 200)) {
-          let recordlist = res.data.data.aokePowerRecords
-          if (!res.data.haveNextPage) {
+          let recordlist = res.data.data.aokePowerRecords.content
+          if (res.data.data.aokePowerRecords.last) {
             // this.count = 0
             this.scrollBottom = true
             fn(true)
