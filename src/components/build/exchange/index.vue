@@ -14,10 +14,10 @@
         <li> 我可白拿 </li>
       </ul>
     </div>
-    <div class="tips">
+    <div class="tips" v-show="showTips">
       <img class="tip-icon" src="../../../assets/tips.png" alt="">
       <span class="tips-text">首次发布/兑换可获10奥克积分，每次发布可获15算力</span>
-      <img class="close" src="../../../assets/close.png" alt="">
+      <img class="close" src="../../../assets/close.png" alt="" @click="closeTips">
     </div>
     <ul class="des-btn">
       <router-link class="btn" to="/push" tag='li'>发布闲置物品</router-link>
@@ -52,6 +52,7 @@ export default {
       roomId: '',
       num: 0,
       owner: 0,
+      showTips: true,
       isSigned: false,
       showSign: false,
       points: 3883,
@@ -80,6 +81,9 @@ export default {
   mounted () {
   },
   methods: {
+    closeTips() {
+      this.showTips = false
+    }
   }
 }
 </script>

@@ -5,18 +5,29 @@
     </div>
     <div class="general-task">
       <p class="task-explain">你的以下行为，都将为奥克城的发展做出贡献</p>
-      <ul class="plan-list" v-if="planList">
-        <router-link :to="item.path" tag="li" v-for="(item, index) of planList" :key="index">
-          <img class="icon" :src="item.icon" alt="">
+      <ul class="plan-list">
+        <router-link to="/exchange" tag="li">
+          <img class="icon" src="https://img1.aylives.cn/8ba0229ab745411d8cf11b65f361f48c.png" alt="">
           <div class="left">
-            <p>{{item.content}}</p>
-            <p class="rule">{{item.rule}}</p>
+            <p> 闲置免费互换 </p>
+            <p class="rule"> +6～15算力 </p>
           </div>
           <div class="right">
-            <span>{{item.cityType}}</span>
+            <span> 建设环保之城 </span>
             <img src="../../assets/arrow.png" alt="">
           </div>
         </router-link>
+        <li @click="getSteps">
+          <img class="icon" src="https://img1.aylives.cn/9f16d704770d4923afd7ebfcf7e9205a.png" alt="">
+          <div class="left">
+            <p> 悦跑 </p>
+            <p class="rule"> +3～6算力 </p>
+          </div>
+          <div class="right">
+            <span> 建设健康之城 </span>
+            <img src="../../assets/arrow.png" alt="">
+          </div>
+        </li>
         <li @click="tips" v-for="(item, index) of planBuildList" :key="index+'-key'">
           <img class="icon" :src="item.icon" alt="">
           <div class="left">
@@ -46,10 +57,6 @@ export default {
       owner: 0,
       isSigned: false,
       showSign: false,
-      planList:[
-        {path: '/exchange', icon: 'https://img1.aylives.cn/8ba0229ab745411d8cf11b65f361f48c.png', content: '闲置免费互换', rule: '+6～15算力', cityType: '建设环保之城'},
-        {path: '/donateSteps', icon: 'https://img1.aylives.cn/9f16d704770d4923afd7ebfcf7e9205a.png', content: '悦跑', rule: '+3～6算力', cityType: '建设健康之城'},
-      ],
       planBuildList:[
         {path: '#', icon: 'https://img1.aylives.cn/7dc8afdf26474cd493ea599d1b1e4cc0.png', content: '邻居串门', rule: '+3算力', cityType: '建设和谐之城'},
         {path: '#', icon: 'https://img1.aylives.cn/c9218154e0124ea2a4e756f1a7b7adeb.png', content: '小区绿化', rule: '+3算力', cityType: '建设绿色之城'},
@@ -61,14 +68,19 @@ export default {
   mounted () {
   },
   methods: {
+    getSteps() {
+      let donateUrl = 'https://h5.aylives.cn/points/#/donateSteps'
+      if (Util.isIos) {
+        window.webkit.messageHandlers.openDonateStepH5.postMessage({donateUrl: donateUrl})
+      } else if (Util.isAndroid) {
+        window.android.openDonateStepH5(donateUrl)
+      } else {
+        this.$toast("您的手机无法获取步数哦", 1500)
+      }
+    },
     tips() {
       this.$toast("正在全力建设中，敬请期待", 1500)
     },
-    jumpToHappiness() {
-      // window.location.href = `https://h5.aylives.cn/happy/#/happiness?token=${this.token}&currentRoomId=${this.currentRoomId}`
-      // 注意需要带cookie
-      window.location.href = 'https://h5.aylives.cn/happy/#/happiness'
-    }
   }
 }
 </script>

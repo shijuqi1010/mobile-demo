@@ -30,25 +30,43 @@
     </div>
 
     <transition name="fade">
-    <ul class="vip-animation" v-show="showFirst && stoneList">
+    <ul class="vip-animation" v-show="userInfo1">
       <li class="animation" v-for="(item, index) in userInfo1" :key="index" :id="`id${item.id}`" @click="collect(item)">
         <img class="bubble" src="../assets/stone.png" alt="">
-        <span class="text">{{item.text}}</span>
+        <span class="text">{{item.point}}</span>
       </li>
     </ul>
     </transition>
 
     <transition name="fade">
-    <ul class="vip-animation" v-show="showSecond && stoneList">
+    <ul class="vip-animation" v-show="userInfo2">
       <li class="animation" v-for="(item, index) in userInfo2" :key="index" :id="`id${item.id}`" @click="collect(item)">
         <img class="bubble" src="../assets/stone.png" alt="">
-        <span class="text">{{item.text}}</span>
+        <span class="text">{{item.point}}</span>
       </li>
     </ul>
     </transition>
 
     <transition name="fade">
-    <ul class="vip-animation" v-show="showWait && !stoneList">
+    <ul class="vip-animation" v-show="userInfo3">
+      <li class="animation" v-for="(item, index) in userInfo2" :key="index" :id="`id${item.id}`" @click="collect(item)">
+        <img class="bubble" src="../assets/stone.png" alt="">
+        <span class="text">{{item.point}}</span>
+      </li>
+    </ul>
+    </transition>
+
+    <transition name="fade">
+    <ul class="vip-animation" v-show="userInfo4">
+      <li class="animation" v-for="(item, index) in userInfo2" :key="index" :id="`id${item.id}`" @click="collect(item)">
+        <img class="bubble" src="../assets/stone.png" alt="">
+        <span class="text">{{item.point}}</span>
+      </li>
+    </ul>
+    </transition>
+
+    <transition name="fade">
+    <ul class="vip-animation" v-show="showWait">
       <li class="animation">
         <img class="bubble" src="../assets/stone.png" alt="">
         <countdown class="count-down" :time="countDownTime"></countdown>
@@ -112,57 +130,11 @@ export default {
       count: 0,
       showFirst: true,
       showSecond: false,
-      showWait: true,
-      userInfo1:[{
-        id: 1,
-        text: 10000
-      },
-      {
-        id: 2,
-        text: 20000
-      },
-      {
-        id: 3,
-        text: 30000
-      },
-      {
-        id: 4,
-        text: 40000
-      },
-      {
-        id: 5,
-        text: 50000
-      },
-      {
-        id: 6,
-        text: 60000
-      }
-      ],
-      userInfo2:[{
-        id: 11,
-        text: 11111
-      },
-      {
-        id: 12,
-        text: 21111
-      },
-      {
-        id: 13,
-        text: 31111
-      },
-      {
-        id: 14,
-        text: 41111
-      },
-      {
-        id: 15,
-        text: 51111
-      },
-      {
-        id: 16,
-        text: 61111
-      }
-      ]
+      showWait: false,
+      userInfo1:[],
+      userInfo2:[],
+      userInfo3:[],
+      userInfo4:[],
     }
   },
   created() {
@@ -190,26 +162,50 @@ export default {
     },
     getParam() {
       api.Axios.get(api.MAIN).then(res => {
+        if (res.data.code === 200) {
+          this.points = res.data.data.aokeUser.aokeWallet.aokePoints
+          this.powers = res.data.data.aokeUser.aokeWallet.aokePower
+          this.stoneList = res.data.data.temporaryPoints
+          this.countDownTime = res.data.data.nextGenerateTime
+          if (res.data.data.temporaryPoints && res.data.data.temporaryPoints.length > 0) {
+            res.data.data.temporaryPoints.forEach( (element, index, array) => {
+              if (index <= 5) {
+                this.userInfo1.push(element)
+                console.log('1', this.userInfo);
+              } else if (index <= 11) {
+                this.userInfo2.push(element)
+                console.log('2', this.userInfo2);
+              } else if (index <= 17) {
+                this.userInfo3.push(element)
+                console.log('3', this.userInfo3);
+              } else if (index <= 23) {
+                this.userInfo4.push(element)
+                console.log('4', this.userInfo4);
+              } else {
+                this.$toast(res.data.msg, 1500)
+              }
+            })
+          } else {
+            this.showWait = true
+          }
+        } else {
+          this.$toast(res.data.msg, 1500)
+        }
+      })
+    },
+    collectStone(pointId) {
+      api.Axios.get(api.COLLECT_STONE(pointId)).then(res => {
         console.log('res', res);
         if (res.data.code === 200) {
           this.points = res.data.data.aokeUser.aokeWallet.aokePoints
           this.powers = res.data.data.aokeUser.aokeWallet.aokePower
           this.stoneList = res.data.data.temporaryPoints
           this.countDownTime = res.data.data.nextGenerateTime
-        } else {
-          this.$toast(res.data.msg, 1500)
-        }
-      })
-    },
-    getStone() {
-      api.Axios.get(api.STONE).then(res => {
-        if (res.data.code === 200) {
-          this.area = res.data.data.agencyName
-          this.city = res.data.data.cityName
-          this.status = res.data.data.added
-          if (this.status) {
-            this.$router.push({ path: "/poster" })
+
+          if (!this.stoneList) {
+            this.showWait = true
           }
+
         } else {
           this.$toast(res.data.msg, 1500)
         }
@@ -239,23 +235,21 @@ export default {
       //   position: 'top-center',
       //   duration: 3000})
 
-      this.refresh(item.text)
+      // this.refresh(item.point)
+      this.collectStone(item.id)
 
-      if (this.count === 6) {
-        this.showFirst = false
-        this.showSecond = true
-      }
-      if (this.count === 12) {
-        this.showSecond = false
-        this.showWait = true
-      }
+      // if (this.count === 6) {
+      //   this.showFirst = false
+      //   this.showSecond = true
+      // }
+      // if (this.count === 12) {
+      //   this.showSecond = false
+      //   this.showWait = true
+      // }
     },
     refresh (point) {
       this.points += point
     },
-    jumpToRank () {
-      this.$router.push({ path: "/rank"})
-    }
   }
 };
 </script>
@@ -298,7 +292,7 @@ export default {
       position: absolute;
       // border: 1px solid red;
       // box-sizing: border-box;
-      width: 60%;
+      width: 100%;
       text-align: left;
       margin-left: 4%;
       .self-castle{

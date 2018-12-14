@@ -122,6 +122,7 @@ export default {
     }
   }
   .story{
+    font-size: 14px;
     padding: 28px 20px 36px;
   }
   .introduct{

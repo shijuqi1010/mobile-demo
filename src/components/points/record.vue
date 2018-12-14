@@ -33,7 +33,7 @@ export default {
       recordlist: null,
       scrollBottom: false,
       count: 0,
-      pageSize: 20
+      pageSize: 10
     }
   },
   created() {

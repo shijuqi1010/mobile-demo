@@ -1,10 +1,10 @@
 <template>
   <div class="des-receive">
     <!-- <scroller :on-infinite = "infinite" :on-refresh = "refresh"> -->
-    <div class="tips">
+    <div class="tips" v-show="showTips">
       <img class="tip-icon" src="../../../assets/tips.png" alt="">
       <span class="tips-text">首次发布可获得10奥克积分，每次发布可获得15算力</span>
-      <img class="close" src="../../../assets/close.png" alt="">
+      <img class="close" src="../../../assets/close.png" alt="" @click="closeTips">
     </div>
     <div class="des-info">
       <ul class="product-list-info" v-if="receiveList">
@@ -186,6 +186,7 @@ export default {
       happyMomentId: '',
       token: '',
       currentRoomId: '',
+      showTips: true,
       scrollBottom: false,
       showCreateBtn: false,
       showHappiness: false,
@@ -228,6 +229,9 @@ export default {
     },
     received() {
       this.tipsModel.showTips = true
+    },
+    closeTips() {
+      this.showTips = false
     }
   }
 }

@@ -70,12 +70,12 @@ export default {
     share () {
       let img = this.shareImg
 
-      if (Util.phoneType() === 'ios') {
+      if (Util.isIos) {
         window.webkit.messageHandlers.shareImage.postMessage({imageUrl: img})
-      } else if (Util.phoneType() === 'android') {
+      } else if (Util.isAndroid) {
         window.android.shareImage(img)
       } else {
-        this.$toast("非iOS和android系统", 1500)
+        this.$toast("您的手机不支持分享哦", 1500)
       }
     }
   }
@@ -95,7 +95,7 @@ export default {
     height: 656px;
     padding-top: 28%;
     box-sizing: border-box;
-    background-image: url('https://img1.aylives.cn/c2b707b85b7f4e988409c837b96dc597.png');
+    background-image: url('https://img1.aylives.cn/42195a1e32184edb97bfe0c5922303f9.png');
     background-size: cover;
     background-position: center;
 

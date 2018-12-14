@@ -20,6 +20,11 @@
           <p class="type"> {{item.content}} </p>
           <div class="rule-btn">{{item.rule}}</div>
         </router-link>
+        <li @click="getSteps">
+          <img class="icon" src="https://img1.aylives.cn/9f16d704770d4923afd7ebfcf7e9205a.png" alt="">
+          <p class="type"> 悦跑 </p>
+          <div class="rule-btn"> +3～6算力 </div>
+        </li>
         <li @click="toApp">
           <img class="icon" src="https://img1.aylives.cn/74384931e9ca4501b903a9f9348b0a3d.png" alt="">
           <p class="type"> 认证房屋 </p>
@@ -84,9 +89,9 @@ export default {
       points: 3883,
       generalTaskList:[
         {path: '/signIn', icon: 'https://img1.aylives.cn/fa21eab5e99549d5b959b112e90008a8.png', content: '签到', rule: '+3～6算力'},
-        {path: '/donateSteps', icon: 'https://img1.aylives.cn/9f16d704770d4923afd7ebfcf7e9205a.png', content: '悦跑', rule: '+3～6算力'},
         {path: '/share', icon: 'https://img1.aylives.cn/4827fc99f5cf4cdca26588ed2002ae5e.png', content: '邀请邻居', rule: '+20～40算力'},
         {path: '/attention', icon: 'https://img1.aylives.cn/5e258b091a674bd19a44db401b6294e3.png', content: '关注公众号', rule: '+6～12算力'},
+        // {path: '/donateSteps', icon: 'https://img1.aylives.cn/9f16d704770d4923afd7ebfcf7e9205a.png', content: '悦跑', rule: '+3～6算力'},
         // {path: '/#', icon: 'https://img1.aylives.cn/74384931e9ca4501b903a9f9348b0a3d.png', content: '认证房屋', rule: '+60算力'},
         // {path: '/#', icon: 'https://img1.aylives.cn/b5bf6d5c02d4437cae5b981b71cbfbb4.png', content: '租住', rule: '+40算力'},
       ],
@@ -109,6 +114,9 @@ export default {
       this.token = Util.getCookie('token')
       this.currentRoomId = Util.getCookie('currentRoomId')
       window.location.href = `https://h5.aylives.cn/happy/#/happiness?token=${this.token}&currentRoomId=${this.currentRoomId}`
+    },
+    getSteps() {
+      alert("getSteps")
     },
     toApp() {
       this.$toast("app交互", 1500)

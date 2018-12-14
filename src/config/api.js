@@ -7,7 +7,9 @@ Axios.defaults.withCredentials = true
 let api = {
   Axios: Axios,
   // 首页
-  MAIN: `${host}/aokecity/aoke/user/api/main`, 
+  MAIN: `${host}/aokecity/aoke/user/api/main`,
+  COLLECT_STONE: (pointId) => `${host}/aokecity/aoke/user/api/receiver/diamond?pointid=${pointId}`,
+
   // 算力记录
   RECORD: `${host}/aokecity/aoke/power/api/minerecord`,
   // 我的城堡

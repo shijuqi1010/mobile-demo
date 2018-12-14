@@ -70,7 +70,7 @@ export default {
         if (res.data.code === 200) {
           this.totalNum = res.data.data.aokeUserSize
           this.rank = res.data.data.minePowerRank
-          this.rankList = res.data.data.aokeUsers
+          this.rankList = res.data.data.aokeUsers.content
         } else {
           this.$toast(res.data.msg, 1500)
         }

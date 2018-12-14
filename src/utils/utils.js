@@ -38,15 +38,22 @@ class Utils {
   * 智能机类型信息:
   *
   */
-  phoneType () {
+  isIos () {
     let u = navigator.userAgent.toLowerCase()
       if (/iphone|ipad|ipod/.test(u)) {
-        return "ios"
-      } else if (/android/.test(u)) {
-        return "android"
+        return true
       } else {
-        alert("这是其他平台：Windows、Linux")
+        return false
       }
+  }
+
+  isAndroid () {
+    let u = navigator.userAgent.toLowerCase()
+    if (/android/.test(u)) {
+      return true
+    } else {
+      false
+    }
   }
 
   AudioContext = window.AudioContext || window.webkitAudioContext
