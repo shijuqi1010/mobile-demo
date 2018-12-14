@@ -69,7 +69,7 @@ export default {
   },
   methods: {
     getSteps() {
-      let donateUrl = 'https://h5.aylives.cn/points/#/donateSteps'
+      let donateUrl = "https://h5.aylives.cn/points/#/donateSteps"
       if (Util.isIos()) {
         window.webkit.messageHandlers.openDonateStepH5.postMessage({donateUrl: donateUrl})
       } else if (Util.isAndroid()) {

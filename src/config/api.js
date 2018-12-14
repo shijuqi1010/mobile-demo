@@ -28,7 +28,7 @@ let api = {
 
   // 悦跑
   RUN: `${host}/aokecity/aoke/step/api/data`,
-  DONATE: `${host}/aokecity/aoke/step/api/donate`,
+  DONATE: (encyptSteps, currentTime) => `${host}/aokecity/aoke/step/api/donate?encyptSteps=${encyptSteps}&currentTime=${currentTime}`,
 
 }
 

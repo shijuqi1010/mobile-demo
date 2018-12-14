@@ -18,13 +18,13 @@
         <p class="notice">
           完成2000步后点击“兑换算力”才能获得算力哦
         </p>
-        <div v-if="clickAble" class="donate-btn" @click="donate">兑换算力</div>
+        <div v-if="!isDonated" class="donate-btn" @click="donateSteps">兑换算力</div>
         <div v-else class="donate-btn-disable">
-          <span v-if="isDonated">兑换成功</span>
-          <span v-else>今日已兑换</span>
+          <span v-if="donateFlag">今日已兑换</span>
+          <span v-else>兑换成功</span>
         </div>
       </div>
-      <ul class="donate-info" v-if="isDonated">
+      <ul class="donate-info">
         <li>
           <p class="donate-data">{{ todayPower }}</p>
           <p class="donate-text">今日已兑换算力</p>
@@ -35,7 +35,7 @@
         </li>
       </ul>
 
-      <ul class="donate-info" v-else>
+      <!-- <ul class="donate-info" v-else>
         <li>
           <p class="donate-data">-</p>
           <p class="donate-text">今日已兑换算力</p>
@@ -44,7 +44,7 @@
           <p class="donate-data">-</p>
           <p class="donate-text">累计兑换算力</p>
         </li>
-      </ul>
+      </ul> -->
     </div>
     <div class="explain">
       <div class="explain-title">
@@ -242,7 +242,8 @@ export default {
       currentTime: '',
       todayPower: 0,
       totalPower: 0,
-      isDonated: false
+      isDonated: false,
+      donateFlag: false
     }
   },
   created () {
@@ -286,10 +287,11 @@ export default {
         }
       })
     },
-    donate () {
+    donateSteps () {
       Api.Axios.post(Api.DONATE(this.encyptSteps, this.currentTime)).then(res => {
         if (res.data.code === 200) {
           this.getDonateData()
+          this.donateFlag = true
           this.$toast(res.data.data, 1500)
         } else {
           this.$toast(res.data.msg, 1500)
