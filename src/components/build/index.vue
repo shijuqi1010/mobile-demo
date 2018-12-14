@@ -70,9 +70,9 @@ export default {
   methods: {
     getSteps() {
       let donateUrl = 'https://h5.aylives.cn/points/#/donateSteps'
-      if (Util.isIos) {
+      if (Util.isIos()) {
         window.webkit.messageHandlers.openDonateStepH5.postMessage({donateUrl: donateUrl})
-      } else if (Util.isAndroid) {
+      } else if (Util.isAndroid()) {
         window.android.openDonateStepH5(donateUrl)
       } else {
         this.$toast("您的手机无法获取步数哦", 1500)

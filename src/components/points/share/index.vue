@@ -70,9 +70,9 @@ export default {
     share () {
       let img = this.shareImg
 
-      if (Util.isIos) {
+      if (Util.isIos()) {
         window.webkit.messageHandlers.shareImage.postMessage({imageUrl: img})
-      } else if (Util.isAndroid) {
+      } else if (Util.isAndroid()) {
         window.android.shareImage(img)
       } else {
         this.$toast("您的手机不支持分享哦", 1500)
