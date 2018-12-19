@@ -46,6 +46,8 @@
 </template>
 
 <script>
+import api from "../../config/api.js"
+import Util from "../../utils/utils"
 
 export default {
   name: 'build',
@@ -57,6 +59,8 @@ export default {
       owner: 0,
       isSigned: false,
       showSign: false,
+      donateUrl: "https://h5.aylives.cn/points/#/donateSteps",
+      second: 2000,
       planBuildList:[
         {path: '#', icon: 'https://img1.aylives.cn/7dc8afdf26474cd493ea599d1b1e4cc0.png', content: '邻居串门', rule: '+3算力', cityType: '建设和谐之城'},
         {path: '#', icon: 'https://img1.aylives.cn/c9218154e0124ea2a4e756f1a7b7adeb.png', content: '小区绿化', rule: '+3算力', cityType: '建设绿色之城'},
@@ -69,25 +73,24 @@ export default {
   },
   methods: {
     getSteps() {
-      let donateUrl = "https://h5.aylives.cn/points/#/donateSteps"
       if (Util.isIos()) {
         if(window.webkit && window.webkit.messageHandlers) {
-          window.webkit.messageHandlers.openDonateStepH5.postMessage({donateUrl: donateUrl})
+          window.webkit.messageHandlers.openDonateStepH5.postMessage({donateUrl: this.donateUrl})
         }  else {
-          this.$toast("您的手机暂时无法获取步数哦，请将您的App更新到最新版本", 1500)
+          this.$toast("您的手机暂时无法获取步数哦，请将您的App更新到最新版本", second)
         }
       } else if (Util.isAndroid()) {
         if (window.android &&  window.android.openDonateStepH5) {
-          window.android.openDonateStepH5(JSON.stringify(donateUrl))
+          window.android.openDonateStepH5(this.donateUrl)
         }  else {
-          this.$toast("您的手机暂时无法获取步数哦，请将您的App更新到最新版本", 1500)
+          this.$toast("您的手机暂时无法获取步数哦，请将您的App更新到最新版本", second)
         }
       } else {
-        this.$toast("您的手机暂时无法获取步数哦，请将您的App更新到最新版本", 1500)
+        this.$toast("您的手机暂时无法获取步数哦，请将您的App更新到最新版本", second)
       }
     },
     tips() {
-      this.$toast("正在全力建设中，敬请期待", 1500)
+      this.$toast("正在全力建设中，敬请期待", second)
     },
   }
 }

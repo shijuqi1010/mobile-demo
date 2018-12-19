@@ -103,14 +103,17 @@ export default {
 
 .fade-enter, .fade-leave-active
   transform translate(-50px)
+  -webkit-transform translate(-50%)
 
 .fade-enter
   opacity 0
   transform translate(0, 50%)
+  -webkit-transform translate(0, -50%)
 
 .fade-leave-active
   opacity 0
   transform translate(0, 0)
+  -webkit-transform translate(0, 0)
 
 </style>
 

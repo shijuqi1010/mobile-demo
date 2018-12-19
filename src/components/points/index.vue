@@ -97,6 +97,7 @@ export default {
       showSign: false,
       chooicePay: false,
       points: 3883,
+      donateUrl: "https://h5.aylives.cn/points/#/donateSteps",
       generalTaskList:[
         {path: '/signIn', icon: 'https://img1.aylives.cn/fa21eab5e99549d5b959b112e90008a8.png', content: '签到', rule: '+3～6算力'},
         {path: '/share', icon: 'https://img1.aylives.cn/4827fc99f5cf4cdca26588ed2002ae5e.png', content: '邀请邻居', rule: '+20～40算力'},
@@ -125,21 +126,20 @@ export default {
       window.location.href = `https://h5.aylives.cn/happy/#/happiness?token=${this.token}&currentRoomId=${this.currentRoomId}`
     },
     getSteps() {
-      let donateUrl = "https://h5.aylives.cn/points/#/donateSteps"
       if (Util.isIos()) {
         if(window.webkit && window.webkit.messageHandlers) {
-          window.webkit.messageHandlers.openDonateStepH5.postMessage({donateUrl: donateUrl})
+          window.webkit.messageHandlers.openDonateStepH5.postMessage({donateUrl: this.donateUrl})
         } else {
-          this.$toast("您的手机暂时无法获取步数哦，请将您的App更新到最新版本", 1500)
+          this.$toast("您的手机暂时无法获取步数哦，请将您的App更新到最新版本", 2000)
         }
       } else if (Util.isAndroid()) {
         if (window.android &&  window.android.openDonateStepH5) {
-          window.android.openDonateStepH5("https://h5.aylives.cn/points/#/donateSteps")
+          window.android.openDonateStepH5(this.donateUrl)
         }  else {
-          this.$toast("您的手机暂时无法获取步数哦，请将您的App更新到最新版本", 1500)
+          this.$toast("您的手机暂时无法获取步数哦，请将您的App更新到最新版本", 2000)
         }
       } else {
-        this.$toast("您的手机暂时无法获取步数哦，请将您的App更新到最新版本", 1500)
+        this.$toast("您的手机暂时无法获取步数哦，请将您的App更新到最新版本", 2000)
       }
     },
     openDoor() {
@@ -147,16 +147,16 @@ export default {
         if(window.webkit && window.webkit.messageHandlers) {
           window.webkit.messageHandlers.openDoor.postMessage()
         }  else {
-          this.$toast("您的手机暂时无法跳转到开扫码功能哦，请将您的App更新到最新版本", 1500)
+          this.$toast("您的手机暂时无法跳转到开扫码功能哦，请将您的App更新到最新版本", 2000)
         }
       } else if (Util.isAndroid()) {
         if (window.android &&  window.android.openDoor) {
           window.android.openDoor()
         } else {
-          this.$toast("您的手机暂时无法跳转到开扫码功能哦，请将您的App更新到最新版本", 1500)
+          this.$toast("您的手机暂时无法跳转到开扫码功能哦，请将您的App更新到最新版本", 2000)
         }
       } else {
-        this.$toast("您的手机暂时无法跳转到开扫码功能哦，请将您的App更新到最新版本", 1500)
+        this.$toast("您的手机暂时无法跳转到开扫码功能哦，请将您的App更新到最新版本", 2000)
       }
     },
     verifyHouse() {
@@ -164,16 +164,16 @@ export default {
         if(window.webkit && window.webkit.messageHandlers) {
           window.webkit.messageHandlers.verifyHouse.postMessage()
         } else {
-          this.$toast("您的手机暂时无法跳转到认证房屋功能哦，请更新您的App到最新版本", 1500)
+          this.$toast("您的手机暂时无法跳转到认证房屋功能哦，请更新您的App到最新版本", 2000)
         }
       } else if (Util.isAndroid()) {
         if (window.android &&  window.android.verifyHouse) {
           window.android.verifyHouse()
         } else {
-          this.$toast("您的手机暂时无法跳转到认证房屋功能哦，请更新您的App到最新版本", 1500)
+          this.$toast("您的手机暂时无法跳转到认证房屋功能哦，请更新您的App到最新版本", 2000)
         }
       } else {
-        this.$toast("您的手机暂时无法跳转到认证房屋功能哦，请更新您的App到最新版本", 1500)
+        this.$toast("您的手机暂时无法跳转到认证房屋功能哦，请更新您的App到最新版本", 2000)
       }
     },
     pay() {
@@ -187,16 +187,16 @@ export default {
         if(window.webkit && window.webkit.messageHandlers) {
           window.webkit.messageHandlers.payHousePropertyFee.postMessage()
         } else {
-          this.$toast("您的手机暂时无法跳转到房屋缴费功能哦，请更新您的App到最新版本", 1500)
+          this.$toast("您的手机暂时无法跳转到房屋缴费功能哦，请更新您的App到最新版本", 2000)
         }
       } else if (Util.isAndroid()) {
         if (window.android &&  window.android.payHousePropertyFee) {
           window.android.payHousePropertyFee()
         } else {
-          this.$toast("您的手机暂时无法跳转到房屋缴费功能哦，请更新您的App到最新版本", 1500)
+          this.$toast("您的手机暂时无法跳转到房屋缴费功能哦，请更新您的App到最新版本", 2000)
         }
       } else {
-        this.$toast("您的手机暂时无法跳转到房屋缴费功能哦，请更新您的App到最新版本", 1500)
+        this.$toast("您的手机暂时无法跳转到房屋缴费功能哦，请更新您的App到最新版本", 2000)
       }
     },
     payForCar() {
@@ -204,16 +204,16 @@ export default {
         if(window.webkit && window.webkit.messageHandlers) {
           window.webkit.messageHandlers.payCarPropertyFee.postMessage()
         }  else {
-          this.$toast("您的手机暂时无法跳转到车位缴费功能哦，请更新您的App到最新版本", 1500)
+          this.$toast("您的手机暂时无法跳转到车位缴费功能哦，请更新您的App到最新版本", 2000)
         }
       } else if (Util.isAndroid()) {
         if (window.android &&  window.android.payCarPropertyFee) {
           window.android.payCarPropertyFee()
         }  else {
-          this.$toast("您的手机暂时无法跳转到车位缴费功能哦，请更新您的App到最新版本", 1500)
+          this.$toast("您的手机暂时无法跳转到车位缴费功能哦，请更新您的App到最新版本", 2000)
         }
       } else {
-        this.$toast("您的手机暂时无法跳转到车位缴费功能哦，请更新您的App到最新版本", 1500)
+        this.$toast("您的手机暂时无法跳转到车位缴费功能哦，请更新您的App到最新版本", 2000)
       }
     },
   }
@@ -457,7 +457,6 @@ export default {
       background: #ffffff;
       width: 86%;
       z-index: 999;
-      // color: #2F3542;
       font-size: 16px;
       line-height: 24px;
       padding-top: 20px;
@@ -477,24 +476,35 @@ export default {
         box-shadow:0px 0.5px 0px 0px rgba(206,206,206,0.5);
         margin-bottom: 20px;
         text-align: center;
-        // margin-left: 5.5%;
         @media only screen and (min-width: 768px) {
           margin-bottom: 50px;
           height: 66px;
-        }
-        .type{
-          line-height: 30px;
-          font-size: 14px;
-          @media only screen and (min-width: 768px) {
-            line-height: 66px;
-            font-size: 30px;
-          }
         }
       }
       li:hover,li:active{
         color: #FF6800;
       }
     }
+  }
+  .fade-enter-active, .fade-leave-active{
+    transition: transform .5s ease;
+  }
+
+  .fade-enter, .fade-leave-active{
+    transform: translate(50%);
+    -webkit-transform: translate(-50%);
+  }
+
+  .fade-enter{
+    opacity: 0;
+    transform: translate(-50%, -50%);
+    -webkit-transform: translate(-50%, -50%);
+  }
+
+  .fade-leave-active{
+    opacity: 0;
+    transform: translate(0, 0);
+    -webkit-transform: translate(0, 0);
   }
 }
 

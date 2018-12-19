@@ -38,13 +38,14 @@ import Util from '../../../utils/utils'
 export default {
   data () {
     return {
-      shareCode: 'AY3883',
+      shareCode: '',
       invited: 0,
       power: 0,
       canInvite: 0,
       token: '',
       currentRoomId: '',
-      shareImg: ''
+      shareImg: '',
+      second: 2000
     }
   },
   created() {
@@ -69,21 +70,22 @@ export default {
     },
     share () {
       let img = this.shareImg
+      console.log(this.shareImg);
 
       if (Util.isIos()) {
         if (window.webkit && window.webkit.messageHandlers) {
           window.webkit.messageHandlers.shareImage.postMessage({imageUrl: img})
         }  else {
-          this.$toast("您的App版本暂不支持分享哦，请将App更新到最新版本", 1500)
+          this.$toast("您的App版本暂不支持分享哦，请将App更新到最新版本", second)
         }
       } else if (Util.isAndroid()) {
         if (window.android && window.android.shareImage) {
           window.android.shareImage(img)
         } else {
-          this.$toast("您的App版本暂不支持分享哦，请将App更新到最新版本", 1500)
+          this.$toast("您的App版本暂不支持分享哦，请将App更新到最新版本", second)
         }
       } else {
-        this.$toast("您的App版本暂不支持分享哦，请将App更新到最新版本", 1500)
+        this.$toast("您的App版本暂不支持分享哦，请将App更新到最新版本", second)
       }
     }
   }
