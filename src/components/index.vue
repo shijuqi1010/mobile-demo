@@ -30,7 +30,7 @@
     </div>
 
     <transition name="fade">
-    <ul class="vip-animation" v-show="userInfo1">
+    <ul class="vip-animation" v-if="userInfo1">
       <li class="animation" v-for="(item, index) in userInfo1" :key="index" :id="`id${item.id}`" @click="collect(item)">
         <img class="bubble" src="../assets/stone.png" alt="">
         <span class="text">{{item.point}}</span>
@@ -39,7 +39,7 @@
     </transition>
 
     <transition name="fade">
-    <ul class="vip-animation" v-show="userInfo2">
+    <ul class="vip-animation" v-if="userInfo2">
       <li class="animation" v-for="(item, index) in userInfo2" :key="index" :id="`id${item.id}`" @click="collect(item)">
         <img class="bubble" src="../assets/stone.png" alt="">
         <span class="text">{{item.point}}</span>
@@ -48,8 +48,8 @@
     </transition>
 
     <transition name="fade">
-    <ul class="vip-animation" v-show="userInfo3">
-      <li class="animation" v-for="(item, index) in userInfo2" :key="index" :id="`id${item.id}`" @click="collect(item)">
+    <ul class="vip-animation" v-if="userInfo3">
+      <li class="animation" v-for="(item, index) in userInfo3" :key="index" :id="`id${item.id}`" @click="collect(item)">
         <img class="bubble" src="../assets/stone.png" alt="">
         <span class="text">{{item.point}}</span>
       </li>
@@ -57,8 +57,8 @@
     </transition>
 
     <transition name="fade">
-    <ul class="vip-animation" v-show="userInfo4">
-      <li class="animation" v-for="(item, index) in userInfo2" :key="index" :id="`id${item.id}`" @click="collect(item)">
+    <ul class="vip-animation" v-if="userInfo4">
+      <li class="animation" v-for="(item, index) in userInfo4" :key="index" :id="`id${item.id}`" @click="collect(item)">
         <img class="bubble" src="../assets/stone.png" alt="">
         <span class="text">{{item.point}}</span>
       </li>
@@ -69,7 +69,7 @@
     <ul class="vip-animation" v-show="showWait">
       <li class="animation">
         <img class="bubble" src="../assets/stone.png" alt="">
-        <countdown class="count-down" :time="countDownTime"></countdown>
+        <span class="count-down">剩余{{countDownTime | outputHour}}</span>
       </li>
     </ul>
     </transition>
@@ -101,14 +101,14 @@
 <script>
 import api from "../config/api.js"
 import Util from "../utils/utils"
-import countdown from "./public/countdown.vue"
+// import countdown from "./public/countdown.vue"
 import  Velocity from 'velocity-animate'
 import { Toast} from 'vux'
 
 export default {
   components: {
     Toast,
-    countdown
+    // countdown
   },
   data() {
     return {
@@ -117,7 +117,9 @@ export default {
       points: 0,
       powers: 0,
       stoneList: null,
-      countDownTime: 0,
+      tempStoneList: null,
+      countTimer: '',
+      countDownTime: '',
       city: "",
       area: "",
       status: "",
@@ -127,7 +129,7 @@ export default {
       clickAble: true,
       loading: true,
       tip: false,
-      count: 0,
+      collectCount: 0,
       showFirst: true,
       showSecond: false,
       showWait: false,
@@ -146,6 +148,22 @@ export default {
   },
   mounted() {
     this.getParam()
+  },
+  filters: {
+    outputHour(val) {
+      let hour = Math.floor(val / 60 / 60)
+      let mintues = Math.floor((val / 60) % 60)
+      let second = Math.floor(val % 60)
+      hour = hour<10 ? '0' + hour : hour
+      mintues = mintues < 10 ? '0' + mintues : mintues
+      second = second < 10? '0' + second : second
+      // return `${hour}:${mintues}:${second}`
+      if (hour >= 1) {
+        return `${hour}:${mintues}`
+      } else {
+        return `${mintues}:${second}`
+      }
+    },
   },
   methods: {
     init() {
@@ -167,26 +185,15 @@ export default {
           this.powers = res.data.data.aokeUser.aokeWallet.aokePower
           this.stoneList = res.data.data.temporaryPoints
           this.countDownTime = res.data.data.nextGenerateTime
-          if (res.data.data.temporaryPoints && res.data.data.temporaryPoints.length > 0) {
-            res.data.data.temporaryPoints.forEach( (element, index, array) => {
+          if (this.stoneList && this.stoneList.length > 0) {
+            this.stoneList.forEach( (element, index, array) => {
               if (index <= 5) {
                 this.userInfo1.push(element)
-                console.log('1', this.userInfo);
-              } else if (index <= 11) {
-                this.userInfo2.push(element)
-                console.log('2', this.userInfo2);
-              } else if (index <= 17) {
-                this.userInfo3.push(element)
-                console.log('3', this.userInfo3);
-              } else if (index <= 23) {
-                this.userInfo4.push(element)
-                console.log('4', this.userInfo4);
-              } else {
-                this.$toast(res.data.msg, 1500)
               }
             })
           } else {
             this.showWait = true
+            this.countDown()
           }
         } else {
           this.$toast(res.data.msg, 1500)
@@ -195,17 +202,31 @@ export default {
     },
     collectStone(pointId) {
       api.Axios.get(api.COLLECT_STONE(pointId)).then(res => {
-        console.log('res', res);
         if (res.data.code === 200) {
           this.points = res.data.data.aokeUser.aokeWallet.aokePoints
           this.powers = res.data.data.aokeUser.aokeWallet.aokePower
-          this.stoneList = res.data.data.temporaryPoints
+          this.tempStoneList = res.data.data.temporaryPoints
           this.countDownTime = res.data.data.nextGenerateTime
 
-          if (!this.stoneList) {
+          this.collectCount++
+          if (this.stoneList && this.stoneList.length > 0) {
+            if(this.stoneList.length > 6) {
+              this.refreshStone(6, this.userInfo1, this.userInfo2)
+              this.refreshStone(12, this.userInfo2, this.userInfo3)
+              this.refreshStone(18, this.userInfo3, this.userInfo4)
+            } else if(this.stoneList.length <= 6) {
+              this.collectCount = this.tempStoneList.length
+              if (this.collectCount > 0) {
+                return
+              } else {
+                this.showWait = true
+                this.countDown()
+              }
+            }
+          } else {
             this.showWait = true
+            thgis.countDown()
           }
-
         } else {
           this.$toast(res.data.msg, 1500)
         }
@@ -214,8 +235,6 @@ export default {
     collect (item) {
       let index = item.id
       let oId = document.getElementById(`id${index}`)
-      this.count++
-      // this.$toast(this.count, 1000)
 
       //动画
       Velocity(oId,{
@@ -231,24 +250,40 @@ export default {
       //声音
       // Util.sound()
 
-      // this.$toasted.show('hello billo', {
-      //   position: 'top-center',
-      //   duration: 3000})
-
-      // this.refresh(item.point)
       this.collectStone(item.id)
-
-      // if (this.count === 6) {
-      //   this.showFirst = false
-      //   this.showSecond = true
-      // }
-      // if (this.count === 12) {
-      //   this.showSecond = false
-      //   this.showWait = true
-      // }
     },
-    refresh (point) {
-      this.points += point
+    refreshStone(count, listNull, pushList) {
+      if (this.collectCount  === count) {
+        listNull = []
+        this.stoneList = this.tempStoneList
+        this.stoneList.forEach( (element, index, array) => {
+          if (index <= 5) {
+            pushList.push(element)
+          } 
+        })
+      }
+    },
+    countDown() {
+      clearInterval(this.countTimer)
+      if (this.countDownTime) {
+        let countLooper = () => {
+          this.countTimer = setInterval(() => {
+            if (this.countDownTime > 0) {
+              this.countDownTime -= 1
+            } else {
+              clearInterval(this.countTimer)
+            }
+          }, 1000)
+        }
+        countLooper()
+      } 
+
+      setTimeout(() => {
+        if (this.countDownTime === 0) {
+          this.showWait = false
+          this.getParam()
+        }
+      }, this.countDownTime)
     },
   }
 };
@@ -422,6 +457,7 @@ export default {
       .count-down{
         position: absolute;
         width: 80px;
+        letter-spacing: 1px;
         left: 50%;
         transform: translateX(-50%);
         -webkit-transform: translateX(-50%);

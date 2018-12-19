@@ -25,7 +25,7 @@
           <p class="type"> 悦跑 </p>
           <div class="rule-btn"> +3～6算力 </div>
         </li>
-        <li @click="toApp">
+        <li @click="verifyHouse">
           <img class="icon" src="https://img1.aylives.cn/74384931e9ca4501b903a9f9348b0a3d.png" alt="">
           <p class="type"> 认证房屋 </p>
           <div class="rule-btn"> +60算力 </div>
@@ -43,10 +43,10 @@
       <ul class="des-special">
         <li @click="toApp">
           <img class="icon" src="https://img1.aylives.cn/160221d2163b46bab2c64760d1075f27.png" alt="">
-          <p class="type"> 缴费 </p>
+          <p class="type" @click="pay"> 缴费 </p>
           <div class="rule-btn"> +6算力 </div>
         </li>
-        <li @click="toApp">
+        <li @click="openDoor">
           <img class="icon" src="https://img1.aylives.cn/288dcafe8bf844d58759b528b4e63469.png" alt="">
           <p class="type"> APP开门 </p>
           <div class="rule-btn"> +3算力 </div>
@@ -68,7 +68,11 @@
         </li>
       </ul>
     </div>
-    <router-view/>
+
+    <transition name="fade">
+    <div class="chooice-pay" v-if="chooicePay">
+    </div>
+    </transition>
   </div>
 </template>
 
@@ -86,6 +90,7 @@ export default {
       owner: 0,
       isSigned: false,
       showSign: false,
+      chooicePay: false,
       points: 3883,
       generalTaskList:[
         {path: '/signIn', icon: 'https://img1.aylives.cn/fa21eab5e99549d5b959b112e90008a8.png', content: '签到', rule: '+3～6算力'},
@@ -124,6 +129,27 @@ export default {
       } else {
         this.$toast("您的手机无法获取步数哦", 1500)
       }
+    },
+    openDoor() {
+      if (Util.isIos()) {
+        window.webkit.messageHandlers.openDoor.postMessage()
+      } else if (Util.isAndroid()) {
+        window.android.openDoor()
+      } else {
+        this.$toast("您的手机无法打开扫码功能哦", 1500)
+      }
+    },
+    verifyHouse() {
+      if (Util.isIos()) {
+        window.webkit.messageHandlers.verifyHouse.postMessage()
+      } else if (Util.isAndroid()) {
+        window.android.verifyHouse()
+      } else {
+        this.$toast("您的手机无法使用认证房屋功能哦", 1500)
+      }
+    },
+    pay() {
+      alert('缴费')
     },
     toApp() {
       this.$toast("app交互", 1500)
