@@ -73,10 +73,14 @@ export default {
       if (Util.isIos()) {
         if (window.webkit && window.webkit.messageHandlers) {
           window.webkit.messageHandlers.shareImage.postMessage({imageUrl: img})
+        }  else {
+          this.$toast("您的App版本暂不支持分享哦，请将App更新到最新版本", 1500)
         }
       } else if (Util.isAndroid()) {
         if (window.android && window.android.shareImage) {
           window.android.shareImage(img)
+        } else {
+          this.$toast("您的App版本暂不支持分享哦，请将App更新到最新版本", 1500)
         }
       } else {
         this.$toast("您的App版本暂不支持分享哦，请将App更新到最新版本", 1500)

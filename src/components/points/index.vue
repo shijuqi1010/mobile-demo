@@ -129,10 +129,14 @@ export default {
       if (Util.isIos()) {
         if(window.webkit && window.webkit.messageHandlers) {
           window.webkit.messageHandlers.openDonateStepH5.postMessage({donateUrl: donateUrl})
+        } else {
+          this.$toast("您的手机暂时无法获取步数哦，请将您的App更新到最新版本", 1500)
         }
       } else if (Util.isAndroid()) {
         if (window.android &&  window.android.openDonateStepH5) {
           window.android.openDonateStepH5("https://h5.aylives.cn/points/#/donateSteps")
+        }  else {
+          this.$toast("您的手机暂时无法获取步数哦，请将您的App更新到最新版本", 1500)
         }
       } else {
         this.$toast("您的手机暂时无法获取步数哦，请将您的App更新到最新版本", 1500)
@@ -142,10 +146,14 @@ export default {
       if (Util.isIos()) {
         if(window.webkit && window.webkit.messageHandlers) {
           window.webkit.messageHandlers.openDoor.postMessage()
+        }  else {
+          this.$toast("您的手机暂时无法跳转到开扫码功能哦，请将您的App更新到最新版本", 1500)
         }
       } else if (Util.isAndroid()) {
         if (window.android &&  window.android.openDoor) {
           window.android.openDoor()
+        } else {
+          this.$toast("您的手机暂时无法跳转到开扫码功能哦，请将您的App更新到最新版本", 1500)
         }
       } else {
         this.$toast("您的手机暂时无法跳转到开扫码功能哦，请将您的App更新到最新版本", 1500)
@@ -155,10 +163,14 @@ export default {
       if (Util.isIos()) {
         if(window.webkit && window.webkit.messageHandlers) {
           window.webkit.messageHandlers.verifyHouse.postMessage()
+        } else {
+          this.$toast("您的手机暂时无法跳转到认证房屋功能哦，请更新您的App到最新版本", 1500)
         }
       } else if (Util.isAndroid()) {
         if (window.android &&  window.android.verifyHouse) {
           window.android.verifyHouse()
+        } else {
+          this.$toast("您的手机暂时无法跳转到认证房屋功能哦，请更新您的App到最新版本", 1500)
         }
       } else {
         this.$toast("您的手机暂时无法跳转到认证房屋功能哦，请更新您的App到最新版本", 1500)
@@ -174,10 +186,14 @@ export default {
       if (Util.isIos()) {
         if(window.webkit && window.webkit.messageHandlers) {
           window.webkit.messageHandlers.payHousePropertyFee.postMessage()
+        } else {
+          this.$toast("您的手机暂时无法跳转到房屋缴费功能哦，请更新您的App到最新版本", 1500)
         }
       } else if (Util.isAndroid()) {
         if (window.android &&  window.android.payHousePropertyFee) {
           window.android.payHousePropertyFee()
+        } else {
+          this.$toast("您的手机暂时无法跳转到房屋缴费功能哦，请更新您的App到最新版本", 1500)
         }
       } else {
         this.$toast("您的手机暂时无法跳转到房屋缴费功能哦，请更新您的App到最新版本", 1500)
@@ -187,10 +203,14 @@ export default {
       if (Util.isIos()) {
         if(window.webkit && window.webkit.messageHandlers) {
           window.webkit.messageHandlers.payCarPropertyFee.postMessage()
+        }  else {
+          this.$toast("您的手机暂时无法跳转到车位缴费功能哦，请更新您的App到最新版本", 1500)
         }
       } else if (Util.isAndroid()) {
         if (window.android &&  window.android.payCarPropertyFee) {
           window.android.payCarPropertyFee()
+        }  else {
+          this.$toast("您的手机暂时无法跳转到车位缴费功能哦，请更新您的App到最新版本", 1500)
         }
       } else {
         this.$toast("您的手机暂时无法跳转到车位缴费功能哦，请更新您的App到最新版本", 1500)
