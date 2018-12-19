@@ -71,11 +71,15 @@ export default {
       let img = this.shareImg
 
       if (Util.isIos()) {
-        window.webkit.messageHandlers.shareImage.postMessage({imageUrl: img})
+        if (window.webkit && window.webkit.messageHandlers) {
+          window.webkit.messageHandlers.shareImage.postMessage({imageUrl: img})
+        }
       } else if (Util.isAndroid()) {
-        window.android.shareImage(img)
+        if (window.android && window.android.shareImage) {
+          window.android.shareImage(img)
+        }
       } else {
-        this.$toast("您的手机不支持分享哦", 1500)
+        this.$toast("您的App版本暂不支持分享哦，请将App更新到最新版本", 1500)
       }
     }
   }

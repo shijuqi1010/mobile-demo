@@ -69,13 +69,17 @@ export default {
   },
   methods: {
     getSteps() {
-      let donateUrl = "https://h5.aylives.cn/points/#/donateSteps"
+      var donateUrl = "https://h5.aylives.cn/points/#/donateSteps"
       if (Util.isIos()) {
-        window.webkit.messageHandlers.openDonateStepH5.postMessage({donateUrl: donateUrl})
+        if(window.webkit && window.webkit.messageHandlers) {
+          window.webkit.messageHandlers.openDonateStepH5.postMessage({donateUrl: donateUrl})
+        }
       } else if (Util.isAndroid()) {
-        window.android.openDonateStepH5(donateUrl)
+        if (window.android &&  window.android.openDonateStepH5) {
+          window.android.openDonateStepH5(donateUrl)
+        }
       } else {
-        this.$toast("您的手机无法获取步数哦", 1500)
+        this.$toast("您的手机暂时无法获取步数哦，请将您的App更新到最新版本", 1500)
       }
     },
     tips() {
