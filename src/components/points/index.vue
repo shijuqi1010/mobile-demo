@@ -41,9 +41,9 @@
       
       <p class="title">专属任务</p>
       <ul class="des-special">
-        <li @click="toApp">
+        <li @click="pay">
           <img class="icon" src="https://img1.aylives.cn/160221d2163b46bab2c64760d1075f27.png" alt="">
-          <p class="type" @click="pay"> 缴费 </p>
+          <p class="type"> 缴费 </p>
           <div class="rule-btn"> +6算力 </div>
         </li>
         <li @click="openDoor">
@@ -71,6 +71,11 @@
 
     <transition name="fade">
     <div class="chooice-pay" v-if="chooicePay">
+      <div class="close-block" @click="cancel"></div>
+      <ul class="des-chooice">
+        <li @click="payForHouse">住宅物业费</li>
+        <li @click="payForCar">车位管理费</li>
+      </ul>
     </div>
     </transition>
   </div>
@@ -109,7 +114,6 @@ export default {
   created () {
   },
   mounted () {
-    // this.toApp()
   },
   methods: {
     tips() {
@@ -123,44 +127,75 @@ export default {
     getSteps() {
       let donateUrl = "https://h5.aylives.cn/points/#/donateSteps"
       if (Util.isIos()) {
-        window.webkit.messageHandlers.openDonateStepH5.postMessage({donateUrl: donateUrl})
+        if(window.webkit && window.webkit.messageHandlers) {
+          window.webkit.messageHandlers.openDonateStepH5.postMessage({donateUrl: donateUrl})
+        }
       } else if (Util.isAndroid()) {
-        window.android.openDonateStepH5("https://h5.aylives.cn/points/#/donateSteps")
+        if (window.android &&  window.android.openDonateStepH5) {
+          window.android.openDonateStepH5("https://h5.aylives.cn/points/#/donateSteps")
+        }
       } else {
-        this.$toast("您的手机无法获取步数哦", 1500)
+        this.$toast("您的手机暂时无法获取步数哦，请将您的App更新到最新版本", 1500)
       }
     },
     openDoor() {
       if (Util.isIos()) {
-        window.webkit.messageHandlers.openDoor.postMessage()
+        if(window.webkit && window.webkit.messageHandlers) {
+          window.webkit.messageHandlers.openDoor.postMessage()
+        }
       } else if (Util.isAndroid()) {
-        window.android.openDoor()
+        if (window.android &&  window.android.openDoor) {
+          window.android.openDoor()
+        }
       } else {
-        this.$toast("您的手机无法打开扫码功能哦", 1500)
+        this.$toast("您的手机暂时无法跳转到开扫码功能哦，请将您的App更新到最新版本", 1500)
       }
     },
     verifyHouse() {
       if (Util.isIos()) {
-        window.webkit.messageHandlers.verifyHouse.postMessage()
+        if(window.webkit && window.webkit.messageHandlers) {
+          window.webkit.messageHandlers.verifyHouse.postMessage()
+        }
       } else if (Util.isAndroid()) {
-        window.android.verifyHouse()
+        if (window.android &&  window.android.verifyHouse) {
+          window.android.verifyHouse()
+        }
       } else {
-        this.$toast("您的手机无法使用认证房屋功能哦", 1500)
+        this.$toast("您的手机暂时无法跳转到认证房屋功能哦，请更新您的App到最新版本", 1500)
       }
     },
     pay() {
-      alert('缴费')
+      this.chooicePay = true
     },
-    toApp() {
-      this.$toast("app交互", 1500)
-      // if (Util.phoneType() === 'ios') {
-      //   alert('ios')
-      // } else if (Util.phoneType() === 'android') {
-      //   alert('android')
-      // } else {
-      //   alert(Util.phoneType())
-      // }
-    }
+    cancel() {
+      this.chooicePay = false
+    },
+    payForHouse() {
+      if (Util.isIos()) {
+        if(window.webkit && window.webkit.messageHandlers) {
+          window.webkit.messageHandlers.payHousePropertyFee.postMessage()
+        }
+      } else if (Util.isAndroid()) {
+        if (window.android &&  window.android.payHousePropertyFee) {
+          window.android.payHousePropertyFee()
+        }
+      } else {
+        this.$toast("您的手机暂时无法跳转到房屋缴费功能哦，请更新您的App到最新版本", 1500)
+      }
+    },
+    payForCar() {
+      if (Util.isIos()) {
+        if(window.webkit && window.webkit.messageHandlers) {
+          window.webkit.messageHandlers.payCarPropertyFee.postMessage()
+        }
+      } else if (Util.isAndroid()) {
+        if (window.android &&  window.android.payCarPropertyFee) {
+          window.android.payCarPropertyFee()
+        }
+      } else {
+        this.$toast("您的手机暂时无法跳转到车位缴费功能哦，请更新您的App到最新版本", 1500)
+      }
+    },
   }
 }
 </script>
@@ -378,6 +413,66 @@ export default {
       li:nth-child(2),li:nth-child(5){
         margin-left: 2.5%; 
         margin-right: 2.5%; 
+      }
+    }
+  }
+  .chooice-pay{
+    position:fixed;
+    top:0;
+    left:0;
+    right: 0;
+    bottom: 0;
+    height: 100%;
+    width: 100%;
+    z-index: 9;
+    background: rgba(0,0,0,0.5);
+    .close-block {
+      position:absolute;
+      width: 100%;
+      height: 100%;
+      z-index: 99;
+    }
+    .des-chooice{
+      position:absolute;
+      background: #ffffff;
+      width: 86%;
+      z-index: 999;
+      // color: #2F3542;
+      font-size: 16px;
+      line-height: 24px;
+      padding-top: 20px;
+      border-radius: 10px;
+      list-style: none;
+      top: 40%;
+      left: 50%;
+      transform: translateX(-50%);
+      @media only screen and (min-width: 768px) {
+        padding-top: 50px;
+        font-size: 24px;
+        line-height: 52px;
+      }
+      li{
+        // width: 26%;
+        height: 30px;
+        box-shadow:0px 0.5px 0px 0px rgba(206,206,206,0.5);
+        margin-bottom: 20px;
+        text-align: center;
+        // margin-left: 5.5%;
+        @media only screen and (min-width: 768px) {
+          margin-bottom: 50px;
+          height: 66px;
+        }
+        .type{
+          line-height: 30px;
+          font-size: 14px;
+          @media only screen and (min-width: 768px) {
+            line-height: 66px;
+            font-size: 30px;
+          }
+        }
+      }
+      li:hover,li:active{
+        color: #FF6800;
       }
     }
   }
