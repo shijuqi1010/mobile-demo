@@ -34,18 +34,19 @@
 <script>
 import api from '../../../config/api.js'
 import Util from '../../../utils/utils'
+import jsInteractive from "../../../utils/jsInteractive"
 
 export default {
   data () {
     return {
-      shareCode: '',
+      shareCode: "",
       invited: 0,
       power: 0,
       canInvite: 0,
-      token: '',
-      currentRoomId: '',
-      shareImg: '',
-      second: 2000
+      token: "",
+      currentRoomId: "",
+      shareImg: "",
+      shareSmallImg: ""
     }
   },
   created() {
@@ -56,37 +57,38 @@ export default {
   methods: {
     getShareInfo() {
       api.Axios.get(api.SHARE).then(res => {
-        console.log('res', res);
         if (res.data.code === 200) {
           this.shareCode = res.data.data.inviteCode
           this.invited = res.data.data.invitePerson
           this.power = res.data.data.invitePersonPower
           this.canInvite = res.data.data.leftInvitePerson
           this.shareImg = res.data.data.invitePic
+          this.shareSmallImg = res.data.data.inviteSmallPic
         } else {
           this.$toast(res.data.msg, 1500)
         }
       })
     },
     share () {
-      let img = this.shareImg
-      console.log(this.shareImg);
-
-      if (Util.isIos()) {
-        if (window.webkit && window.webkit.messageHandlers) {
-          window.webkit.messageHandlers.shareImage.postMessage({imageUrl: img})
-        }  else {
-          this.$toast("您的App版本暂不支持分享哦，请将App更新到最新版本", second)
-        }
-      } else if (Util.isAndroid()) {
-        if (window.android && window.android.shareImage) {
-          window.android.shareImage(img)
-        } else {
-          this.$toast("您的App版本暂不支持分享哦，请将App更新到最新版本", second)
-        }
-      } else {
-        this.$toast("您的App版本暂不支持分享哦，请将App更新到最新版本", second)
-      }
+      // if (Util.isIos()) {
+      //   if (window.webkit && window.webkit.messageHandlers) {
+      //     window.webkit.messageHandlers.shareImage.postMessage({imageUrl: this.shareImg, thumbUrl: this.shareSmallImg})
+      //   }  else {
+      //     this.shareTips()
+      //   }
+      // } else if (Util.isAndroid()) {
+      //   if (window.android && window.android.shareImage) {
+      //     window.android.shareImage(this.shareImg, this.shareSmallImg)
+      //   } else {
+      //     this.shareTips()
+      //   }
+      // } else {
+      //   this.shareTips()
+      // }
+      jsInteractive.jsToApp("share", this.shareTips, this.shareImg, this.shareSmallImg)
+    },
+    shareTips(){
+      this.$toast("您的App版本暂不支持分享哦，请将App更新到最新版本", 2000)
     }
   }
 }

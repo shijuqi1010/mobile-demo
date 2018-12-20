@@ -145,6 +145,14 @@ export default {
   computed: {
   },
   watch: {
+    countDownTime(newV) {
+      setTimeout(() => {
+        if (newV === 0) {
+          this.showWait = false
+          this.getParam()
+        }
+      }, newV)
+    }
   },
   mounted() {
     this.getParam()
@@ -277,13 +285,6 @@ export default {
         }
         countLooper()
       } 
-
-      setTimeout(() => {
-        if (this.countDownTime === 0) {
-          this.showWait = false
-          this.getParam()
-        }
-      }, this.countDownTime)
     },
   }
 };

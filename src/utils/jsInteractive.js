@@ -1,0 +1,73 @@
+import Util from "./utils"
+
+class jsInteractive {
+  jsToApp(type, tips, param, share) {
+    if (Util.isIos()) {
+      if(window.webkit && window.webkit.messageHandlers) {
+        switch (type) {
+          case 'getSteps':
+            window.webkit.messageHandlers.getSteps.postMessage({donateUrl: param})
+            break
+          case 'openDoor':
+            window.webkit.messageHandlers.openDoor.postMessage()
+            break
+          case 'verifyHouse':
+            window.webkit.messageHandlers.verifyHouse.postMessage()
+            break
+          case 'payForHouse':
+            window.webkit.messageHandlers.payHousePropertyFee.postMessage()
+            break
+          case 'payForCar':
+            window.webkit.messageHandlers.payCarPropertyFee.postMessage()
+            break
+          case 'share':
+            window.webkit.messageHandlers.shareImage.postMessage({imageUrl: param, thumbUrl: share})
+            break;
+        }
+      } else {
+        tips()
+      }
+    } else if (Util.isAndroid()) {
+      if (window.android) {
+        switch (type) {
+          case 'getSteps':
+            if(window.android.openDonateStepH5) {
+              window.android.openDonateStepH5(param)
+            }
+          break
+          case 'openDoor':
+            if(window.android.openDoor) {
+              window.android.openDoor()
+            }
+            break
+          case 'verifyHouse':
+            if(window.android.verifyHouse) {
+              window.android.verifyHouse()
+            }
+            break
+          case 'payForHouse':
+            if(window.android.payHousePropertyFee) {
+              window.android.payHousePropertyFee()
+            }
+            break
+          case 'payForCar':
+            if(window.android.payCarPropertyFee) {
+              window.android.payCarPropertyFee()
+            }
+            break
+          case 'share':
+          if(window.android.shareImage) {
+            window.android.shareImage(param, share)
+          }
+          break;
+        }
+      } else {
+        tips()
+      }
+    } else {
+      tips()
+    }
+  }
+}
+
+export default new jsInteractive()

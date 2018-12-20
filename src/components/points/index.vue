@@ -84,6 +84,7 @@
 <script>
 import api from "../../config/api.js"
 import Util from "../../utils/utils"
+import jsInteractive from "../../utils/jsInteractive"
 
 export default {
   name: 'points',
@@ -96,7 +97,7 @@ export default {
       isSigned: false,
       showSign: false,
       chooicePay: false,
-      points: 3883,
+      points: 0,
       donateUrl: "https://h5.aylives.cn/points/#/donateSteps",
       generalTaskList:[
         {path: '/signIn', icon: 'https://img1.aylives.cn/fa21eab5e99549d5b959b112e90008a8.png', content: '签到', rule: '+3～6算力'},
@@ -115,8 +116,18 @@ export default {
   created () {
   },
   mounted () {
+    this.init()
   },
   methods: {
+    init() {
+      api.Axios.get(api.MAIN).then(res => {
+        if (res.data.code === 200) {
+          this.points = res.data.data.aokeUser.aokeWallet.aokePower
+        } else {
+          this.$toast(res.data.msg, 1500)
+        }
+      })
+    },
     tips() {
       this.$toast("正在全力建设中，敬请期待", 1500)
     },
@@ -126,55 +137,58 @@ export default {
       window.location.href = `https://h5.aylives.cn/happy/#/happiness?token=${this.token}&currentRoomId=${this.currentRoomId}`
     },
     getSteps() {
-      if (Util.isIos()) {
-        if(window.webkit && window.webkit.messageHandlers) {
-          window.webkit.messageHandlers.openDonateStepH5.postMessage({donateUrl: this.donateUrl})
-        } else {
-          this.$toast("您的手机暂时无法获取步数哦，请将您的App更新到最新版本", 2000)
-        }
-      } else if (Util.isAndroid()) {
-        if (window.android &&  window.android.openDonateStepH5) {
-          window.android.openDonateStepH5(this.donateUrl)
-        }  else {
-          this.$toast("您的手机暂时无法获取步数哦，请将您的App更新到最新版本", 2000)
-        }
-      } else {
-        this.$toast("您的手机暂时无法获取步数哦，请将您的App更新到最新版本", 2000)
-      }
+      // if (Util.isIos()) {
+      //   if(window.webkit && window.webkit.messageHandlers) {
+      //     window.webkit.messageHandlers.openDonateStepH5.postMessage({donateUrl: this.donateUrl})
+      //   } else {
+      //     this.stepToast()
+      //   }
+      // } else if (Util.isAndroid()) {
+      //   if (window.android &&  window.android.openDonateStepH5) {
+      //     window.android.openDonateStepH5(this.donateUrl)
+      //   }  else {
+      //     this.stepToast()
+      //   }
+      // } else {
+      //   this.stepToast()
+      // }
+      jsInteractive.jsToApp("getSteps", this.stepToast, this.donateUrl)
     },
     openDoor() {
-      if (Util.isIos()) {
-        if(window.webkit && window.webkit.messageHandlers) {
-          window.webkit.messageHandlers.openDoor.postMessage()
-        }  else {
-          this.$toast("您的手机暂时无法跳转到开扫码功能哦，请将您的App更新到最新版本", 2000)
-        }
-      } else if (Util.isAndroid()) {
-        if (window.android &&  window.android.openDoor) {
-          window.android.openDoor()
-        } else {
-          this.$toast("您的手机暂时无法跳转到开扫码功能哦，请将您的App更新到最新版本", 2000)
-        }
-      } else {
-        this.$toast("您的手机暂时无法跳转到开扫码功能哦，请将您的App更新到最新版本", 2000)
-      }
+      // if (Util.isIos()) {
+      //   if(window.webkit && window.webkit.messageHandlers) {
+      //     window.webkit.messageHandlers.openDoor.postMessage()
+      //   }  else {
+      //     this.openDoorToast()
+      //   }
+      // } else if (Util.isAndroid()) {
+      //   if (window.android &&  window.android.openDoor) {
+      //     window.android.openDoor()
+      //   } else {
+      //     this.openDoorToast()
+      //   }
+      // } else {
+      //   this.openDoorToast()
+      // }
+      jsInteractive.jsToApp("openDoor", this.openDoorToast, null)
     },
     verifyHouse() {
-      if (Util.isIos()) {
-        if(window.webkit && window.webkit.messageHandlers) {
-          window.webkit.messageHandlers.verifyHouse.postMessage()
-        } else {
-          this.$toast("您的手机暂时无法跳转到认证房屋功能哦，请更新您的App到最新版本", 2000)
-        }
-      } else if (Util.isAndroid()) {
-        if (window.android &&  window.android.verifyHouse) {
-          window.android.verifyHouse()
-        } else {
-          this.$toast("您的手机暂时无法跳转到认证房屋功能哦，请更新您的App到最新版本", 2000)
-        }
-      } else {
-        this.$toast("您的手机暂时无法跳转到认证房屋功能哦，请更新您的App到最新版本", 2000)
-      }
+      // if (Util.isIos()) {
+      //   if(window.webkit && window.webkit.messageHandlers) {
+      //     window.webkit.messageHandlers.verifyHouse.postMessage()
+      //   } else {
+      //     this.verifyHouseToast() 
+      //   }
+      // } else if (Util.isAndroid()) {
+      //   if (window.android &&  window.android.verifyHouse) {
+      //     window.android.verifyHouse()
+      //   } else {
+      //     this.verifyHouseToast() 
+      //   }
+      // } else {
+      //   this.verifyHouseToast() 
+      // }
+      jsInteractive.jsToApp("verifyHouse", this.verifyHouseToast, null)
     },
     pay() {
       this.chooicePay = true
@@ -183,38 +197,55 @@ export default {
       this.chooicePay = false
     },
     payForHouse() {
-      if (Util.isIos()) {
-        if(window.webkit && window.webkit.messageHandlers) {
-          window.webkit.messageHandlers.payHousePropertyFee.postMessage()
-        } else {
-          this.$toast("您的手机暂时无法跳转到房屋缴费功能哦，请更新您的App到最新版本", 2000)
-        }
-      } else if (Util.isAndroid()) {
-        if (window.android &&  window.android.payHousePropertyFee) {
-          window.android.payHousePropertyFee()
-        } else {
-          this.$toast("您的手机暂时无法跳转到房屋缴费功能哦，请更新您的App到最新版本", 2000)
-        }
-      } else {
-        this.$toast("您的手机暂时无法跳转到房屋缴费功能哦，请更新您的App到最新版本", 2000)
-      }
+      // if (Util.isIos()) {
+      //   if(window.webkit && window.webkit.messageHandlers) {
+      //     window.webkit.messageHandlers.payHousePropertyFee.postMessage()
+      //   } else {
+      //     this.payForHouseToast()
+      //   }
+      // } else if (Util.isAndroid()) {
+      //   if (window.android &&  window.android.payHousePropertyFee) {
+      //     window.android.payHousePropertyFee()
+      //   } else {
+      //     this.payForHouseToast()
+      //   }
+      // } else {
+      //   this.payForHouseToast()
+      // }
+      jsInteractive.jsToApp("payForHouse", this.payForHouseToast, null)
     },
     payForCar() {
-      if (Util.isIos()) {
-        if(window.webkit && window.webkit.messageHandlers) {
-          window.webkit.messageHandlers.payCarPropertyFee.postMessage()
-        }  else {
-          this.$toast("您的手机暂时无法跳转到车位缴费功能哦，请更新您的App到最新版本", 2000)
-        }
-      } else if (Util.isAndroid()) {
-        if (window.android &&  window.android.payCarPropertyFee) {
-          window.android.payCarPropertyFee()
-        }  else {
-          this.$toast("您的手机暂时无法跳转到车位缴费功能哦，请更新您的App到最新版本", 2000)
-        }
-      } else {
-        this.$toast("您的手机暂时无法跳转到车位缴费功能哦，请更新您的App到最新版本", 2000)
-      }
+      // if (Util.isIos()) {
+      //   if(window.webkit && window.webkit.messageHandlers) {
+      //     window.webkit.messageHandlers.payCarPropertyFee.postMessage()
+      //   }  else {
+      //     this.payForCarToast()
+      //   }
+      // } else if (Util.isAndroid()) {
+      //   if (window.android &&  window.android.payCarPropertyFee) {
+      //     window.android.payCarPropertyFee()
+      //   }  else {
+      //     this.payForCarToast()
+      //   }
+      // } else {
+      //   this.payForCarToast()
+      // }
+      jsInteractive.jsToApp("payForCar", this.payForCarToast, null)
+    },
+    stepToast() {
+      this.$toast("您的手机暂时无法获取步数哦，请将您的App更新到最新版本", 2000)
+    },
+    openDoorToast() {
+      this.$toast("您的手机暂时无法跳转到开扫码功能哦，请将您的App更新到最新版本", 2000)
+    },
+    verifyHouseToast() {
+      this.$toast("您的手机暂时无法跳转到认证房屋功能哦，请更新您的App到最新版本", 2000)
+    },
+    payForHouseToast() {
+      this.$toast("您的手机暂时无法跳转到房屋缴费功能哦，请更新您的App到最新版本", 2000)
+    },
+    payForCarToast() {
+      this.$toast("您的手机暂时无法跳转到车位缴费功能哦，请更新您的App到最新版本", 2000)
     },
   }
 }
