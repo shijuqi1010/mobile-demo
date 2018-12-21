@@ -6,22 +6,34 @@ class jsInteractive {
       if(window.webkit && window.webkit.messageHandlers) {
         switch (type) {
           case 'getSteps':
-            window.webkit.messageHandlers.getSteps.postMessage({donateUrl: param})
+            if(window.webkit.messageHandlers.getSteps) {
+              window.webkit.messageHandlers.getSteps.postMessage({donateUrl: param})
+            }
             break
           case 'openDoor':
-            window.webkit.messageHandlers.openDoor.postMessage()
+            if(window.webkit.messageHandlers.openDoor) {
+              window.webkit.messageHandlers.openDoor.postMessage()
+            }
             break
           case 'verifyHouse':
-            window.webkit.messageHandlers.verifyHouse.postMessage()
+            if(window.webkit.messageHandlers.verifyHouse) {
+              window.webkit.messageHandlers.verifyHouse.postMessage()
+            }
             break
           case 'payForHouse':
-            window.webkit.messageHandlers.payHousePropertyFee.postMessage()
+            if(window.webkit.messageHandlers.payHousePropertyFee) {
+              window.webkit.messageHandlers.payHousePropertyFee.postMessage()
+            }
             break
           case 'payForCar':
-            window.webkit.messageHandlers.payCarPropertyFee.postMessage()
+            if(window.webkit.messageHandlers.payCarPropertyFee) {
+              window.webkit.messageHandlers.payCarPropertyFee.postMessage()
+            }
             break
           case 'share':
-            window.webkit.messageHandlers.shareImage.postMessage({imageUrl: param, thumbUrl: share})
+            if(window.webkit.messageHandlers.shareImage) {
+              window.webkit.messageHandlers.shareImage.postMessage({imageUrl: param, thumbUrl: share})
+            }
             break;
         }
       } else {

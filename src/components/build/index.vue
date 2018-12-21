@@ -48,6 +48,7 @@
 <script>
 import api from "../../config/api.js"
 import Util from "../../utils/utils"
+import jsInteractive from "../../utils/jsInteractive"
 
 export default {
   name: 'build',
@@ -72,21 +73,10 @@ export default {
   },
   methods: {
     getSteps() {
-      if (Util.isIos()) {
-        if(window.webkit && window.webkit.messageHandlers) {
-          window.webkit.messageHandlers.openDonateStepH5.postMessage({donateUrl: this.donateUrl})
-        }  else {
-          this.$toast("您的手机暂时无法获取步数哦，请将您的App更新到最新版本", 2000)
-        }
-      } else if (Util.isAndroid()) {
-        if (window.android &&  window.android.openDonateStepH5) {
-          window.android.openDonateStepH5(this.donateUrl)
-        }  else {
-          this.$toast("您的手机暂时无法获取步数哦，请将您的App更新到最新版本", 2000)
-        }
-      } else {
-        this.$toast("您的手机暂时无法获取步数哦，请将您的App更新到最新版本", 2000)
-      }
+      jsInteractive.jsToApp("getSteps", this.stepToast, this.donateUrl)
+    },
+    stepToast() {
+      this.$toast("您的手机暂时无法获取步数哦，请将您的App更新到最新版本", 2000)
     },
     tips() {
       this.$toast("正在全力建设中，敬请期待", 2000)

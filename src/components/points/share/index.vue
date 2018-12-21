@@ -70,21 +70,6 @@ export default {
       })
     },
     share () {
-      // if (Util.isIos()) {
-      //   if (window.webkit && window.webkit.messageHandlers) {
-      //     window.webkit.messageHandlers.shareImage.postMessage({imageUrl: this.shareImg, thumbUrl: this.shareSmallImg})
-      //   }  else {
-      //     this.shareTips()
-      //   }
-      // } else if (Util.isAndroid()) {
-      //   if (window.android && window.android.shareImage) {
-      //     window.android.shareImage(this.shareImg, this.shareSmallImg)
-      //   } else {
-      //     this.shareTips()
-      //   }
-      // } else {
-      //   this.shareTips()
-      // }
       jsInteractive.jsToApp("share", this.shareTips, this.shareImg, this.shareSmallImg)
     },
     shareTips(){

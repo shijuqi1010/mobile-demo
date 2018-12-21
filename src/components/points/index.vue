@@ -78,6 +78,11 @@
       </ul>
     </div>
     </transition>
+    <tips-model 
+      :tips-model="tipsModel" 
+      @closedialog="tipsModel.showTips = false"
+      @confirm="confirm">
+    </tips-model>
   </div>
 </template>
 
@@ -85,6 +90,8 @@
 import api from "../../config/api.js"
 import Util from "../../utils/utils"
 import jsInteractive from "../../utils/jsInteractive"
+
+import tipsModel from "../public/tipsModel.vue"
 
 export default {
   name: 'points',
@@ -103,15 +110,20 @@ export default {
         {path: '/signIn', icon: 'https://img1.aylives.cn/fa21eab5e99549d5b959b112e90008a8.png', content: '签到', rule: '+3～6算力'},
         {path: '/share', icon: 'https://img1.aylives.cn/4827fc99f5cf4cdca26588ed2002ae5e.png', content: '邀请邻居', rule: '+20～40算力'},
         {path: '/attention', icon: 'https://img1.aylives.cn/5e258b091a674bd19a44db401b6294e3.png', content: '关注公众号', rule: '+6～12算力'},
-        // {path: '/donateSteps', icon: 'https://img1.aylives.cn/9f16d704770d4923afd7ebfcf7e9205a.png', content: '悦跑', rule: '+3～6算力'},
-        // {path: '/#', icon: 'https://img1.aylives.cn/74384931e9ca4501b903a9f9348b0a3d.png', content: '认证房屋', rule: '+60算力'},
-        // {path: '/#', icon: 'https://img1.aylives.cn/b5bf6d5c02d4437cae5b981b71cbfbb4.png', content: '租住', rule: '+40算力'},
       ],
       planDevList:[
         {path: '/#', icon: 'https://img1.aylives.cn/c9218154e0124ea2a4e756f1a7b7adeb.png', content: '小区绿化', rule: '+3算力'},
         {path: '/#', icon: 'https://img1.aylives.cn/7dc8afdf26474cd493ea599d1b1e4cc0.png', content: '邻居串门', rule: '+3算力'},
-      ]
+      ],
+      tipsModel: {
+        showTips: false,
+        title: '温馨提示:',
+        content: '您的版本过低，请前往个人中心--设置--检查新版本，更新到最新版本再使用该功能',
+      }
     }
+  },
+  components: {
+    tipsModel
   },
   created () {
   },
@@ -137,58 +149,13 @@ export default {
       window.location.href = `https://h5.aylives.cn/happy/#/happiness?token=${this.token}&currentRoomId=${this.currentRoomId}`
     },
     getSteps() {
-      // if (Util.isIos()) {
-      //   if(window.webkit && window.webkit.messageHandlers) {
-      //     window.webkit.messageHandlers.openDonateStepH5.postMessage({donateUrl: this.donateUrl})
-      //   } else {
-      //     this.stepToast()
-      //   }
-      // } else if (Util.isAndroid()) {
-      //   if (window.android &&  window.android.openDonateStepH5) {
-      //     window.android.openDonateStepH5(this.donateUrl)
-      //   }  else {
-      //     this.stepToast()
-      //   }
-      // } else {
-      //   this.stepToast()
-      // }
-      jsInteractive.jsToApp("getSteps", this.stepToast, this.donateUrl)
+      jsInteractive.jsToApp("getSteps", this.toastTips, this.donateUrl)
     },
     openDoor() {
-      // if (Util.isIos()) {
-      //   if(window.webkit && window.webkit.messageHandlers) {
-      //     window.webkit.messageHandlers.openDoor.postMessage()
-      //   }  else {
-      //     this.openDoorToast()
-      //   }
-      // } else if (Util.isAndroid()) {
-      //   if (window.android &&  window.android.openDoor) {
-      //     window.android.openDoor()
-      //   } else {
-      //     this.openDoorToast()
-      //   }
-      // } else {
-      //   this.openDoorToast()
-      // }
-      jsInteractive.jsToApp("openDoor", this.openDoorToast, null)
+      jsInteractive.jsToApp("openDoor", this.toastTips, null)
     },
     verifyHouse() {
-      // if (Util.isIos()) {
-      //   if(window.webkit && window.webkit.messageHandlers) {
-      //     window.webkit.messageHandlers.verifyHouse.postMessage()
-      //   } else {
-      //     this.verifyHouseToast() 
-      //   }
-      // } else if (Util.isAndroid()) {
-      //   if (window.android &&  window.android.verifyHouse) {
-      //     window.android.verifyHouse()
-      //   } else {
-      //     this.verifyHouseToast() 
-      //   }
-      // } else {
-      //   this.verifyHouseToast() 
-      // }
-      jsInteractive.jsToApp("verifyHouse", this.verifyHouseToast, null)
+      jsInteractive.jsToApp("verifyHouse", this.toastTips, null)
     },
     pay() {
       this.chooicePay = true
@@ -197,59 +164,21 @@ export default {
       this.chooicePay = false
     },
     payForHouse() {
-      // if (Util.isIos()) {
-      //   if(window.webkit && window.webkit.messageHandlers) {
-      //     window.webkit.messageHandlers.payHousePropertyFee.postMessage()
-      //   } else {
-      //     this.payForHouseToast()
-      //   }
-      // } else if (Util.isAndroid()) {
-      //   if (window.android &&  window.android.payHousePropertyFee) {
-      //     window.android.payHousePropertyFee()
-      //   } else {
-      //     this.payForHouseToast()
-      //   }
-      // } else {
-      //   this.payForHouseToast()
-      // }
-      jsInteractive.jsToApp("payForHouse", this.payForHouseToast, null)
+      jsInteractive.jsToApp("payForHouse", this.toastTips, null)
     },
     payForCar() {
-      // if (Util.isIos()) {
-      //   if(window.webkit && window.webkit.messageHandlers) {
-      //     window.webkit.messageHandlers.payCarPropertyFee.postMessage()
-      //   }  else {
-      //     this.payForCarToast()
-      //   }
-      // } else if (Util.isAndroid()) {
-      //   if (window.android &&  window.android.payCarPropertyFee) {
-      //     window.android.payCarPropertyFee()
-      //   }  else {
-      //     this.payForCarToast()
-      //   }
-      // } else {
-      //   this.payForCarToast()
-      // }
-      jsInteractive.jsToApp("payForCar", this.payForCarToast, null)
+      jsInteractive.jsToApp("payForCar", this.toastTips, null)
     },
-    stepToast() {
-      this.$toast("您的手机暂时无法获取步数哦，请将您的App更新到最新版本", 2000)
+    toastTips() {
+      this.tipsModel.showTips = true
     },
-    openDoorToast() {
-      this.$toast("您的手机暂时无法跳转到开扫码功能哦，请将您的App更新到最新版本", 2000)
-    },
-    verifyHouseToast() {
-      this.$toast("您的手机暂时无法跳转到认证房屋功能哦，请更新您的App到最新版本", 2000)
-    },
-    payForHouseToast() {
-      this.$toast("您的手机暂时无法跳转到房屋缴费功能哦，请更新您的App到最新版本", 2000)
-    },
-    payForCarToast() {
-      this.$toast("您的手机暂时无法跳转到车位缴费功能哦，请更新您的App到最新版本", 2000)
+    confirm() {
+      this.tipsModel.showTips = false
     },
   }
 }
 </script>
+
 <style lang="less" scoped>
 .des-points {
   width: 100%;
@@ -401,8 +330,6 @@ export default {
     }
     .des-special{
       list-style: none;
-      // position: absolute;
-      // height: 12%;
       width: 100%;
       @media only screen and (min-width: 768px) {
         font-size: 24px;
@@ -412,13 +339,8 @@ export default {
         background: #ffffff;
         width: 30%;
         height: 124px;
-        // border: 1px solid red;
-        // box-shadow: 0px 0px 4px 0px rgba(183,183,183,0.5);
         margin-bottom: 25px;
         padding-top: 20px;
-        // margin-left: 2%; 
-        // margin-right: 2%; 
-        // box-sizing: border-box;
         display: inline-block;
         @media only screen and (min-width: 768px) {
           margin-bottom: 50px;

@@ -63,7 +63,7 @@ export default {
     .tip-content
       position relative
       height 64px
-      padding 20px 30px
+      margin 20px 30px
       font-size 16px
       .tip-text
         position absolute
