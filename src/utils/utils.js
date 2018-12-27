@@ -1,4 +1,8 @@
 class Utils {
+  constructor(){
+    this.audioCtx = new AudioContext()
+  }
+
   setCookie (name, value, domain, expires) {
     let Days = 10
     let exp = new Date()

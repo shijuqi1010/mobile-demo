@@ -9,6 +9,9 @@ import VueScroller from 'vue-scroller' // 划动加载
 import Toast from 'vue-toast-component'
 import Toasted from 'vue-toasted'
 
+import 'swiper/dist/css/swiper.min.css'
+import './assets/iconfont/iconfont.css'
+
 Vue.use(Toast)
 Vue.use(Toasted)
 Vue.use(VueScroller)

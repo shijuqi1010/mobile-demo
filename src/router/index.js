@@ -37,12 +37,23 @@ import receive from '@/components/build/exchange/receive'
 // 市场
 import store from '@/components/store/index'
 
-// import model from '@/components/public/model'
+import progressBar from '@/components/public/progressBar'
+import iconfont from '@/components/public/iconfont'
 
 Vue.use(Router)
 
 const router = new Router({
   routes: [
+    {
+      path: '/iconfont',
+      name: 'iconfont',
+      component: iconfont
+    },
+    {
+      path: '/progressBar',
+      name: 'progressBar',
+      component: progressBar
+    },
     {
       path: '/index',
       name: 'index',
@@ -202,10 +213,6 @@ const router = new Router({
 })
 
 router.beforeEach((to, from, next) => {
-  console.log(window.navigation);
-  console.log('next', next);
-  console.log('from', from);
-  console.log('to', to);
   /* 路由发生变化修改页面title */
   if (to.meta.title) {
     document.title = to.meta.title
