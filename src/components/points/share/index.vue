@@ -8,7 +8,7 @@
           <p>奥园物业与你共同欢迎</p>
           <p>新邻居入住奥克城</p>
         </div>
-        <img src="../../../assets/shareBg.png" alt="">
+        <img src="../../../assets/image/shareBg.png" alt="">
         <div class="code">
           <p>-您的邀请码-</p>
           <p class="share-code">{{ shareCode }}</p>

@@ -14,7 +14,7 @@
           </div>
           <div class="right">
             <span> 九宫格Go起来 </span>
-            <img src="../../assets/arrow.png" alt="">
+            <img src="../../assets/image/arrow.png" alt="">
           </div>
         </li>
         <li @click="tips">
@@ -25,7 +25,7 @@
           </div>
           <div class="right">
             <span> 医美体验，精美实物 </span>
-            <img src="../../assets/arrow.png" alt="">
+            <img src="../../assets/image/arrow.png" alt="">
           </div>
         </li>
       </ul>

@@ -19,8 +19,6 @@
 
         </li>
         <div class="content-bottom">
-          <!-- <span class="report" @click="report(item)">举报</span> -->
-          <!-- <img class="praise" src="../assets/demoIcon/heart.png" @click="downLoadApp"> -->
           <span v-if="shareInfo.happyMoment">{{ shareInfo.happyMoment.happyMomentPraise }}</span>
         </div>
       </ul>
@@ -32,11 +30,9 @@
 
     <div class="share-info">
       <div class="download-title">
-        <!-- <img src="../assets/demoIcon/pink-heart.png" alt=""> -->
         <div class="download-text" @click="downLoadApp">下载奥悦家为好友点赞</div>
       </div>
       <div class="luck-container">
-        <!-- <img src="../assets/demoIcon/bg-luck-code.png" alt=""> -->
         <div class="luck-code">
           <p class="code">幸运码</p>
           <p>{{ userHappyNum }}</p>

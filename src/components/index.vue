@@ -3,7 +3,7 @@
     <div class="header">
       <div class="castle">
         <router-link to="/personalCenter" class="self-castle">
-          <img src="../assets/castle.png" alt="">
+          <img src="../assets/image/castle.png" alt="">
           <p class="title">我的城堡</p>
         </router-link>
         <ul class="point-info">
@@ -32,7 +32,7 @@
     <transition name="fade">
     <ul class="vip-animation" v-if="userInfo1">
       <li class="animation" v-for="(item, index) in userInfo1" :key="index" :id="`id${item.id}`" @click="collect(item)">
-        <img class="bubble" src="../assets/stone.png" alt="">
+        <img class="bubble" src="../assets/image/stone.png" alt="">
         <span class="text">{{item.point}}</span>
       </li>
     </ul>
@@ -41,7 +41,7 @@
     <transition name="fade">
     <ul class="vip-animation" v-if="userInfo2">
       <li class="animation" v-for="(item, index) in userInfo2" :key="index" :id="`id${item.id}`" @click="collect(item)">
-        <img class="bubble" src="../assets/stone.png" alt="">
+        <img class="bubble" src="../assets/image/stone.png" alt="">
         <span class="text">{{item.point}}</span>
       </li>
     </ul>
@@ -50,7 +50,7 @@
     <transition name="fade">
     <ul class="vip-animation" v-if="userInfo3">
       <li class="animation" v-for="(item, index) in userInfo3" :key="index" :id="`id${item.id}`" @click="collect(item)">
-        <img class="bubble" src="../assets/stone.png" alt="">
+        <img class="bubble" src="../assets/image/stone.png" alt="">
         <span class="text">{{item.point}}</span>
       </li>
     </ul>
@@ -59,7 +59,7 @@
     <transition name="fade">
     <ul class="vip-animation" v-if="userInfo4">
       <li class="animation" v-for="(item, index) in userInfo4" :key="index" :id="`id${item.id}`" @click="collect(item)">
-        <img class="bubble" src="../assets/stone.png" alt="">
+        <img class="bubble" src="../assets/image/stone.png" alt="">
         <span class="text">{{item.point}}</span>
       </li>
     </ul>
@@ -68,7 +68,7 @@
     <transition name="fade">
     <ul class="vip-animation" v-show="showWait">
       <li class="animation">
-        <img class="bubble" src="../assets/stone.png" alt="">
+        <img class="bubble" src="../assets/image/stone.png" alt="">
         <span class="count-down">剩余{{countDownTime | outputHour}}</span>
       </li>
     </ul>
@@ -79,19 +79,19 @@
 
     <div class="footer">
       <router-link class="des-btn" to="/points">
-        <img src="../assets/energy.png">
+        <img src="../assets/image/energy.png">
         <p>获取能量</p>
       </router-link>
       <router-link class="des-btn btn" to="/build">
-        <img src="../assets/build.png">
+        <img src="../assets/image/build.png">
         <p>共建计划</p>
       </router-link>
       <router-link class="des-btn btn" to="/share">
-        <img src="../assets/share.png">
+        <img src="../assets/image/share.png">
         <p>邀请好友</p>
       </router-link>
       <router-link class="des-btn btn" to="/store">
-        <img src="../assets/store.png">
+        <img src="../assets/image/store.png">
         <p>市场</p>
       </router-link>
     </div>

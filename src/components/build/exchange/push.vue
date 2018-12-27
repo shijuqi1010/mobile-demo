@@ -42,7 +42,7 @@
           :text="uploadText"
           :url="uploadUrl">
           <div class="upload-btn">
-            <img src="../../../assets/upload.png" alt="">
+            <img src="../../../assets/image/upload.png" alt="">
             <p>上传照片</p>
           </div>
         </vue-core-image-upload>
@@ -54,7 +54,7 @@
         <span>分类</span>
         <div class="choose">
           <span>{{ selected }}</span>
-          <img src="../../../assets/arrow.png" alt="">
+          <img src="../../../assets/image/arrow.png" alt="">
         </div>
       </li>
       <li class="record points">

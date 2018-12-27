@@ -14,7 +14,7 @@
           </div>
           <div class="right">
             <span> 建设环保之城 </span>
-            <img src="../../assets/arrow.png" alt="">
+            <img src="../../assets/image/arrow.png" alt="">
           </div>
         </router-link>
         <li @click="getSteps">
@@ -25,7 +25,7 @@
           </div>
           <div class="right">
             <span> 建设健康之城 </span>
-            <img src="../../assets/arrow.png" alt="">
+            <img src="../../assets/image/arrow.png" alt="">
           </div>
         </li>
         <li @click="tips" v-for="(item, index) of planBuildList" :key="index+'-key'">
@@ -36,7 +36,7 @@
           </div>
           <div class="right">
             <span>{{item.cityType}}</span>
-            <img src="../../assets/arrow.png" alt="">
+            <img src="../../assets/image/arrow.png" alt="">
           </div>
         </li>
       </ul>

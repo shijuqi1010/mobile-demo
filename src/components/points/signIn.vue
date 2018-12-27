@@ -5,7 +5,7 @@
         <p>传说，</p>
         <p>每天来到奥克城门打卡签到，都能获得神秘力量...</p>
       </div>
-      <img class="sign-img" src="../../assets/sign.png" @click="signIn">
+      <img class="sign-img" src="../../assets/image/sign.png" @click="signIn">
     </div>
     <div class="text">
       <p class="title">规则</p>

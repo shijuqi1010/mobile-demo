@@ -21,7 +21,7 @@
 
     <div class="buy-btn">
       <div class="des-btn">
-        <img src="./../../../assets/stone.png" alt="">
+        <img src="./../../../assets/image/stone.png" alt="">
         <span>50奥克积分</span>
       </div>
       <div class="des-btn buy">

@@ -3,7 +3,7 @@
     <div class="exchange-banner">
       <ul class="top">
         <li>
-          <img src="../../../assets/local.png" alt="">
+          <img src="../../../assets/image/local.png" alt="">
           奥园城市天地
         </li>
       </ul>
@@ -15,9 +15,9 @@
       </ul>
     </div>
     <div class="tips" v-show="showTips">
-      <img class="tip-icon" src="../../../assets/tips.png" alt="">
+      <img class="tip-icon" src="../../../assets/image/tips.png" alt="">
       <span class="tips-text">首次发布/兑换可获10奥克积分，每次发布可获15算力</span>
-      <img class="close" src="../../../assets/close.png" alt="" @click="closeTips">
+      <img class="close" src="../../../assets/image/close.png" alt="" @click="closeTips">
     </div>
     <ul class="des-btn">
       <router-link class="btn" to="/push" tag='li'>发布闲置物品</router-link>

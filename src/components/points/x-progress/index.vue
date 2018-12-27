@@ -3,7 +3,7 @@
     <div class="weui-progress__bar">
       <div class="weui-progress__inner-bar" :style="{width: percent + '%'}">
       </div>
-      <img src="../../../assets/run.png" :style="{left: percent + '%'}" width="20px" height="20px">
+      <img src="../../../assets/image/run.png" :style="{left: percent + '%'}" width="20px" height="20px">
       
     </div>
     <i v-if="percent === 100" class="weui-icon-success"></i>

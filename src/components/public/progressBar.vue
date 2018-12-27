@@ -4,9 +4,6 @@
 </template>
 
 <style lang="stylus" scoped>
-  // @import '../../variables.styl'
-  // @import '../../assets/stylus/common.styl'
-
   .btn
     btn-green-positive(100%, 28px)
     &.progressEnd
