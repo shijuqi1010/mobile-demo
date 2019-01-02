@@ -36,6 +36,7 @@ import receive from '@/components/build/exchange/receive'
 
 // 市场
 import store from '@/components/store/index'
+import luckywheel from '@/components/store/luckywheel'
 
 import progressBar from '@/components/public/progressBar'
 import iconfont from '@/components/public/iconfont'
@@ -96,6 +97,14 @@ const router = new Router({
         title: '市场'
       },
       component: store
+    },
+    {
+      path: '/luckywheel',
+      name: 'luckywheel',
+      meta: {
+        title: '幸运大转盘'
+      },
+      component: luckywheel
     },
     {
       path: '/personalCenter',

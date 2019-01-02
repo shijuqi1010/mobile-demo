@@ -67,11 +67,15 @@ build: 共建计划
       |     |--receive: 我领到的
 store: 市场
       |--index: 市场主页
-      |--prize: 抽奖(共用之前的抽奖)
+      |--luckywheel: 幸运大转盘（抽奖）
+      |--store
 public: 公共组件
       |--countdown: 倒计时
       |--loading: 正在加载中
-      |--tip: 弹出框
+      |--tipModel: 提示弹出框
+      |--selectModel: 选择弹出框
+      |--swiperBanner: 轮播banner组件
+      |--iconfront: 矢量图标实例
 ```
 
 ## 接口文档

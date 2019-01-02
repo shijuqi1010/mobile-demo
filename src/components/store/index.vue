@@ -62,7 +62,7 @@ export default {
   },
   methods: {
     jumpToPrize() {
-      this.$toast("即将跳到抽奖", 2000)
+      this.$router.push({path: '/luckyWheel'})
     },
     getSteps() {
       jsInteractive.jsToApp("getSteps", this.stepToast, this.donateUrl)
