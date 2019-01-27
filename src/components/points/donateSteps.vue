@@ -69,16 +69,16 @@
     height: 517px;
     // border: 1px solid red;
     box-sizing: border-box;
-    background-image: url('https://img1.aylives.cn/ac78d2c752c6438195682678be837af8.png');
+    background-images: url('https://img1.aylives.cn/ac78d2c752c6438195682678be837af8.png');
     background-size: cover;
     background-position: center;
     @media only screen and (device-width: 375px) and (device-height: 812px) {
-      background-image: url('https://img1.aylives.cn/1d372d34d9b846b3a128569d87a04e4d.png');
+      background-images: url('https://img1.aylives.cn/1d372d34d9b846b3a128569d87a04e4d.png');
       height: 600px;
     }
 
     @media only screen and (device-width: 411px) and (device-height: 823px) {
-      background-image: url('https://img1.aylives.cn/1d372d34d9b846b3a128569d87a04e4d.png');
+      background-images: url('https://img1.aylives.cn/1d372d34d9b846b3a128569d87a04e4d.png');
       height: 658px;
     }
 

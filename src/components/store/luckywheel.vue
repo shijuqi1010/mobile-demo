@@ -428,20 +428,20 @@ export default {
   margin-bottom: 0.9375rem;
 }
 .toast-btn div {
-  background-image: -moz-linear-gradient(
+  background-images: -moz-linear-gradient(
     -18deg,
     rgb(242, 148, 85) 0%,
     rgb(252, 124, 88) 51%,
     rgb(252, 124, 88) 99%
   );
 
-  background-image: -ms-linear-gradient(
+  background-images: -ms-linear-gradient(
     -18deg,
     rgb(242, 148, 85) 0%,
     rgb(252, 124, 88) 51%,
     rgb(252, 124, 88) 99%
   );
-  background-image: -webkit-linear-gradient(
+  background-images: -webkit-linear-gradient(
     -18deg,
     rgb(242, 148, 85) 0%,
     rgb(252, 124, 88) 51%,

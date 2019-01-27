@@ -31,8 +31,8 @@ class jsInteractive {
             }
             break
           case 'share':
-            if(window.webkit.messageHandlers.shareImage) {
-              window.webkit.messageHandlers.shareImage.postMessage({imageUrl: param, thumbUrl: share})
+            if(window.webkit.messageHandlers.shareimages) {
+              window.webkit.messageHandlers.shareimages.postMessage({imagesUrl: param, thumbUrl: share})
             }
             break;
         }
@@ -68,8 +68,8 @@ class jsInteractive {
             }
             break
           case 'share':
-          if(window.android.shareImage) {
-            window.android.shareImage(param, share)
+          if(window.android.shareimages) {
+            window.android.shareimages(param, share)
           }
           break;
         }

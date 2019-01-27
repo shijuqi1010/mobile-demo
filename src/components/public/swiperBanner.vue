@@ -2,7 +2,7 @@
   <div class="des-swiper">
     <swiper :options="swiperOption" ref="myswiper">
       <swiper-slide v-for="(item, index) in bannerList" :key="index">
-        <div href="" :style="`background-image: url(${item})`" class="banner-img"></div>
+        <div href="" :style="`background-images: url(${item})`" class="banner-img"></div>
       </swiper-slide>
       <div class="swiper-pagination" slot="pagination"></div>
       <!-- <div class="swiper-button-prev" slot="button-prev"></div>

@@ -5,7 +5,7 @@
         <p>传说，</p>
         <p>每天来到奥克城门打卡签到，都能获得神秘力量...</p>
       </div>
-      <img class="sign-img" src="../../assets/image/sign.png" @click="signIn">
+      <img class="sign-img" src="../../assets/images/sign.png" @click="signIn">
     </div>
     <div class="text">
       <p class="title">规则</p>
@@ -52,17 +52,17 @@ export default {
     text-align: left;
     width: 100%;
     height: 470px;
-    background-image: url('https://img1.aylives.cn/159a85b0074e4187899618edc191cef9.png');
+    background-images: url('https://img1.aylives.cn/159a85b0074e4187899618edc191cef9.png');
     background-repeat: no-repeat;
     background-position: center center;
     background-size: cover;
     @media only screen and (device-width: 375px) and (device-height: 812px) {
-      background-image: url('https://img1.aylives.cn/9235a26c171148b69b5eaf0be36cf04c.png');
+      background-images: url('https://img1.aylives.cn/9235a26c171148b69b5eaf0be36cf04c.png');
       height: 600px;
     }
 
     @media only screen and (device-width: 411px) and (device-height: 823px) {
-      background-image: url('https://img1.aylives.cn/9235a26c171148b69b5eaf0be36cf04c.png');
+      background-images: url('https://img1.aylives.cn/9235a26c171148b69b5eaf0be36cf04c.png');
       height: 658px;
     }
 

@@ -2,9 +2,9 @@
   <div class="des-publish">
     <!-- <scroller :on-infinite = "infinite" :on-refresh = "refresh"> -->
     <div class="tips" v-show="showTips">
-      <img class="tip-icon" src="../../../assets/image/tips.png" alt="">
+      <img class="tip-icon" src="../../../assets/images/tips.png" alt="">
       <span class="tips-text">首次发布可获得10奥克积分，每次发布可获得15算力</span>
-      <img class="close" src="../../../assets/image/close.png" alt="" @click="closeTips">
+      <img class="close" src="../../../assets/images/close.png" alt="" @click="closeTips">
     </div>
 
     <div class="des-info">

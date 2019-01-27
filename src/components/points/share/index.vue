@@ -8,7 +8,7 @@
           <p>奥园物业与你共同欢迎</p>
           <p>新邻居入住奥克城</p>
         </div>
-        <img src="../../../assets/image/shareBg.png" alt="">
+        <img src="../../../assets/images/shareBg.png" alt="">
         <div class="code">
           <p>-您的邀请码-</p>
           <p class="share-code">{{ shareCode }}</p>
@@ -92,12 +92,12 @@ export default {
     height: 656px;
     padding-top: 28%;
     box-sizing: border-box;
-    background-image: url('https://img1.aylives.cn/42195a1e32184edb97bfe0c5922303f9.png');
+    background-images: url('https://img1.aylives.cn/42195a1e32184edb97bfe0c5922303f9.png');
     background-size: cover;
     background-position: center;
 
     @media only screen and (min-width: 768px) {
-      background-image: url('https://img1.aylives.cn/1d372d34d9b846b3a128569d87a04e4d.png');
+      background-images: url('https://img1.aylives.cn/1d372d34d9b846b3a128569d87a04e4d.png');
       padding-top: 12%;
       height: 1040px;
     }

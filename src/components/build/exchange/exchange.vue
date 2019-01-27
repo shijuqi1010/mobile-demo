@@ -8,7 +8,7 @@
     </div>
     <div class="des-info">
       <div class="user-info">
-        <img class="user-image" :src="userInfo.avater">
+        <img class="user-images" :src="userInfo.avater">
         <div class="content-right">
           <div class="user-address">{{userInfo.address}}</div>
           <span class="user-name">{{userInfo.userName}}</span>
@@ -21,7 +21,7 @@
 
     <div class="buy-btn">
       <div class="des-btn">
-        <img src="./../../../assets/image/stone.png" alt="">
+        <img src="./../../../assets/images/stone.png" alt="">
         <span>50奥克积分</span>
       </div>
       <div class="des-btn buy">
@@ -170,7 +170,7 @@ export default {
       overflow: hidden;
       // padding: 15px 0 40px 0;
       border-bottom: 0.05px solid #F8F8F8;
-      .user-image{
+      .user-images{
         position: absolute;
         width: 35px;
         height: 35px;

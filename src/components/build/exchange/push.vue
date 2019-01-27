@@ -9,40 +9,40 @@
       <div class="upload-box">
         <flexbox class="flex-box-one" v-if="form.uploadPics.length > 0 && form.uploadPics.length === 1" :gutter="2">
           <flexbox-item class="img-box" v-for="(item, index) in form.uploadPics" :key="index">
-            <div class="photo" :style="`background-image: url(${item})`">
+            <div class="photo" :style="`background-images: url(${item})`">
             </div>
             <!-- <img class="photo" :src="item"/> -->
-            <span @click="delImage(index)" class="close weui-icon-cancel"></span>
+            <span @click="delimages(index)" class="close weui-icon-cancel"></span>
           </flexbox-item>
         </flexbox>
         <flexbox class="flex-box-two" v-if="form.uploadPics.length > 0 && form.uploadPics.length === 2" :gutter="2">
           <flexbox-item class="img-box" v-for="(item, index) in form.uploadPics" :key="index">
-            <div class="photo" :style="`background-image: url(${item})`">
+            <div class="photo" :style="`background-images: url(${item})`">
             </div>
             <!-- <img class="photo" :src="item"/> -->
-            <span @click="delImage(index)" class="close weui-icon-cancel"></span>
+            <span @click="delimages(index)" class="close weui-icon-cancel"></span>
           </flexbox-item>
         </flexbox>
         <flexbox class="flex-box-three" v-if="form.uploadPics.length > 0 && form.uploadPics.length === 3" :gutter="2">
           <flexbox-item class="img-box" v-for="(item, index) in form.uploadPics" :key="index">
-            <div class="photo" :style="`background-image: url(${item})`">
+            <div class="photo" :style="`background-images: url(${item})`">
             </div>
             <!-- <img class="photo" :src="item"/> -->
-            <span @click="delImage(index)" class="close weui-icon-cancel"></span>
+            <span @click="delimages(index)" class="close weui-icon-cancel"></span>
           </flexbox-item>
         </flexbox>
         <vue-core-image-upload v-if="showUpload"
           :class="['btn', 'upload-box-item']"
           :crop="false"
-          @imageuploaded="imageuploaded"
-          @imageuploading="imageuploading"
+          @imagesuploaded="imagesuploaded"
+          @imagesuploading="imagesuploading"
           @errorhandle="errorhandle"
           :max-file-size="10485760"
           inputOfFile="images"
           :text="uploadText"
           :url="uploadUrl">
           <div class="upload-btn">
-            <img src="../../../assets/image/upload.png" alt="">
+            <img src="../../../assets/images/upload.png" alt="">
             <p>上传照片</p>
           </div>
         </vue-core-image-upload>
@@ -54,7 +54,7 @@
         <span>分类</span>
         <div class="choose">
           <span>{{ selected }}</span>
-          <img src="../../../assets/image/arrow.png" alt="">
+          <img src="../../../assets/images/arrow.png" alt="">
         </div>
       </li>
       <li class="record points">
@@ -275,7 +275,7 @@
 
 <script>
 import { XCircle, XButton, XTextarea, TransferDom, Flexbox, FlexboxItem } from 'vux'
-import VueCoreImageUpload from 'vue-core-image-upload'
+import VueCoreimagesUpload from 'vue-core-image-upload'
 import Api from '../../../config/api.js'
 import { setTimeout } from 'timers'
 import selectModel from '../../public/selectModel'
@@ -288,7 +288,7 @@ export default {
     XCircle,
     XButton,
     XTextarea,
-    VueCoreImageUpload,
+    VueCoreimagesUpload,
     Flexbox,
     FlexboxItem,
     selectModel
@@ -350,7 +350,7 @@ export default {
         }
       })
     },
-    imageuploaded (res) {
+    imagesuploaded (res) {
       if (this.form.uploadPics.length === 3) {
         this.$toast('最多可上传三张图片', 1000)
       }
@@ -365,13 +365,13 @@ export default {
         this.$toast(res.msg, 1000)
       }
     },
-    delImage (index) {
+    delimages (index) {
       this.form.uploadPics.splice(index, 1)
       if (this.form.uploadPics.length < 3) {
         this.showUpload = true
       }
     },
-    imageuploading () {
+    imagesuploading () {
       // 显示
       // this.$vux.loading.show({
       //   text: 'Loading'

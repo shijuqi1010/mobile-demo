@@ -3,7 +3,7 @@
     <div class="header">
       <div class="castle">
         <router-link to="/personalCenter" class="self-castle">
-          <img src="../assets/image/castle.png" alt="">
+          <img src="../assets/images/castle.png" alt="">
           <p class="title">我的城堡</p>
         </router-link>
         <ul class="point-info">
@@ -32,7 +32,7 @@
     <transition name="fade">
     <ul class="vip-animation" v-if="userInfo1">
       <li class="animation" v-for="(item, index) in userInfo1" :key="index" :id="`id${item.id}`" @click="collect(item)">
-        <img class="bubble" src="../assets/image/stone.png" alt="">
+        <img class="bubble" src="../assets/images/stone.png" alt="">
         <span class="text">{{item.point}}</span>
       </li>
     </ul>
@@ -41,7 +41,7 @@
     <transition name="fade">
     <ul class="vip-animation" v-if="userInfo2">
       <li class="animation" v-for="(item, index) in userInfo2" :key="index" :id="`id${item.id}`" @click="collect(item)">
-        <img class="bubble" src="../assets/image/stone.png" alt="">
+        <img class="bubble" src="../assets/images/stone.png" alt="">
         <span class="text">{{item.point}}</span>
       </li>
     </ul>
@@ -50,7 +50,7 @@
     <transition name="fade">
     <ul class="vip-animation" v-if="userInfo3">
       <li class="animation" v-for="(item, index) in userInfo3" :key="index" :id="`id${item.id}`" @click="collect(item)">
-        <img class="bubble" src="../assets/image/stone.png" alt="">
+        <img class="bubble" src="../assets/images/stone.png" alt="">
         <span class="text">{{item.point}}</span>
       </li>
     </ul>
@@ -59,7 +59,7 @@
     <transition name="fade">
     <ul class="vip-animation" v-if="userInfo4">
       <li class="animation" v-for="(item, index) in userInfo4" :key="index" :id="`id${item.id}`" @click="collect(item)">
-        <img class="bubble" src="../assets/image/stone.png" alt="">
+        <img class="bubble" src="../assets/images/stone.png" alt="">
         <span class="text">{{item.point}}</span>
       </li>
     </ul>
@@ -68,7 +68,7 @@
     <transition name="fade">
     <ul class="vip-animation" v-show="showWait">
       <li class="animation">
-        <img class="bubble" src="../assets/image/stone.png" alt="">
+        <img class="bubble" src="../assets/images/stone.png" alt="">
         <span class="count-down">剩余{{countDownTime | outputHour}}</span>
       </li>
     </ul>
@@ -79,19 +79,19 @@
 
     <div class="footer">
       <router-link class="des-btn" to="/points">
-        <img src="../assets/image/energy.png">
+        <img src="../assets/images/energy.png">
         <p>获取能量</p>
       </router-link>
       <router-link class="des-btn btn" to="/build">
-        <img src="../assets/image/build.png">
+        <img src="../assets/images/build.png">
         <p>共建计划</p>
       </router-link>
       <router-link class="des-btn btn" to="/share">
-        <img src="../assets/image/share.png">
+        <img src="../assets/images/share.png">
         <p>邀请好友</p>
       </router-link>
       <router-link class="des-btn btn" to="/store">
-        <img src="../assets/image/store.png">
+        <img src="../assets/images/store.png">
         <p>市场</p>
       </router-link>
     </div>
@@ -302,16 +302,16 @@ export default {
   bottom: 0;
   font-weight: normal;
   overflow: hidden;
-  background-image: url("https://img1.aylives.cn/7fce378fdd1448838838ee553ff248ca.png"); //667
+  background-images: url("https://img1.aylives.cn/7fce378fdd1448838838ee553ff248ca.png"); //667
   background-repeat: no-repeat;
   background-position: center center;
   // background-size: 100% auto;
   background-size: cover;
   @media only screen and (device-width: 375px) and (device-height: 812px) {
-    // background-image: url("https://img1.aylives.cn/0472e8034ba54187ba399ca916623a17.png");
+    // background-images: url("https://img1.aylives.cn/0472e8034ba54187ba399ca916623a17.png");
   }
   @media only screen and (min-width: 768px) {
-    background-image: url("https://img1.aylives.cn/2e0ce14d7a1e44d6b4359389549f3b55.png");
+    background-images: url("https://img1.aylives.cn/2e0ce14d7a1e44d6b4359389549f3b55.png");
     font-size: 24px;
   }
   .header{

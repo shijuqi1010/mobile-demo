@@ -19,19 +19,19 @@
       <li class="bitspin">
         <router-link class="record" to="/record">
           <span>我的算力</span>
-          <img src="../../assets/image/arrow.png" alt="">
+          <img src="../../assets/images/arrow.png" alt="">
         </router-link>
       </li>
       <li class="points">
         <router-link class="record" to="/detail">
           <span>我的奥克积分</span>
-          <img src="../../assets/image/arrow.png" alt="">
+          <img src="../../assets/images/arrow.png" alt="">
         </router-link>
       </li>
       <li class="code">
         <router-link class="record" to="/share">
           <span>我的邀请码</span>
-          <img src="../../assets/image/arrow.png" alt="">
+          <img src="../../assets/images/arrow.png" alt="">
         </router-link>
       </li>
     </ul>
@@ -79,7 +79,7 @@ export default {
   overflow: auto;
   .center-info{
     height: 205px;
-    background-image: url("https://img1.aylives.cn/db85c2032b3c422c934154d0269436df.png");
+    background-images: url("https://img1.aylives.cn/db85c2032b3c422c934154d0269436df.png");
     background-size: 100% 100%;
     background-position: center;
     text-align: center;

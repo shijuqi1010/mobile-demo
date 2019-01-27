@@ -38,22 +38,29 @@ import receive from '@/components/build/exchange/receive'
 import store from '@/components/store/index'
 import luckywheel from '@/components/store/luckywheel'
 
-import progressBar from '@/components/public/progressBar'
+import camera from '@/components/public/camera'
 import iconfont from '@/components/public/iconfont'
+
+import parking from '@/components/keyboard/parking'
 
 Vue.use(Router)
 
 const router = new Router({
   routes: [
     {
+      path: '/parking',
+      name: 'parking',
+      component: parking
+    },
+    {
       path: '/iconfont',
       name: 'iconfont',
       component: iconfont
     },
     {
-      path: '/progressBar',
-      name: 'progressBar',
-      component: progressBar
+      path: '/camera',
+      name: 'camera',
+      component: camera
     },
     {
       path: '/index',

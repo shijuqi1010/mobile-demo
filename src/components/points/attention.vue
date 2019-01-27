@@ -7,7 +7,7 @@
       <li>4、普通用户关注公众号可获得个2算力，业主及家属租客可获得4个算力。</li>
     </ul>
     <div class="qrdode">
-      <img src="../../assets/image/qrcode.png" alt="">
+      <img src="../../assets/images/qrcode.png" alt="">
     </div>
     <div class="luck-code">
       <input type="text" placeholder="请输入幸运码">

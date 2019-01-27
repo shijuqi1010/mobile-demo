@@ -3,7 +3,7 @@
     <div class="des-info" v-if="shareInfo">
       <ul class="photo-list-info">
         <li class="user-info">
-          <img class="user-image" :src="shareInfo.userAvater" alt="头像">
+          <img class="user-images" :src="shareInfo.userAvater" alt="头像">
           <div class="content-right">
             <span class="user-name">{{shareInfo.userName}}</span>
             <div v-if="shareInfo.happyMoment" class="content-text">{{shareInfo.happyMoment.happyMomentContent}}</div>
@@ -11,7 +11,7 @@
               <flexbox-item v-if="shareInfo.happyMoment" v-for="(photo, index) in shareInfo.happyMoment.happyMomentPhotosArray" :key="index">
                 <img class="photo" v-if="shareInfo.happyMoment.happyMomentPhotosSize === 1" :src="photo" style="width:60%"/>
                 <!-- <img class="photo" v-else :src="photo" style="width:100%"/> -->
-                <div v-else class="figure-photo" :style="`background-image: url(${photo})`">
+                <div v-else class="figure-photo" :style="`background-images: url(${photo})`">
                 </div>
               </flexbox-item>
             </flexbox>
@@ -82,7 +82,7 @@
         position: relative;
         overflow: hidden;
         padding-top: 15px;
-        .user-image{
+        .user-images{
           position: absolute;
           width: 35px;
           height: 35px;
