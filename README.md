@@ -1,4 +1,4 @@
-# 奥克积分
+# 移动端项目
 
 > A Vue.js project
 
@@ -69,6 +69,10 @@ store: 市场
       |--index: 市场主页
       |--luckywheel: 幸运大转盘（抽奖）
       |--store
+parking: 停车缴费
+      |--parking: 停车缴费主页
+      |--inputBoard: 车牌输入框
+      |--keyboard: 车牌输入定制键盘
 public: 公共组件
       |--countdown: 倒计时
       |--loading: 正在加载中

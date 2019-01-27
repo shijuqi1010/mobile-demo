@@ -41,7 +41,7 @@ import luckywheel from '@/components/store/luckywheel'
 import camera from '@/components/public/camera'
 import iconfont from '@/components/public/iconfont'
 
-import parking from '@/components/keyboard/parking'
+import parking from '@/components/parking/parking'
 
 Vue.use(Router)
 
