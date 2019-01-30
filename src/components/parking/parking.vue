@@ -14,7 +14,7 @@
     </div>
 
     <div class="des-input">
-      <input-board></input-board>
+      <input-board :inputList="inputList"></input-board>
     </div>
 
     <div class="des-history">
@@ -26,6 +26,14 @@
           <p>历史</p>
         </li>
       </ul>
+    </div>
+
+    <div>
+      <select-car
+        :select-model="selectModel"
+        @closedialog="selectModel.showSelect = false"
+        @getSelected="getSelected">
+      </select-car>
     </div>
 
     <div class="btn">临停缴费</div>
@@ -40,28 +48,33 @@
         </router-link>
       </ul>
     </div>
+
   </div>
+  
 </template>
 
 <script>
   import { XCircle } from 'vux'
   import inputBoard from './inputBoard'
+  import selectCar from './selectCar'
 
   export default {
     components: {
       XCircle,
-      inputBoard
+      inputBoard,
+      selectCar
     },
     data(){
       return{
         percent: 20,
-        provinceList:[['粤','沪','湘']],
-        province:['粤'],
-        plateNumberList : [['A512312', 'B234234']],
-        plateNumber:"",
-        valueList:[],
+        provinceList: [['粤','沪','湘']],
+        province: ['粤'],
+        plateNumList: [['A512312', 'B234234']],
+        plateNum: '',
+        valueList: [],
         surplusNumber: 0,
-        contentList:[
+        inputList: '',
+        contentList: [
           {path: '/monthCard', icon: 'https://img1.aylives.cn/23b7964613024b23821d720bfa06d17a.png', content: '月卡缴费'},
           {path: '/unlicensed', icon: 'https://img1.aylives.cn/63c9dda34dc04e83aabe5b347b529cd1.png', content: '无牌车缴费'},
           {path: '/', icon: 'https://img1.aylives.cn/bc1121d0785f427c91103bb77e6720ce.png', content: '无感支付'},
@@ -70,13 +83,26 @@
           {path: '/record', icon: 'https://img1.aylives.cn/2d55f3e3b57d44e2abbf0acb0d1c487d.png', content: '记录查询'},
           {path: '/personalCenter', icon: 'https://img1.aylives.cn/077858eca7ae4c7b8dfa459c3303d5f7.png', content: '个人中心'},
         ],
+        selectModel: {
+          showSelect: false,
+          selectList: ['粤A11111', '粤A222222', '粤A111111', '粤A111111', '粤A111111'],
+          title: '历史车牌',
+          // selectList: ''
+        },
       }
     },
     created(){
     },
     methods:{
       showHistory() {
-        alert('showHistory')
+        this.selectModel.showSelect = true
+      },
+      getSelected(selectedOpt) {
+        this.inputList = selectedOpt
+        console.log('====', this.inputList);
+      },
+      onChange (value) {
+        this.plateNum = value[0]
       },
       refresh() {}
     }

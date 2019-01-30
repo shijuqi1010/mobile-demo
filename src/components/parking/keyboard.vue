@@ -1,5 +1,5 @@
 <template>
-  <div class="des-keyboarda" v-if="showKeyboard">
+  <div class="des-keyboarda" v-if="isShowKeyboard" v-clickoutside="changeShow">
     <div class="des-area" id="area" v-if="showProvince">
       <ul class="des-general">
         <li class="router-link" v-for="(item, index) of provinceList" :key="index" v-if="((index + 1) % 7 >= 0)">
@@ -50,12 +50,39 @@
 </template>
 
 <script>
+const clickoutside = {
+	// 初始化指令
+  bind(el, binding, vnode) {
+    function documentHandler(e) {
+      // 这里判断点击的元素是否是本身，是本身，则返回
+      if (el.contains(e.target)) {
+        return false;
+      }
+      // 判断指令中是否绑定了函数
+      if (binding.expression) {
+      // 如果绑定了函数 则调用那个函数，此处binding.value就是handleClose方法
+        binding.value(e);
+      }
+    }
+    // 给当前元素绑定个私有变量，方便在unbind中可以解除事件监听
+    el.__vueClickOutside__ = documentHandler;
+    document.addEventListener('click', documentHandler);
+  },
+  update() {},
+  unbind(el, binding) {
+    // 解除事件监听
+    document.removeEventListener('click', el.__vueClickOutside__);
+    delete el.__vueClickOutside__;
+  },
+};
+
 export default {
   name: 'keyboard',
   props:["showKeyboard", "changeKeyboard"],
   data () {
     return {
       number: '',
+      isShowKeyboard: false,
       showProvince: true,
       provinceList:['京','沪','粤','津','浙','苏','湘','渝','云','豫','皖','陕','桂','新','青','琼','闽','蒙','辽','宁','鲁','晋','吉','冀','黑','甘','鄂','赣','贵','川','藏','民'],
     //   rowList:"京沪粤津浙苏湘渝云豫皖陕桂新青琼闽蒙辽宁鲁晋吉冀黑甘鄂赣贵川藏民",
@@ -67,11 +94,6 @@ export default {
     }
   },
   watch: {
-    changeKeyboard(newV) {
-      if (newV) {
-        this.showProvince = true
-      }
-    }
   },
   components: {
   },
@@ -79,6 +101,14 @@ export default {
   },
   mounted () {
   },
+  watch: {
+    showKeyboard(newV) {
+      if (newV) {
+        this.isShowKeyboard = this.showKeyboard
+      }
+    }
+  },
+  directives: {clickoutside},
   methods: {
     switchToAlph() {
       this.showProvince = false
@@ -95,7 +125,13 @@ export default {
     },
     deleteProvince() {
       this.$emit('deleteProvince')
-    }
+    },
+    closeKeyboard() {
+      this.showProvince = false
+    },
+    changeShow(e) {
+      this.isShowKeyboard = false
+    },
   }
 }
 </script>

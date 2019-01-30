@@ -1,5 +1,5 @@
 <template>
-  <div class="input-body">
+  <div class="input-body" id="input">
     <ul class="des-area">
       <li class="list" id="list1" @click="changeShow">
         <p class="text" @click="editLicense('list1')">{{one}}</p>
@@ -45,6 +45,7 @@
       @getAlph="getAlph"
       @deleteProvince="deleteProvince">
     </keyboard>
+    
   </div>
 </template>
 
@@ -53,6 +54,7 @@ import keyboard from './keyboard'
 
 export default {
   name: 'input-board',
+  props:["inputList"],
   data () {
     return {
       showNewEnerge: false,
@@ -79,8 +81,26 @@ export default {
   mounted () {
   },
   watch: {
+    inputList(newV) {
+      if (newV) {
+        this.showHistory()
+      }
+    }
   },
   methods: {
+    showHistory() {
+      if (this.inputList) {
+        console.log('+++', this.inputList)
+        this.one = this.inputList[0]
+        this.two = this.inputList[1]
+        this.three = this.inputList[2]
+        this.four = this.inputList[3]
+        this.five = this.inputList[4]
+        this.six = this.inputList[5]
+        this.seven = this.inputList[6]
+        this.newEnergeNum = this.inputList[7]
+      }
+    },
     changeShow() {
       if (this.showKeyboard) {
         this.showKeyboard = false
