@@ -1,6 +1,6 @@
 import Axios from 'axios'
 
-let host =  '//h5api.aylives.cn'
+let host =  ''
 
 Axios.defaults.withCredentials = true
 
